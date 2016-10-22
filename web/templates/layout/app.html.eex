@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Hello NanoPlanner!</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 

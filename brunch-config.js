@@ -20,9 +20,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css",
-      order: {
-        after: ["web/static/css/app.css"] // concat app.css last
+      joinTo: {
+        "css/app.css": /^(web\/static\/css)/,
+        "css/vendor.css": /^node_modules/
       }
     },
     templates: {
@@ -67,6 +67,9 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    styles: {
+      bootstrap: ["dist/css/bootstrap.css"]
+    }
   }
 };
