@@ -10,6 +10,11 @@
     <title>Hello NanoPlanner!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="shortcut icon"
+      href="<%= static_path(@conn, "/images/nano_planner.ico") %>"
+      type="image/vnd.microsoft.ico">
+    <link rel="apple-touch-icon"
+      href="<%= static_path(@conn, "/images/clock256.png") %>">
   </head>
 
   <body>
