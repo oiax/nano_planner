@@ -7,26 +7,27 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello NanoPlanner!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <link rel="shortcut icon"
-      href="<%= static_path(@conn, "/images/nano_planner.ico") %>"
-      type="image/vnd.microsoft.ico">
-    <link rel="apple-touch-icon"
-      href="<%= static_path(@conn, "/images/clock256.png") %>">
+    <title>NanoPlanner</title>
+    <%= tag :link, rel: "stylesheet",
+      href: static_path(@conn, "/css/vendor.css") %>
+    <%= tag :link, rel: "stylesheet",
+      href: static_path(@conn, "/css/app.css") %>
+    <%= tag :link, rel: "shortcut icon",
+      href: static_path(@conn, "/images/nano_planner.ico") %>
+    <%= tag :link, rel: "shortcut icon",
+      href: static_path(@conn, "/images/clock256.png") %>
   </head>
 
   <body>
     <header>
-      <h1><%= link 'PicoPlanner', to: :root %></h1>
+      <h1><%= link "NanoPlanner", to: :root %></h1>
     </header>
     <main>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <footer>
-      &copy; 2016 Oiax Inc.
+      &copy; 2017 Oiax Inc.
     </footer>
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <%= content_tag :script, "", src: static_path(@conn, "/js/app.js") %>
   </body>
 </html>
