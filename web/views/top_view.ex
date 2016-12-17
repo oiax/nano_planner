@@ -12,12 +12,8 @@ defmodule NanoPlanner.TopView do
         text "XXX"
       end
       div do
-        span do
-          text "YYY"
-        end
-        span do
-          text "ZZZ"
-        end
+        span "YYY"
+        span "ZZZ"
       end
       table do
         tr do

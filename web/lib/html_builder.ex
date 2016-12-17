@@ -41,11 +41,38 @@ defmodule NanoPlanner.HtmlBuilder do
   )a
 
   for tag_name <- normal_tag_names do
-    defmacro unquote(tag_name)(attributes \\ [], do: expression) do
+    defmacro unquote(tag_name)(attributes, do: expression) do
       tag_name = unquote(tag_name)
       quote do
         var!(acc) = var!(acc) <> open_tag(unquote(tag_name), unquote(attributes))
         unquote(expression)
+        var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
+      end
+    end
+
+    defmacro unquote(tag_name)(do: expression) do
+      tag_name = unquote(tag_name)
+      quote do
+        var!(acc) = var!(acc) <> open_tag(unquote(tag_name), [])
+        unquote(expression)
+        var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
+      end
+    end
+
+    defmacro unquote(tag_name)(text, attributes) do
+      tag_name = unquote(tag_name)
+      quote do
+        var!(acc) = var!(acc) <> open_tag(unquote(tag_name), unquote(attributes))
+        var!(acc) = var!(acc) <> unquote(text)
+        var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
+      end
+    end
+
+    defmacro unquote(tag_name)(text) do
+      tag_name = unquote(tag_name)
+      quote do
+        var!(acc) = var!(acc) <> open_tag(unquote(tag_name), [])
+        var!(acc) = var!(acc) <> unquote(text)
         var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
       end
     end
