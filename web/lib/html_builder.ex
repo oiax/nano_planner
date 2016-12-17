@@ -3,7 +3,7 @@ defmodule NanoPlanner.HtmlBuilder do
     quote do
       def unquote(fn_name)(var!(acc) \\ "") do
         unquote(expression)
-        var!(acc)
+        {:safe, var!(acc)}
       end
     end
   end
@@ -11,6 +11,18 @@ defmodule NanoPlanner.HtmlBuilder do
   defmacro text(text) do
     quote do
       var!(acc) = var!(acc) <> unquote(text)
+    end
+  end
+
+  defmacro space do
+    quote do
+      var!(acc) = var!(acc) <> " "
+    end
+  end
+
+  defmacro new_line do
+    quote do
+      var!(acc) = var!(acc) <> "\n"
     end
   end
 

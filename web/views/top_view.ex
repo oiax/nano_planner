@@ -9,12 +9,19 @@ defmodule NanoPlanner.TopView do
         text "AAA"
       end
       div do
-        text "XXX"
+        if true do
+          text "XXX"
+        else
+          text "FFF"
+        end
       end
+      new_line
       div do
         span "YYY"
+        space
         span "ZZZ"
       end
+      new_line
       table do
         tr do
           th do
