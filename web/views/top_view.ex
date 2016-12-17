@@ -19,6 +19,13 @@ defmodule NanoPlanner.TopView do
           text "ZZZ"
         end
       end
+      table do
+        tr do
+          th do
+            text "vvv"
+          end
+        end
+      end
     end
   end
 end
