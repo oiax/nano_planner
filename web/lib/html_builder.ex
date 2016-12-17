@@ -63,7 +63,7 @@ defmodule NanoPlanner.HtmlBuilder do
       tag_name = unquote(tag_name)
       quote do
         var!(acc) = var!(acc) <> open_tag(unquote(tag_name), unquote(attributes))
-        var!(acc) = var!(acc) <> unquote(text)
+        text unquote(text)
         var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
       end
     end
@@ -72,7 +72,7 @@ defmodule NanoPlanner.HtmlBuilder do
       tag_name = unquote(tag_name)
       quote do
         var!(acc) = var!(acc) <> open_tag(unquote(tag_name), [])
-        var!(acc) = var!(acc) <> unquote(text)
+        text unquote(text)
         var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
       end
     end
