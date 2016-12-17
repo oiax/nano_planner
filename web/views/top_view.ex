@@ -8,7 +8,7 @@ defmodule NanoPlanner.TopView do
       span style: "font-size: 10px" do
         text "AAA"
       end
-      div do
+      div data: [ foo: 1, bar: 2 ] do
         if true do
           text "XXX"
         else

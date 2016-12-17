@@ -3,7 +3,8 @@ defmodule NanoPlanner.HtmlBuilder do
     quote do
       def unquote(fn_name)(var!(acc) \\ "") do
         unquote(expression)
-        {:safe, var!(acc)}
+        # {:safe, var!(acc)}
+        var!(acc)
       end
     end
   end
@@ -27,7 +28,18 @@ defmodule NanoPlanner.HtmlBuilder do
   end
 
   defmacro open_tag(tag_name, attributes) do
-    attr = Enum.map(attributes, fn({k, v}) -> "#{k}='#{v}'" end) |> Enum.join(" ")
+    parts = Enum.map attributes, fn({k, v}) ->
+      case k do
+        :data ->
+          if is_list(v) do
+            Enum.map(v, fn({kk, vv}) -> "data-#{kk}='#{vv}'" end)
+          else
+            "#{k}='#{v}'"
+          end
+        _ -> "#{k}='#{v}'"
+      end
+    end
+    attr = List.flatten(parts) |> Enum.join(" ")
     case attr do
       "" -> "<#{tag_name}>"
       _ ->  "<#{tag_name} " <> attr <> ">"
