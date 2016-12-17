@@ -4,24 +4,28 @@ defmodule NanoPlanner.TopView do
   import NanoPlanner.HtmlBuilder
 
   markup :foo do
-    div class: "foo" do
+    div class: "fox'" do
       span style: "font-size: 10px" do
         text "AAA"
       end
-      div data: [ foo: 1, bar: 2 ] do
+      name = "ggg"
+      div data: [ foo: 1, bar: "'" ] do
         if true do
-          text "XXX"
+          text "#{name}<br>"
         else
           text "FFF"
         end
       end
       new_line
-      div do
-        span "YYY"
-        space
-        span "ZZZ"
+      Enum.each ~w(aaa bbb), fn(x) ->
+        div do
+          span x
+          space
+          span "ZZZ"
+        end
       end
       new_line
+      raw_text("<hr>")
       table do
         tr do
           th do

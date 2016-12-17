@@ -1,15 +1,21 @@
 defmodule NanoPlanner.HtmlBuilder do
+  import Phoenix.HTML, only: [html_escape: 1, safe_to_string: 1]
   defmacro markup(fn_name, do: expression) do
     quote do
       def unquote(fn_name)(var!(acc) \\ "") do
         unquote(expression)
-        # {:safe, var!(acc)}
-        var!(acc)
+        {:safe, var!(acc)}
       end
     end
   end
 
   defmacro text(text) do
+    quote do
+      var!(acc) = var!(acc) <> safe_to_string(html_escape(unquote(text)))
+    end
+  end
+
+  defmacro raw_text(text) do
     quote do
       var!(acc) = var!(acc) <> unquote(text)
     end
@@ -29,14 +35,14 @@ defmodule NanoPlanner.HtmlBuilder do
 
   defmacro open_tag(tag_name, attributes) do
     parts = Enum.map attributes, fn({k, v}) ->
-      case k do
-        :data ->
-          if is_list(v) do
-            Enum.map(v, fn({kk, vv}) -> "data-#{kk}='#{vv}'" end)
-          else
-            "#{k}='#{v}'"
-          end
-        _ -> "#{k}='#{v}'"
+      if k == :data && is_list(v) do
+        Enum.map v, fn({kk, vv}) ->
+          vv = safe_to_string(html_escape(vv))
+          "data-#{kk}='#{vv}'"
+        end
+      else
+        v = safe_to_string(html_escape(v))
+        "#{k}='#{v}'"
       end
     end
     attr = List.flatten(parts) |> Enum.join(" ")
