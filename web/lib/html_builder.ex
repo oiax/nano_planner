@@ -14,19 +14,28 @@ defmodule NanoPlanner.HtmlBuilder do
     end
   end
 
-  defmacro div(_opts \\ [], do: expression) do
-    quote do
-      var!(acc) = var!(acc) <> "<div>"
-      unquote(expression)
-      var!(acc) = var!(acc) <> "</div>"
+  defmacro open_tag(tag_name, attributes) do
+    attr = Enum.map(attributes, fn({k, v}) -> "#{k}='#{v}'" end) |> Enum.join(" ")
+    case attr do
+      "" -> "<#{tag_name}>"
+      _ ->  "<#{tag_name} " <> attr <> ">"
     end
   end
 
-  defmacro span(_opts \\ [], do: expression) do
-    quote do
-      var!(acc) = var!(acc) <> "<span>"
-      unquote(expression)
-      var!(acc) = var!(acc) <> "</span>"
+  defmacro close_tag(tag_name) do
+    "</#{tag_name}>"
+  end
+
+  tag_names = ~W(div span)a
+
+  for tag_name <- tag_names do
+    defmacro unquote(tag_name)(attributes \\ [], do: expression) do
+      tag_name = unquote(tag_name)
+      quote do
+        var!(acc) = var!(acc) <> open_tag(unquote(tag_name), unquote(attributes))
+        unquote(expression)
+        var!(acc) = var!(acc) <> close_tag(unquote(tag_name))
+      end
     end
   end
 end
