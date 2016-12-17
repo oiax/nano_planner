@@ -29,9 +29,8 @@ $ sudo apt-get -y install inotify-tools
 $ mix local.hex --force
 $ mix local.rebar --force
 $ mix deps.get
-$ mix ecto.create
-$ mix ecto.load
-$ mix run priv/repo/seeds.exs
+$ mix ecto.setup
+$ npm install
 ```
 
 ## 起動方法
