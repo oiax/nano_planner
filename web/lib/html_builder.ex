@@ -33,6 +33,18 @@ defmodule NanoPlanner.HtmlBuilder do
     end
   end
 
+  defmacro for_each(enumerable, fun) do
+    quote do
+      temp = Enum.map unquote(enumerable), fn(elem) ->
+        acc = ""
+        unquote(fun).(elem)
+        acc
+      end
+      Logger.debug temp
+      var!(acc) = var!(acc) <> Enum.join(temp)
+    end
+  end
+
   defmacro open_tag(tag_name, attributes) do
     parts = Enum.map attributes, fn({k, v}) ->
       if k == :data && is_list(v) do
