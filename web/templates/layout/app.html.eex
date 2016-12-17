@@ -9,6 +9,8 @@
 
     <title>NanoPlanner</title>
     <%= tag :link, rel: "stylesheet",
+      href: static_path(@conn, "/css/vendor.css") %>
+    <%= tag :link, rel: "stylesheet",
       href: static_path(@conn, "/css/app.css") %>
   </head>
 
