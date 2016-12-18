@@ -35,8 +35,8 @@ SET default_with_oids = false;
 
 CREATE TABLE plan_items (
     id integer NOT NULL,
-    name character varying(255),
-    description character varying(65535),
+    name character varying(255) NOT NULL,
+    description character varying(65535) NOT NULL,
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
