@@ -1,1 +1,12 @@
-<p>plan_items#index</p>
+<div>
+  <%= for item <- @plan_items do %>
+  <div>
+    <div>
+      <%= item.name %>
+    </div>
+    <div>
+      <%= item.description %>
+    </div>
+  </div>
+  <% end %>
+</div>
