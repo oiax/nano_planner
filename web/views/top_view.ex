@@ -7,6 +7,6 @@ defmodule NanoPlanner.TopView do
       {"br"},
       {"br"},
       {"span", nil, "World!"}
-    ]} |> HTMLBuilder.encode!(pretty: true)
+    ]} |> HTMLBuilder.encode! |> raw
   end
 end
