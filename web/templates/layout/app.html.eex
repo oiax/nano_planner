@@ -20,7 +20,7 @@
 
   <body>
     <header>
-      <h1><%= link "NanoPlanner", to: :root %></h1>
+      <h1><%= link "NanoPlanner", to: top_path(@conn, :index) %></h1>
     </header>
     <main>
       <%= render @view_module, @view_template, assigns %>
