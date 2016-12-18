@@ -2,6 +2,8 @@ defmodule NanoPlanner.PlanItem do
   use NanoPlanner.Web, :model
 
   schema "plan_items" do
+    field :name, :string
+    field :description, :string
 
     timestamps()
   end
