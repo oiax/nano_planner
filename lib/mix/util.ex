@@ -1,7 +1,7 @@
 defmodule Mix.Util do
   import Mix.Ecto
 
-  def prepare_repo() do
+  def get_repo do
     [repo|_] = parse_repo([])
     ensure_started(repo, [])
     repo
