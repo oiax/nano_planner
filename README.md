@@ -1,6 +1,6 @@
 # NanoPlanner: 簡易予定表管理システム
 
-これは『Elixir/Phoenix 入門①』の学習用 Phoenix アプリケーションです。
+これは『Elixir/Phoenix 入門②』の学習用 Phoenix アプリケーションです。
 
 ## 対象 OS
 
@@ -11,8 +11,8 @@
 ## 稼働条件
 
 * Erlang 19.1
-* Elixir 1.3.3
-* Phoenix 0.32.1
+* Elixir 1.3.4
+* Phoenix 1.2.1
 * PostgreSQL 9.4
 * Node.js 6.9.1
 * npm 3.10.8
