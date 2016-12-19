@@ -1,0 +1,9 @@
+div.plan-items {
+  div.row {
+    margin-bottom: 0.5rem;
+    background-color: #ddd;
+  }
+  div.row:last-child {
+    margin-bottom: 0;
+  }
+}
