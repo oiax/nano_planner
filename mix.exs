@@ -50,6 +50,7 @@ defmodule NanoPlanner.Mixfile do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "db.migrate": ["ecto.migrate", "ecto.dump"],
+     "db.migrate.reset": ["ecto.drop", "ecto.create", "ecto.migrate"],
      "db.seed": ["run priv/repo/seeds.exs"],
      "db.reset": ["ecto.drop", "ecto.create", "ecto.load", "db.seed"],
      "db.setup": ["ecto.create", "ecto.load", "db.seed"],
