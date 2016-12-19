@@ -2,10 +2,10 @@
   <%= for item <- @plan_items do %>
   <div class="row">
     <div class="col-xs-12 col-md-4">
-      <%= item.name %>
+      <span class="plan-item-name"><%= item.name %></span>
     </div>
     <div class="col-xs-12 col-md-8">
-      <%= item.description %>
+      <span class="plan-item-description"><%= item.description %></span>
     </div>
   </div>
   <% end %>
