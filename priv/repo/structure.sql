@@ -37,6 +37,8 @@ CREATE TABLE plan_items (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     description character varying(65535) NOT NULL,
+    starts_at timestamp without time zone NOT NULL,
+    ends_at timestamp without time zone NOT NULL,
     inserted_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
