@@ -35,7 +35,6 @@ defmodule NanoPlanner.PlanItemsView do
   end
 
   defp format_wday(datetime) do
-    Enum.at ~w(日 月 火 水 木 金 土),
-      Timex.days_to_beginning_of_week(datetime, :sun)
+    Enum.at ~w(日 月 火 水 木 金 土), Date.day_of_week(datetime)
   end
 end
