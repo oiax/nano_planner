@@ -10,7 +10,7 @@ defmodule NanoPlanner.PlanItemsController do
   end
 
   def show(conn, params) do
-    plan_item = Repo.get(PlanItem, params["id"])
+    plan_item = Repo.get(PlanItem, params["id"])|> PlanItem.convert_datetime
     render conn, "show.html", plan_item: plan_item
   end
 end
