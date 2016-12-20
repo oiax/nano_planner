@@ -4,14 +4,31 @@ defmodule NanoPlanner.PlanItemsView do
 
   def format_duration(item) do
     [
-      format_datetime(item.starts_at),
+      format_starts_at(item),
       "～",
-      format_datetime(item.ends_at)
+      format_ends_at(item)
     ] |> Enum.join
   end
 
-  defp format_datetime(time) do
-    time |> Timex.Timezone.convert("Asia/Tokyo")
-      |> format!("%Y年%-m月%-d日 %H:%M")
+  defp format_starts_at(item) do
+    s = item.starts_at |> Timex.Timezone.convert("Asia/Tokyo")
+    if s.year == Timex.now("Asia/Tokyo").year do
+      s |> format!("%-m月%-d日 %H:%M")
+    else
+      s |> format!("%Y年%-m月%-d日 %H:%M")
+    end
+  end
+
+  defp format_ends_at(item) do
+    s = item.starts_at |> Timex.Timezone.convert("Asia/Tokyo")
+    e = item.ends_at |> Timex.Timezone.convert("Asia/Tokyo")
+    cond do
+      Timex.to_date(e) == Timex.to_date(s) ->
+        e |> format!("%H:%M")
+      e.year == s.year ->
+        e |> format!("%-m月%-d日 %H:%M")
+      true ->
+        e |> format!("%Y年%-m月%-d日 %H:%M")
+    end
   end
 end
