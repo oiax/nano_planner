@@ -8,4 +8,9 @@ defmodule NanoPlanner.PlanItemsController do
       |> PlanItem.convert_datetime
     render conn, "index.html", plan_items: plan_items
   end
+
+  def show(conn, params) do
+    plan_item = Repo.get(PlanItem, params["id"])
+    render conn, "show.html", plan_item: plan_item
+  end
 end
