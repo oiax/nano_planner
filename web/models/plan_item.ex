@@ -28,8 +28,9 @@ defmodule NanoPlanner.PlanItem do
 
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
 
-    item
-      |> Map.put(:starts_at, Timezone.convert(item.starts_at, time_zone))
-      |> Map.put(:ends_at, Timezone.convert(item.ends_at, time_zone))
+    Map.merge(item, %{
+      starts_at: Timezone.convert(item.starts_at, time_zone),
+      ends_at: Timezone.convert(item.ends_at, time_zone)
+    })
   end
 end
