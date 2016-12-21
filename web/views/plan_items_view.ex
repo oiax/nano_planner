@@ -5,7 +5,7 @@ defmodule NanoPlanner.PlanItemsView do
   @timezone "Asia/Tokyo"
 
   def format_duration(item) do
-    [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join
+    [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join(" ")
   end
 
   defp format_starts_at(item) do
