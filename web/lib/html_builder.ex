@@ -5,8 +5,10 @@ defmodule NanoPlanner.HtmlBuilder do
   defmacro markup(fun_name, do: expression) do
     quote do
       def unquote(fun_name)(var!(buf) \\ :dummy) do
-        # The following line is necessary to suppress the "variable buf is unused"
+        # The following line is necessary to suppress the warining that the
+        # variable buf is unused.
         var!(buf)
+
         {:ok, var!(buf)} = StringBuffer.start_link
 
         unquote(expression)
@@ -14,7 +16,6 @@ defmodule NanoPlanner.HtmlBuilder do
         html_fragment = StringBuffer.get(var!(buf))
         StringBuffer.stop(var!(buf))
         {:safe, html_fragment}
-        html_fragment
       end
     end
   end
