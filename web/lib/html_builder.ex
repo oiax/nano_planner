@@ -6,6 +6,7 @@ defmodule NanoPlanner.HtmlBuilder do
     quote do
       unquote(expression)
       html_fragment = StringBuffer.get(var!(buf))
+      StringBuffer.stop(var!(buf))
       {:safe, html_fragment}
     end
   end

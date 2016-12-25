@@ -1,27 +1,17 @@
 defmodule StringBuffer do
   def start_link do
-    pid = spawn_link fn -> listen([]) end
-    {:ok, pid}
+    Agent.start_link fn -> [] end
   end
 
   def append(pid, string) do
-    send pid, {:append, string}
+    Agent.update(pid, fn(list) -> [string | list] end)
   end
 
   def get(pid) do
-    send pid, {:get, self}
-
-    receive do
-      list -> list
-    end
+    Agent.get(pid, fn(list) -> list |> Enum.reverse |> Enum.join end)
   end
 
-  def listen(list) do
-    receive do
-      {:append, string} -> listen([string | list])
-      {:get, from} ->
-        send from, list |> Enum.reverse |> Enum.join
-        listen(list)
-    end
+  def stop(pid) do
+    Agent.stop(pid)
   end
 end
