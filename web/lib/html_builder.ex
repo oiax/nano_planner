@@ -2,19 +2,21 @@ defmodule NanoPlanner.HtmlBuilder do
   import Phoenix.HTML, only: [html_escape: 1, safe_to_string: 1]
   import StringBuffer, only: [append: 2]
 
-  defmacro markup(do: expression) do
+  defmacro markup(fun_name, do: expression) do
     quote do
-      unquote(expression)
-      html_fragment = StringBuffer.get(var!(buf))
-      StringBuffer.stop(var!(buf))
-      {:safe, html_fragment}
-    end
-  end
+      def unquote(fun_name)(var!(buf) \\ :dummy) do
+        # The following line is necessary to suppress the "variable buf is unused"
+        var!(buf)
+        {:ok, var!(buf)} = StringBuffer.start_link
 
-  def render(name) do
-    buf = StringBuffer.start_link
-    apply(__MODULE__, name, [buf])
-    StringBuffer.get(buf)
+        unquote(expression)
+
+        html_fragment = StringBuffer.get(var!(buf))
+        StringBuffer.stop(var!(buf))
+        {:safe, html_fragment}
+        html_fragment
+      end
+    end
   end
 
   defmacro text(text) do
@@ -45,6 +47,7 @@ defmodule NanoPlanner.HtmlBuilder do
     parts = Enum.map attributes, fn({k, v}) ->
       if k == :data && is_list(v) do
         Enum.map v, fn({kk, vv}) ->
+          kk = kk |> Atom.to_string |> String.replace("_", "-")
           vv = safe_to_string(html_escape(vv))
           "data-#{kk}='#{vv}'"
         end
