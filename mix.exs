@@ -39,7 +39,8 @@ defmodule NanoPlanner.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 3.0"},
-     {:timex_ecto, "~> 3.0"}]
+     {:timex_ecto, "~> 3.0"},
+     {:xain, "~> 0.6.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
