@@ -4,37 +4,37 @@ defmodule NanoPlanner.HtmlBuilder do
 
   defmacro markup(do: expression) do
     quote do
-      {:ok, var!(buf, NanoPlanner.HtmlBuilder)} = StringBuffer.start_link
+      {:ok, var!(buf, HtmlBuilder)} = StringBuffer.start_link
 
       unquote(expression)
 
-      html_fragment = StringBuffer.get(var!(buf, NanoPlanner.HtmlBuilder))
-      StringBuffer.stop(var!(buf, NanoPlanner.HtmlBuilder))
+      html_fragment = StringBuffer.get(var!(buf, HtmlBuilder))
+      StringBuffer.stop(var!(buf, HtmlBuilder))
       {:safe, html_fragment}
     end
   end
 
   defmacro text(text) do
     quote do
-      append var!(buf, NanoPlanner.HtmlBuilder), safe_to_string(html_escape(unquote(text)))
+      append var!(buf, HtmlBuilder), safe_to_string(html_escape(unquote(text)))
     end
   end
 
   defmacro raw_text(text) do
     quote do
-      append var!(buf, NanoPlanner.HtmlBuilder), unquote(text)
+      append var!(buf, HtmlBuilder), unquote(text)
     end
   end
 
   defmacro space do
     quote do
-      append var!(buf, NanoPlanner.HtmlBuilder), " "
+      append var!(buf, HtmlBuilder), " "
     end
   end
 
   defmacro new_line do
     quote do
-      append var!(buf, NanoPlanner.HtmlBuilder), "\n"
+      append var!(buf, HtmlBuilder), "\n"
     end
   end
 
@@ -80,36 +80,36 @@ defmodule NanoPlanner.HtmlBuilder do
     defmacro unquote(tag_name)(attributes, do: expression) do
       tag_name = unquote(tag_name)
       quote do
-        append var!(buf, NanoPlanner.HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
+        append var!(buf, HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
         unquote(expression)
-        append var!(buf, NanoPlanner.HtmlBuilder), close_tag(unquote(tag_name))
+        append var!(buf, HtmlBuilder), close_tag(unquote(tag_name))
       end
     end
 
     defmacro unquote(tag_name)(do: expression) do
       tag_name = unquote(tag_name)
       quote do
-        append var!(buf, NanoPlanner.HtmlBuilder), open_tag(unquote(tag_name), [])
+        append var!(buf, HtmlBuilder), open_tag(unquote(tag_name), [])
         unquote(expression)
-        append var!(buf, NanoPlanner.HtmlBuilder), close_tag(unquote(tag_name))
+        append var!(buf, HtmlBuilder), close_tag(unquote(tag_name))
       end
     end
 
     defmacro unquote(tag_name)(text, attributes) do
       tag_name = unquote(tag_name)
       quote do
-        append var!(buf, NanoPlanner.HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
+        append var!(buf, HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
         text unquote(text)
-        append var!(buf, NanoPlanner.HtmlBuilder), close_tag(unquote(tag_name))
+        append var!(buf, HtmlBuilder), close_tag(unquote(tag_name))
       end
     end
 
     defmacro unquote(tag_name)(text) do
       tag_name = unquote(tag_name)
       quote do
-        append var!(buf, NanoPlanner.HtmlBuilder), open_tag(unquote(tag_name), [])
+        append var!(buf, HtmlBuilder), open_tag(unquote(tag_name), [])
         text unquote(text)
-        append var!(buf, NanoPlanner.HtmlBuilder), close_tag(unquote(tag_name))
+        append var!(buf, HtmlBuilder), close_tag(unquote(tag_name))
       end
     end
   end
@@ -123,7 +123,7 @@ defmodule NanoPlanner.HtmlBuilder do
     defmacro unquote(tag_name)(attributes \\ []) do
       tag_name = unquote(tag_name)
       quote do
-        append var!(buf, NanoPlanner.HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
+        append var!(buf, HtmlBuilder), open_tag(unquote(tag_name), unquote(attributes))
       end
     end
   end
