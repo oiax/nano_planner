@@ -1,6 +1,30 @@
 defmodule NanoPlanner.HtmlBuilder do
+
   import Phoenix.HTML, only: [html_escape: 1, safe_to_string: 1]
   import StringBuffer, only: [append: 2]
+
+  @external_resource normal_tag_names_path =
+    Path.join([__DIR__, "normal_tag_names.txt"])
+  @external_resource void_tag_names_path =
+    Path.join([__DIR__, "void_tag_names.txt"])
+
+  @normal_tag_names (
+    for line <- File.stream!(normal_tag_names_path, [], :line) do
+      line |> String.strip |> String.to_atom
+    end
+  )
+  @void_tag_names (
+    for line <- File.stream!(void_tag_names_path, [], :line) do
+      line |> String.strip |> String.to_atom
+    end
+  )
+
+  defmacro __using__(_) do
+    quote do
+      import Kernel, except: [div: 2]
+      import NanoPlanner.HtmlBuilder
+    end
+  end
 
   defmacro markup(do: expression) do
     quote do
@@ -62,21 +86,7 @@ defmodule NanoPlanner.HtmlBuilder do
     "</#{tag_name}>"
   end
 
-  normal_tag_names = ~W(
-    a abbr address article aside audio b bdi bdo
-    blockquote body button canvas caption cite code
-    colgroup datalist dd del details dfn dialog div
-    dl dt em fieldset figcaption figure footer
-    form h1 h2 h3 h4 h5 h6 head header html
-    i iframe ins kbd label legend li main map mark
-    menu menuitem meter nav noscript object ol optgroup
-    option output p pre progress q rp rt ruby s
-    samp script section select small span strong style
-    sub summary sup table tbody td textarea tfoot
-    th thead time title tr u ul var video
-  )a
-
-  for tag_name <- normal_tag_names do
+  for tag_name <- @normal_tag_names do
     defmacro unquote(tag_name)(attributes, do: expression) do
       tag_name = unquote(tag_name)
       quote do
@@ -114,12 +124,7 @@ defmodule NanoPlanner.HtmlBuilder do
     end
   end
 
-  void_tag_names = ~W(
-    area base br col embed hr img input keygen
-    link meta param source track wbr
-  )a
-
-  for tag_name <- void_tag_names do
+  for tag_name <- @void_tag_names do
     defmacro unquote(tag_name)(attributes \\ []) do
       tag_name = unquote(tag_name)
       quote do
