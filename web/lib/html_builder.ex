@@ -2,17 +2,15 @@ defmodule NanoPlanner.HtmlBuilder do
   import Phoenix.HTML, only: [html_escape: 1, safe_to_string: 1]
   import StringBuffer, only: [append: 2]
 
-  defmacro markup(fun_name, do: expression) do
+  defmacro markup(do: expression) do
     quote do
-      def unquote(fun_name)(var!(buf, NanoPlanner.HtmlBuilder) \\ :dummy) do
-        {:ok, var!(buf, NanoPlanner.HtmlBuilder)} = StringBuffer.start_link
+      {:ok, var!(buf, NanoPlanner.HtmlBuilder)} = StringBuffer.start_link
 
-        unquote(expression)
+      unquote(expression)
 
-        html_fragment = StringBuffer.get(var!(buf, NanoPlanner.HtmlBuilder))
-        StringBuffer.stop(var!(buf, NanoPlanner.HtmlBuilder))
-        {:safe, html_fragment}
-      end
+      html_fragment = StringBuffer.get(var!(buf, NanoPlanner.HtmlBuilder))
+      StringBuffer.stop(var!(buf, NanoPlanner.HtmlBuilder))
+      {:safe, html_fragment}
     end
   end
 
