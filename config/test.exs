@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :nano_planner, NanoPlanner.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "phoenix",
+  password: "phoenix",
   database: "nano_planner_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
