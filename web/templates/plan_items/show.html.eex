@@ -1,6 +1,6 @@
 <div class="container-fluid plan-item">
   <div class="row">
-    <div class="col-xs-12 hidden-md-up text-xs-right toolbar">
+    <div class="col-12 hidden-md-up text-right toolbar">
       <%= link to: plan_items_path(@conn, :index) do %>
         <i class="fa fa-list fa-lg"></i>
       <% end %>
@@ -13,26 +13,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-4 bg-info text-md-right">件名</div>
-    <div class="col-xs-12 col-md-8"><%= @plan_item.name %></div>
+    <div class="col-12 col-md-4 bg-info text-md-right">件名</div>
+    <div class="col-12 col-md-8"><%= @plan_item.name %></div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-4 bg-info text-md-right">説明</div>
-    <div class="col-xs-12 col-md-8">
+    <div class="col-12 col-md-4 bg-info text-md-right">説明</div>
+    <div class="col-12 col-md-8">
       <%= for line <- String.split(@plan_item.description, "\n") do %>
         <%= line %><br>
       <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-4 bg-info text-md-right">開始日時</div>
-    <div class="col-xs-12 col-md-8">
+    <div class="col-12 col-md-4 bg-info text-md-right">開始日時</div>
+    <div class="col-12 col-md-8">
       <%= format_datetime @plan_item.starts_at %>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-4 bg-info text-md-right">終了日時</div>
-    <div class="col-xs-12 col-md-8">
+    <div class="col-12 col-md-4 bg-info text-md-right">終了日時</div>
+    <div class="col-12 col-md-8">
       <%= format_datetime @plan_item.ends_at %>
     </div>
   </div>
