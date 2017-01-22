@@ -1,4 +1,3 @@
-use Timex
 import NanoPlanner.Repo, only: [insert!: 1]
 alias NanoPlanner.PlanItem
 
