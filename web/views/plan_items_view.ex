@@ -2,15 +2,14 @@ defmodule NanoPlanner.PlanItemsView do
   use NanoPlanner.Web, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
-  @timezone "Asia/Tokyo"
-
   def format_duration(item) do
     [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join(" ")
   end
 
   defp format_starts_at(item) do
     w = format_wday(item.starts_at)
-    if item.starts_at.year == Timex.now(@timezone).year do
+    time_zone = Application.get_env(:nano_planner, :default_time_zone)
+    if item.starts_at.year == Timex.now(time_zone).year do
       Strftime.format! item.starts_at, "%-m月%-d日 (#{w}) %H:%M"
     else
       Strftime.format! item.starts_at, "%Y年%-m月%-d日 (#{w}) %H:%M"
