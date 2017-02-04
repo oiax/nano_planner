@@ -20,7 +20,7 @@ defmodule NanoPlanner.PlanItem do
   end
 
   def convert_datetime(items) when is_list(items) do
-    Enum.map items, &(convert_datetime(&1))
+    Enum.map items, &(convert_datetime &1)
   end
 
   def convert_datetime(item) when is_map(item) do
