@@ -23,7 +23,7 @@ defmodule NanoPlanner.PlanItem do
     Enum.map items, &(convert_datetime &1)
   end
 
-  def convert_datetime(item) when is_map(item) do
+  def convert_datetime(%__MODULE__{} = item) do
     alias Timex.Timezone
 
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
