@@ -6,6 +6,6 @@ defmodule NanoPlanner.LessonsController do
   end
 
   def register(conn, params) do
-    render conn, "register.html", user_name: params["user_name"]
+    render conn, "register.html", user_name: params["user"]["name"]
   end
 end

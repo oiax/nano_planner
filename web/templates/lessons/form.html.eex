@@ -1,7 +1,7 @@
 <form action="/lessons/register">
   <div>
     <label for="user-name">ユーザー名</label>
-    <input type="text" name="user_name" id="user-name">
+    <input type="text" name="user[name]" id="user-name">
   </div>
   <div>
     <input type="submit" value="登録">
