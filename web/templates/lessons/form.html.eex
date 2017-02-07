@@ -9,6 +9,11 @@
     <input type="text" name="user[password]" id="user-password"
       class="form-control">
   </div>
+  <div class="form-group">
+    <label for="user-remarks">備考</label>
+    <textarea name="user[remarks]" id="user-remarks"
+      class="form-control" rows="4">TEST</textarea>
+  </div>
   <div>
     <input type="submit" value="登録" class="btn btn-primary">
   </div>
