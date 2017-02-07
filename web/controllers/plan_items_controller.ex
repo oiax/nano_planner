@@ -12,8 +12,7 @@ defmodule NanoPlanner.PlanItemsController do
   end
 
   def new(conn, _params) do
-    now = Timex.now("Asia/Tokyo")
-    time0 = now |> Timex.beginning_of_day |> Timex.shift(hours: now.hour)
+    time0 = beginning_of_hour()
     changeset = PlanItem.changeset(%PlanItem{
       starts_at: Timex.shift(time0, hours: 1),
       ends_at: Timex.shift(time0, hours: 2)
@@ -36,5 +35,10 @@ defmodule NanoPlanner.PlanItemsController do
       |> PlanItem.convert_datetime
       |> PlanItem.changeset
     render(conn, "edit.html", changeset: changeset)
+  end
+
+  defp beginning_of_hour do
+    time_zone = Application.get_env(:nano_planner, :default_time_zone)
+    %{Timex.now(time_zone) | :minute => 0, :second => 0, :microsecond => {0,0}}
   end
 end
