@@ -14,6 +14,7 @@
 import "phoenix_html"
 import "tether"
 import "bootstrap"
+import "pikaday"
 
 // Import local files
 //

@@ -74,7 +74,8 @@ exports.config = {
     globals: {
       $: "jquery",
       jQuery: "jquery",
-      Tether: "tether"
+      Tether: "tether",
+      Pikaday: "pikaday"
     }
   }
 };
