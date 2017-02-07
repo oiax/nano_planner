@@ -4,6 +4,10 @@
     <input type="text" name="user[name]" id="user-name">
   </div>
   <div>
+    <label for="user-password">パスワード</label>
+    <input type="text" name="user[password]" id="user-password">
+  </div>
+  <div>
     <input type="submit" value="登録">
   </div>
 </form>
