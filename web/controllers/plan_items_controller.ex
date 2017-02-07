@@ -20,6 +20,19 @@ defmodule NanoPlanner.PlanItemsController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def create(conn, %{"plan_item" => plan_item_params}) do
+    changeset = PlanItem.changeset(%PlanItem{}, plan_item_params)
+
+    case Repo.insert(changeset) do
+      {:ok, _plan_item} ->
+        conn
+        |> put_flash(:info, "Plan item created successfully.")
+        |> redirect(to: plan_items_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
+
   def show(conn, params) do
     plan_item =
       PlanItem
@@ -35,6 +48,23 @@ defmodule NanoPlanner.PlanItemsController do
       |> PlanItem.convert_datetime
       |> PlanItem.changeset
     render(conn, "edit.html", changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
+    changeset =
+      PlanItem
+      |> Repo.get!(id)
+      |> PlanItem.convert_datetime
+      |> PlanItem.changeset(user_params)
+
+    case Repo.update(changeset) do
+      {:ok, _plan_item} ->
+        conn
+        |> put_flash(:info, "Plan item updated successfully.")
+        |> redirect(to: plan_items_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "edit.html", changeset: changeset)
+    end
   end
 
   defp beginning_of_hour do
