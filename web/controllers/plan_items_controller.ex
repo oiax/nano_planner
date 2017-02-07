@@ -23,4 +23,13 @@ defmodule NanoPlanner.PlanItemsController do
       |> PlanItem.convert_datetime
     render conn, "show.html", plan_item: plan_item
   end
+
+  def edit(conn, params) do
+    changeset =
+      PlanItem
+      |> Repo.get!(params["id"])
+      |> PlanItem.convert_datetime
+      |> PlanItem.changeset
+    render(conn, "edit.html", changeset: changeset)
+  end
 end
