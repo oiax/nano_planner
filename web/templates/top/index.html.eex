@@ -1,5 +1,8 @@
 <div>
   <%= link to: plan_items_path(@conn, :index) do %>
-    <i class='fa fa-list'></i> 予定表
+    <i class="fa fa-list"></i> 予定表
+  <% end %>
+  <%= link to: plan_items_path(@conn, :new) do %>
+    <i class="fa fa-plus"></i> 予定の追加
   <% end %>
 </div>
