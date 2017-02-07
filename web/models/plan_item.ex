@@ -1,11 +1,16 @@
 defmodule NanoPlanner.PlanItem do
   use NanoPlanner.Web, :model
+  alias Timex.Format.DateTime.Formatters.Strftime
 
   schema "plan_items" do
     field :name, :string
     field :description, :string
     field :starts_at, Timex.Ecto.DateTime
     field :ends_at, Timex.Ecto.DateTime
+    field :starts_at_date_part, Timex.Ecto.Date, virtual: true
+    field :starts_at_time_part, Timex.Ecto.Time, virtual: true
+    field :ends_at_date_part, Timex.Ecto.Date, virtual: true
+    field :ends_at_time_part, Timex.Ecto.Time, virtual: true
 
     timestamps()
   end
@@ -15,8 +20,33 @@ defmodule NanoPlanner.PlanItem do
   """
   def changeset(struct, params \\ %{}) do
     struct
+    |> populate_date_and_time_parts()
     |> cast(params, [])
     |> validate_required([])
+  end
+
+  defp populate_date_and_time_parts(%__MODULE__{} = item) do
+    if item.starts_at do
+      if item.starts_at_date_part == nil do
+        item = Map.put(item, :starts_at_date_part,
+          Timex.to_date(item.starts_at))
+      end
+      if item.starts_at_time_part == nil do
+        item = Map.put(item, :starts_at_time_part,
+          Strftime.format!(item.starts_at, "%H:%M"))
+      end
+    end
+    if item.ends_at do
+      if item.ends_at_date_part == nil do
+        item = Map.put(item, :ends_at_date_part,
+          Timex.to_date(item.ends_at))
+      end
+      if item.ends_at_time_part == nil do
+        item = Map.put(item, :ends_at_time_part,
+          Strftime.format!(item.ends_at, "%H:%M"))
+      end
+    end
+    item
   end
 
   def convert_datetime(items) when is_list(items) do

@@ -12,7 +12,12 @@ defmodule NanoPlanner.PlanItemsController do
   end
 
   def new(conn, _params) do
-    changeset = PlanItem.changeset(%PlanItem{})
+    now = Timex.now("Asia/Tokyo")
+    time0 = now |> Timex.beginning_of_day |> Timex.shift(hours: now.hour)
+    changeset = PlanItem.changeset(%PlanItem{
+      starts_at: Timex.shift(time0, hours: 1),
+      ends_at: Timex.shift(time0, hours: 2)
+    })
     render(conn, "new.html", changeset: changeset)
   end
 
