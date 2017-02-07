@@ -1,16 +1,16 @@
 <form action="/lessons/register">
   <div class="form-group">
-    <label for="user-name">ユーザー名</label>
+    <label for="user-name" class="control-label">ユーザー名</label>
     <input type="text" name="user[name]" id="user-name"
       class="form-control">
   </div>
   <div class="form-group">
-    <label for="user-password">パスワード</label>
+    <label for="user-password" class="control-label">パスワード</label>
     <input type="text" name="user[password]" id="user-password"
       class="form-control">
   </div>
   <div class="form-group">
-    <label for="user-remarks">備考</label>
+    <label for="user-remarks" class="control-label">備考</label>
     <textarea name="user[remarks]" id="user-remarks"
       class="form-control" rows="4">TEST</textarea>
   </div>

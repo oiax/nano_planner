@@ -11,6 +11,11 @@ defmodule NanoPlanner.PlanItemsController do
     render conn, "index.html", plan_items: plan_items
   end
 
+  def new(conn, _params) do
+    changeset = PlanItem.changeset(%PlanItem{})
+    render(conn, "new.html", changeset: changeset)
+  end
+
   def show(conn, params) do
     plan_item =
       PlanItem
