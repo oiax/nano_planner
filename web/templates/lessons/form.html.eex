@@ -1,13 +1,15 @@
 <form action="/lessons/register">
-  <div>
+  <div class="form-group">
     <label for="user-name">ユーザー名</label>
-    <input type="text" name="user[name]" id="user-name">
+    <input type="text" name="user[name]" id="user-name"
+      class="form-control">
   </div>
-  <div>
+  <div class="form-group">
     <label for="user-password">パスワード</label>
-    <input type="text" name="user[password]" id="user-password">
+    <input type="text" name="user[password]" id="user-password"
+      class="form-control">
   </div>
   <div>
-    <input type="submit" value="登録">
+    <input type="submit" value="登録" class="btn btn-primary">
   </div>
 </form>
