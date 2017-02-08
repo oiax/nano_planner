@@ -1,5 +1,13 @@
 input[type="text"].form-control,
 input[type="password"].form-control,
-textarea.form-control {
+textarea.form-control,
+select.form-control {
   border-color: gray;
+}
+div.time-part {
+  .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
 }

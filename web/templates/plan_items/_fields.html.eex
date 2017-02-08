@@ -14,9 +14,10 @@
       <%= text_input @f, :starts_at_date_part,
         class: "form-control pikaday", required: true %>
     </div>
-    <div class="col-12 col-md-5">
-      <%= text_input @f, :starts_at_time_part,
-        class: "form-control", required: true %>
+    <div class="hidden-md-up p-1"></div>
+    <div class="col-12 col-md-5 time-part">
+      <%= select_for_hours @f, :starts_at_hour_part %> :
+      <%= select_for_minutes @f, :starts_at_minute_part %>
     </div>
   </div>
 </div>
@@ -27,9 +28,10 @@
       <%= text_input @f, :ends_at_date_part,
         class: "form-control pikaday", required: true %>
     </div>
-    <div class="col-12 col-md-5">
-      <%= text_input @f, :ends_at_time_part,
-        class: "form-control", required: true %>
+    <div class="hidden-md-up p-1"></div>
+    <div class="col-12 col-md-5 time-part">
+      <%= select_for_hours @f, :ends_at_hour_part %> :
+      <%= select_for_minutes @f, :ends_at_minute_part %>
     </div>
   </div>
 </div>

@@ -55,7 +55,7 @@ defmodule NanoPlanner.PlanItemsController do
       PlanItem
       |> Repo.get!(id)
       |> PlanItem.convert_datetime
-      |> PlanItem.changeset(user_params)
+      |> PlanItem.changeset(plan_item_params)
 
     case Repo.update(changeset) do
       {:ok, _plan_item} ->

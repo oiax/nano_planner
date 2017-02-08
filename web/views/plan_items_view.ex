@@ -37,4 +37,22 @@ defmodule NanoPlanner.PlanItemsView do
     Enum.at ~w(日 月 火 水 木 金 土),
       Timex.days_to_beginning_of_week(datetime, :sun)
   end
+
+  def select_for_hours(form, field) do
+    values = 0..23
+    options = Enum.map(values, &{two_digits(&1), &1})
+    Phoenix.HTML.Form.select form, field, options,
+      class: "form-control", required: true
+  end
+
+  def select_for_minutes(form, field) do
+    values = Enum.map(0..11, &(&1 * 5))
+    options = Enum.map(values, &{two_digits(&1), &1})
+    Phoenix.HTML.Form.select form, field, options,
+      class: "form-control", required: true
+  end
+
+  defp two_digits(n) do
+    n |> Integer.to_string |> String.rjust(2, ?0)
+  end
 end
