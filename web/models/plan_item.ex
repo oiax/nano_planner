@@ -108,11 +108,7 @@ defmodule NanoPlanner.PlanItem do
     m = get_field(changeset, :s_minute)
     dt = to_local_datetime(d, h, m)
 
-    if item.starts_at != dt do
-      changeset |> put_change(:starts_at, dt)
-    else
-      changeset
-    end
+    changeset |> put_change(:starts_at, dt)
   end
 
   defp populate_ends_at(changeset) do
@@ -122,11 +118,7 @@ defmodule NanoPlanner.PlanItem do
     m = get_field(changeset, :e_minute)
     dt = to_local_datetime(d, h, m)
 
-    if item.ends_at != dt do
-      changeset |> put_change(:ends_at, dt)
-    else
-      changeset
-    end
+    changeset |> put_change(:ends_at, dt)
   end
 
   defp to_local_datetime(date, hour, minute) do
