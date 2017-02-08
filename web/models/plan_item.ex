@@ -6,13 +6,12 @@ defmodule NanoPlanner.PlanItem do
     field :description, :string
     field :starts_at, Timex.Ecto.DateTime
     field :ends_at, Timex.Ecto.DateTime
-    field :starts_at_date_part, Timex.Ecto.Date, virtual: true
-    field :starts_at_hour_part, :integer, virtual: true
-    field :starts_at_minute_part, :integer, virtual: true
-    field :ends_at_date_part, Timex.Ecto.Date, virtual: true
-    field :ends_at_time_part, Timex.Ecto.Time, virtual: true
-    field :ends_at_hour_part, :integer, virtual: true
-    field :ends_at_minute_part, :integer, virtual: true
+    field :s_date, Timex.Ecto.Date, virtual: true
+    field :s_hour, :integer, virtual: true
+    field :s_minute, :integer, virtual: true
+    field :e_date, Timex.Ecto.Date, virtual: true
+    field :e_hour, :integer, virtual: true
+    field :e_minute, :integer, virtual: true
 
     timestamps()
   end
@@ -22,57 +21,57 @@ defmodule NanoPlanner.PlanItem do
   """
   @allowed_fields [
     :name, :description,
-    :starts_at_date_part, :starts_at_hour_part, :starts_at_minute_part,
-    :ends_at_date_part, :ends_at_hour_part, :ends_at_minute_part
+    :s_date, :s_hour, :s_minute,
+    :e_date, :e_hour, :e_minute
   ]
   def changeset(struct, params \\ %{}) do
     struct
-    |> populate_date_and_time_parts()
+    |> populate_date_and_times()
     |> cast(params, @allowed_fields)
     |> validate_required([])
     |> before_save()
   end
 
-  defp populate_date_and_time_parts(%__MODULE__{} = item) do
+  defp populate_date_and_times(%__MODULE__{} = item) do
     item
-    |> populate_starts_at_date_part()
-    |> populate_ends_at_date_part()
-    |> populate_starts_at_time_part()
-    |> populate_ends_at_time_part()
+    |> populate_s_date()
+    |> populate_e_date()
+    |> populate_s_time()
+    |> populate_e_time()
   end
 
-  defp populate_starts_at_date_part(%__MODULE__{} = item) do
-    if item.starts_at && item.starts_at_date_part == nil do
-      Map.put(item, :starts_at_date_part, Timex.to_date(item.starts_at))
+  defp populate_s_date(%__MODULE__{} = item) do
+    if item.starts_at && item.s_date == nil do
+      Map.put(item, :s_date, Timex.to_date(item.starts_at))
     else
       item
     end
   end
 
-  defp populate_ends_at_date_part(%__MODULE__{} = item) do
-    if item.ends_at && item.ends_at_date_part == nil do
-      Map.put(item, :ends_at_date_part, Timex.to_date(item.ends_at))
+  defp populate_e_date(%__MODULE__{} = item) do
+    if item.ends_at && item.e_date == nil do
+      Map.put(item, :e_date, Timex.to_date(item.ends_at))
     else
       item
     end
   end
 
-  defp populate_starts_at_time_part(%__MODULE__{} = item) do
-    if item.starts_at && item.starts_at_hour_part == nil do
+  defp populate_s_time(%__MODULE__{} = item) do
+    if item.starts_at && item.s_hour == nil do
       Map.merge(item, %{
-        starts_at_hour_part: item.starts_at.hour,
-        starts_at_minute_part: item.starts_at.minute
+        s_hour: item.starts_at.hour,
+        s_minute: item.starts_at.minute
       })
     else
       item
     end
   end
 
-  defp populate_ends_at_time_part(%__MODULE__{} = item) do
-    if item.ends_at && item.ends_at_hour_part == nil do
+  defp populate_e_time(%__MODULE__{} = item) do
+    if item.ends_at && item.e_hour == nil do
       Map.merge(item, %{
-        ends_at_hour_part: item.ends_at.hour,
-        ends_at_minute_part: item.ends_at.minute
+        e_hour: item.ends_at.hour,
+        e_minute: item.ends_at.minute
       })
     else
       item
@@ -106,15 +105,15 @@ defmodule NanoPlanner.PlanItem do
 
   defp populate_starts_at(changeset) do
     item = changeset.data
-    d = get_change(changeset, :starts_at_date_part, item.starts_at_date_part)
-    h = get_change(changeset, :starts_at_hour_part, item.starts_at_hour_part)
-    m = get_change(changeset, :starts_at_minute_part, item.starts_at_minute_part)
+    d = get_field(changeset, :s_date)
+    h = get_field(changeset, :s_hour)
+    m = get_field(changeset, :s_minute)
+
     dt =
       d
       |> Timex.to_datetime("Asia/Tokyo")
       |> Timex.shift(hours: h, minutes: m)
 
-IO.inspect [item.starts_at, dt]
     if item.starts_at != dt do
       changeset |> put_change(:starts_at, dt)
     else
@@ -124,9 +123,10 @@ IO.inspect [item.starts_at, dt]
 
   defp populate_ends_at(changeset) do
     item = changeset.data
-    d = get_change(changeset, :ends_at_date_part, item.ends_at_date_part)
-    h = get_change(changeset, :ends_at_hour_part, item.ends_at_hour_part)
-    m = get_change(changeset, :ends_at_minute_part, item.ends_at_minute_part)
+    d = get_field(changeset, :e_date)
+    h = get_field(changeset, :e_hour)
+    m = get_field(changeset, :e_minute)
+
     dt =
       d
       |> Timex.to_datetime("Asia/Tokyo")

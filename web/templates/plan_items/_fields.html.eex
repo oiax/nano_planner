@@ -11,13 +11,13 @@
   <%= label @f, :starts_at, "開始日時", class: "control-label" %>
   <div class="row">
     <div class="col-12 col-md-7">
-      <%= text_input @f, :starts_at_date_part,
+      <%= text_input @f, :s_date,
         class: "form-control pikaday", required: true %>
     </div>
     <div class="hidden-md-up p-1"></div>
     <div class="col-12 col-md-5 time-part">
-      <%= select_for_hours @f, :starts_at_hour_part %> :
-      <%= select_for_minutes @f, :starts_at_minute_part %>
+      <%= select_for_hours @f, :s_hour %> :
+      <%= select_for_minutes @f, :s_minute %>
     </div>
   </div>
 </div>
@@ -25,13 +25,13 @@
   <%= label @f, :ends_at, "終了日時", class: "control-label" %>
   <div class="row">
     <div class="col-12 col-md-7">
-      <%= text_input @f, :ends_at_date_part,
+      <%= text_input @f, :e_date,
         class: "form-control pikaday", required: true %>
     </div>
     <div class="hidden-md-up p-1"></div>
     <div class="col-12 col-md-5 time-part">
-      <%= select_for_hours @f, :ends_at_hour_part %> :
-      <%= select_for_minutes @f, :ends_at_minute_part %>
+      <%= select_for_hours @f, :e_hour %> :
+      <%= select_for_minutes @f, :e_minute %>
     </div>
   </div>
 </div>
