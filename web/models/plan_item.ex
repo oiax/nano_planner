@@ -20,11 +20,17 @@ defmodule NanoPlanner.PlanItem do
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
+  @allowed_fields [
+    :name, :description,
+    :starts_at_date_part, :starts_at_hour_part, :starts_at_minute_part,
+    :ends_at_date_part, :ends_at_hour_part, :ends_at_minute_part
+  ]
   def changeset(struct, params \\ %{}) do
     struct
     |> populate_date_and_time_parts()
-    |> cast(params, [])
+    |> cast(params, @allowed_fields)
     |> validate_required([])
+    |> before_save()
   end
 
   defp populate_date_and_time_parts(%__MODULE__{} = item) do
@@ -86,5 +92,50 @@ defmodule NanoPlanner.PlanItem do
       starts_at: Timezone.convert(item.starts_at, time_zone),
       ends_at: Timezone.convert(item.ends_at, time_zone)
     })
+  end
+
+  defp before_save(changeset) do
+    if changeset.valid? do
+      changeset
+        |> populate_starts_at()
+        |> populate_ends_at()
+    else
+      changeset
+    end
+  end
+
+  defp populate_starts_at(changeset) do
+    item = changeset.data
+    d = get_change(changeset, :starts_at_date_part, item.starts_at_date_part)
+    h = get_change(changeset, :starts_at_hour_part, item.starts_at_hour_part)
+    m = get_change(changeset, :starts_at_minute_part, item.starts_at_minute_part)
+    dt =
+      d
+      |> Timex.to_datetime("Asia/Tokyo")
+      |> Timex.shift(hours: h, minutes: m)
+
+IO.inspect [item.starts_at, dt]
+    if item.starts_at != dt do
+      changeset |> put_change(:starts_at, dt)
+    else
+      changeset
+    end
+  end
+
+  defp populate_ends_at(changeset) do
+    item = changeset.data
+    d = get_change(changeset, :ends_at_date_part, item.ends_at_date_part)
+    h = get_change(changeset, :ends_at_hour_part, item.ends_at_hour_part)
+    m = get_change(changeset, :ends_at_minute_part, item.ends_at_minute_part)
+    dt =
+      d
+      |> Timex.to_datetime("Asia/Tokyo")
+      |> Timex.shift(hours: h, minutes: m)
+
+    if item.ends_at != dt do
+      changeset |> put_change(:ends_at, dt)
+    else
+      changeset
+    end
   end
 end
