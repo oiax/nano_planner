@@ -85,11 +85,9 @@ defmodule NanoPlanner.PlanItem do
   def convert_datetime(%__MODULE__{} = item) do
     alias Timex.Timezone
 
-    time_zone = Application.get_env(:nano_planner, :default_time_zone)
-
     Map.merge(item, %{
-      starts_at: Timezone.convert(item.starts_at, time_zone),
-      ends_at: Timezone.convert(item.ends_at, time_zone)
+      starts_at: Timezone.convert(item.starts_at, time_zone()),
+      ends_at: Timezone.convert(item.ends_at, time_zone())
     })
   end
 
@@ -108,11 +106,7 @@ defmodule NanoPlanner.PlanItem do
     d = get_field(changeset, :s_date)
     h = get_field(changeset, :s_hour)
     m = get_field(changeset, :s_minute)
-
-    dt =
-      d
-      |> Timex.to_datetime("Asia/Tokyo")
-      |> Timex.shift(hours: h, minutes: m)
+    dt = to_local_datetime(d, h, m)
 
     if item.starts_at != dt do
       changeset |> put_change(:starts_at, dt)
@@ -126,16 +120,22 @@ defmodule NanoPlanner.PlanItem do
     d = get_field(changeset, :e_date)
     h = get_field(changeset, :e_hour)
     m = get_field(changeset, :e_minute)
-
-    dt =
-      d
-      |> Timex.to_datetime("Asia/Tokyo")
-      |> Timex.shift(hours: h, minutes: m)
+    dt = to_local_datetime(d, h, m)
 
     if item.ends_at != dt do
       changeset |> put_change(:ends_at, dt)
     else
       changeset
     end
+  end
+
+  defp to_local_datetime(date, hour, minute) do
+    date
+    |> Timex.to_datetime(time_zone())
+    |> Timex.shift(hours: hour, minutes: minute)
+  end
+
+  defp time_zone do
+    Application.get_env(:nano_planner, :default_time_zone)
   end
 end
