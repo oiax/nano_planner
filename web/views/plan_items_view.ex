@@ -53,6 +53,6 @@ defmodule NanoPlanner.PlanItemsView do
   end
 
   defp two_digits(n) do
-    n |> Integer.to_string |> String.rjust(2, ?0)
+    n |> Integer.to_string |> String.pad_leading(2, "0")
   end
 end
