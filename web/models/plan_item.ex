@@ -83,7 +83,6 @@ defmodule NanoPlanner.PlanItem do
   defp populate_changes(changeset), do: changeset
 
   defp change_starts_at(changeset) do
-    item = changeset.data
     d = get_field(changeset, :s_date)
     h = get_field(changeset, :s_hour)
     m = get_field(changeset, :s_minute)
@@ -93,7 +92,6 @@ defmodule NanoPlanner.PlanItem do
   end
 
   defp change_ends_at(changeset) do
-    item = changeset.data
     d = get_field(changeset, :e_date)
     h = get_field(changeset, :e_hour)
     m = get_field(changeset, :e_minute)
