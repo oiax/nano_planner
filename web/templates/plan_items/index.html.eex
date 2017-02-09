@@ -4,30 +4,15 @@
 
 <div class="container-fluid plan-items">
   <%= for item <- @plan_items do %>
-  <div class="row">
-    <div class="col-xs-8 col-md-4">
-      <span class="plan-item-name">
-        <%= link item.name, to: plan_items_path(@conn, :show, item.id) %>
-      </span>
-    </div>
-    <div class="col-xs-4 hidden-md-up text-xs-right toolbar">
-      <%= render "_xs_toolbar.html", conn: @conn, item: item %>
-    </div>
-    <div class="col-12 col-md-5">
-      <span class="plan-item-description">
-        <%= for line <- String.split(item.description, "\n") do %>
-          <%= line %><br>
-        <% end %>
-      </span>
-    </div>
-    <div class="col-md-3 hidden-sm-down text-xs-right toolbar">
-      <%= render "_md_toolbar.html", conn: @conn, item: item %>
-    </div>
-    <div class="col-12">
-      <span class="plan-item-duration">
-        <%= format_duration(item) %>
-      </span>
-    </div>
-  </div>
+    <%= render "_index_row.html", item: item, conn: @conn %>
   <% end %>
 </div>
+
+<%= if @continued_plan_items != [] do %>
+  <hr>
+  <div class='container-fluid plan-items'>
+    <%= for item <- @continued_plan_items do %>
+      <%= render "_index_row.html", item: item, conn: @conn %>
+    <% end %>
+  </div>
+<% end %>

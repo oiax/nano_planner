@@ -8,7 +8,34 @@ defmodule NanoPlanner.PlanItemsController do
       |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
       |> Repo.all
       |> PlanItem.convert_datetime
-    render conn, "index.html", plan_items: plan_items
+    render conn, "index.html", plan_items: plan_items,
+      continued_plan_items: []
+  end
+
+  def of_today(conn, _params) do
+    t0 = Timex.now("Asia/Tokyo") |> Timex.beginning_of_day
+    t1 = Timex.shift(t0, days: 1)
+
+    plan_items =
+      PlanItem
+      |> where([i],
+        (i.starts_at >= ^t0 and i.starts_at < ^t1) or
+        (i.ends_at > ^t0 and i.ends_at <= ^t1)
+      )
+      |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
+      |> Repo.all
+      |> PlanItem.convert_datetime
+      # .or(PlanItem.where('ends_at > ? AND ends_at <= ?', t0, t1))
+
+    continued_plan_items =
+      PlanItem
+      |> where([i], i.starts_at < ^t0 and i.ends_at > ^t1)
+      |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
+      |> Repo.all
+      |> PlanItem.convert_datetime
+
+    render conn, "index.html", plan_items: plan_items,
+      continued_plan_items: continued_plan_items
   end
 
   def new(conn, _params) do
