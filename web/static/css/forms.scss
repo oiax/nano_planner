@@ -4,11 +4,20 @@ textarea.form-control,
 select.form-control {
   border-color: gray;
 }
-div.date-part,
-div.time-part {
-  .form-control {
+div.date-and-time {
+  margin-bottom: -0.5rem;
+
+  div {
     display: inline-block;
-    width: auto;
-    vertical-align: middle;
+    padding-bottom: 0.5rem;
+
+    .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+  div:first-child {
+    margin-right: 1rem;
   }
 }
