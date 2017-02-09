@@ -10,12 +10,13 @@
 <div class="form-group">
   <%= label @f, :starts_at, "開始日時", class: "control-label" %>
   <div class="row">
-    <div class="col-12 col-md-7">
+    <div class="col-12 col-md-5 date-part">
       <%= text_input @f, :s_date,
         class: "form-control pikaday", required: true %>
+      <span class="btn btn-info"><i class='fa fa-calendar'></i></span>
     </div>
     <div class="hidden-md-up p-1"></div>
-    <div class="col-12 col-md-5 time-part">
+    <div class="col-12 col-md-4 time-part">
       <%= select_for_hours @f, :s_hour %> :
       <%= select_for_minutes @f, :s_minute %>
     </div>
@@ -24,9 +25,10 @@
 <div class="form-group">
   <%= label @f, :ends_at, "終了日時", class: "control-label" %>
   <div class="row">
-    <div class="col-12 col-md-7">
+    <div class="col-12 col-md-5 date-part">
       <%= text_input @f, :e_date,
         class: "form-control pikaday", required: true %>
+      <span class="btn btn-info"><i class='fa fa-calendar'></i></span>
     </div>
     <div class="hidden-md-up p-1"></div>
     <div class="col-12 col-md-5 time-part">

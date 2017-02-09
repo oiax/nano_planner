@@ -2,6 +2,7 @@ $(function() {
   $('.pikaday').each(function() {
     new Pikaday({
       field: $(this)[0],
+      trigger: $(this).next('.btn')[0],
       i18n: {
         previousMonth: '前の月',
         nextMonth: '次の月',
@@ -15,7 +16,8 @@ $(function() {
           '日', '月', '火', '水', '木', '金', '土']
       },
       yearSuffix: '年',
-      showMonthAfterYear: true
+      showMonthAfterYear: true,
+      theme: 'dark-theme'
     });
   });
 });
