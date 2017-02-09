@@ -41,15 +41,13 @@ defmodule NanoPlanner.PlanItemsView do
   def select_for_hours(form, field) do
     values = 0..23
     options = Enum.map(values, &{two_digits(&1), &1})
-    Phoenix.HTML.Form.select form, field, options,
-      class: "form-control", required: true
+    select form, field, options, class: "form-control", required: true
   end
 
   def select_for_minutes(form, field) do
     values = Enum.map(0..11, &(&1 * 5))
     options = Enum.map(values, &{two_digits(&1), &1})
-    Phoenix.HTML.Form.select form, field, options,
-      class: "form-control", required: true
+    select form, field, options, class: "form-control", required: true
   end
 
   defp two_digits(n) do
