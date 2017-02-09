@@ -26,39 +26,22 @@ defmodule NanoPlanner.PlanItem do
   ]
   def changeset(struct, params \\ %{}) do
     struct
-    |> populate_date_and_times()
+    |> populate_virtual_fields()
     |> cast(params, @allowed_fields)
+    |> populate_changes()
     |> validate_required([])
-    |> before_save()
   end
 
-  defp populate_date_and_times(%__MODULE__{} = item) do
+  defp populate_virtual_fields(%__MODULE__{} = item) do
     item
-    |> populate_s_date()
-    |> populate_e_date()
-    |> populate_s_time()
-    |> populate_e_time()
+    |> populate_s_fields()
+    |> populate_e_fields()
   end
 
-  defp populate_s_date(%__MODULE__{} = item) do
-    if item.starts_at && item.s_date == nil do
-      Map.put(item, :s_date, Timex.to_date(item.starts_at))
-    else
-      item
-    end
-  end
-
-  defp populate_e_date(%__MODULE__{} = item) do
-    if item.ends_at && item.e_date == nil do
-      Map.put(item, :e_date, Timex.to_date(item.ends_at))
-    else
-      item
-    end
-  end
-
-  defp populate_s_time(%__MODULE__{} = item) do
-    if item.starts_at && item.s_hour == nil do
+  defp populate_s_fields(%__MODULE__{} = item) do
+    if item.starts_at do
       Map.merge(item, %{
+        s_date: Timex.to_date(item.starts_at),
         s_hour: item.starts_at.hour,
         s_minute: item.starts_at.minute
       })
@@ -67,9 +50,10 @@ defmodule NanoPlanner.PlanItem do
     end
   end
 
-  defp populate_e_time(%__MODULE__{} = item) do
-    if item.ends_at && item.e_hour == nil do
+  defp populate_e_fields(%__MODULE__{} = item) do
+    if item.ends_at do
       Map.merge(item, %{
+        e_date: Timex.to_date(item.ends_at),
         e_hour: item.ends_at.hour,
         e_minute: item.ends_at.minute
       })
@@ -91,17 +75,14 @@ defmodule NanoPlanner.PlanItem do
     })
   end
 
-  defp before_save(changeset) do
-    if changeset.valid? do
-      changeset
-        |> populate_starts_at()
-        |> populate_ends_at()
-    else
-      changeset
-    end
+  defp populate_changes(%Ecto.Changeset{valid?: true} = changeset) do
+    changeset
+      |> change_starts_at()
+      |> change_ends_at()
   end
+  defp populate_changes(changeset), do: changeset
 
-  defp populate_starts_at(changeset) do
+  defp change_starts_at(changeset) do
     item = changeset.data
     d = get_field(changeset, :s_date)
     h = get_field(changeset, :s_hour)
@@ -111,7 +92,7 @@ defmodule NanoPlanner.PlanItem do
     changeset |> put_change(:starts_at, dt)
   end
 
-  defp populate_ends_at(changeset) do
+  defp change_ends_at(changeset) do
     item = changeset.data
     d = get_field(changeset, :e_date)
     h = get_field(changeset, :e_hour)
