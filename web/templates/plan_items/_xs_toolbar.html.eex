@@ -2,6 +2,6 @@
   <i class="fa fa-pencil-square fa-lg"></i>
 <% end %>
 
-<%= link to: "#delete-confirmation-#{@item.id}" do %>
+<%= link to: "#delete-confirmation-#{@item.id}", data: [toggle: "modal"] do %>
   <i class="fa fa-trash fa-lg"></i>
 <% end %>

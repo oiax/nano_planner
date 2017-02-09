@@ -67,6 +67,16 @@ defmodule NanoPlanner.PlanItemsController do
     end
   end
 
+  def delete(conn, params) do
+    plan_item = Repo.get!(PlanItem, params["id"])
+
+    Repo.delete!(plan_item)
+
+    conn
+    |> put_flash(:info, "Plan item deleted successfully.")
+    |> redirect(to: plan_items_path(conn, :index))
+  end
+
   defp beginning_of_hour do
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
     %{Timex.now(time_zone) | :minute => 0, :second => 0, :microsecond => {0,0}}
