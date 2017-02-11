@@ -53,4 +53,13 @@ defmodule NanoPlanner.PlanItemsView do
   defp two_digits(n) do
     n |> Integer.to_string |> String.pad_leading(2, "0")
   end
+
+  def form_group(form, field, [do: block]) do
+    class = if form.errors[field] do
+      "form-group has-danger"
+    else
+      "form-group"
+    end
+    content_tag(:div, [class: class], [do: block])
+  end
 end

@@ -1,17 +1,20 @@
-<div class="form-group">
-  <%= label @f, :name, "件名", class: "control-label" %>
+<%= form_group @f, :name do %>
+  <%= label @f, :name, "件名", class: "form-control-label" %>
   <%= text_input @f, :name, class: "form-control", required: true %>
-</div>
-<div class="form-group">
-  <%= label @f, :description, "説明", class: "control-label" %>
-  <%= textarea @f, :description, class: "form-control", rows: 4,
-    required: true %>
-</div>
-<div class="form-group">
-  <%= label @f, :starts_at, "開始日時", class: "control-label" %>
+  <%= error_tag @f, :name %>
+<% end %>
+<%= form_group @f, :description do %>
+  <%= label @f, :description, "説明", class: "form-control-label" %>
+  <%= textarea @f, :description, class: "form-control", rows: 4 %>
+  <%= error_tag @f, :description %>
+<% end %>
+<%= form_group @f, :starts_at do %>
+  <%= label @f, :starts_at, "開始日時", class: "form-control-label" %>
   <%= render "_date_and_time.html", f: @f, prefix: "s" %>
-</div>
-<div class="form-group">
-  <%= label @f, :ends_at, "終了日時", class: "control-label" %>
+  <%= error_tag @f, :starts_at %>
+<% end %>
+<%= form_group @f, :ends_at do %>
+  <%= label @f, :ends_at, "終了日時", class: "form-control-label" %>
   <%= render "_date_and_time.html", f: @f, prefix: "e" %>
-</div>
+  <%= error_tag @f, :ends_at %>
+<% end %>
