@@ -29,7 +29,7 @@ defmodule NanoPlanner.PlanItem do
     |> populate_virtual_fields()
     |> cast(params, @allowed_fields)
     |> populate_changes()
-    |> validate_required([])
+    |> validate_required([:name])
   end
 
   defp populate_virtual_fields(%__MODULE__{} = item) do

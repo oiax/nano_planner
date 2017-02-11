@@ -26,6 +26,10 @@ config :logger, :console,
 config :nano_planner,
   default_time_zone: "Asia/Tokyo"
 
+# Configures the default locale
+config :nano_planner, NanoPlanner.Gettext,
+  default_locale: "ja"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
