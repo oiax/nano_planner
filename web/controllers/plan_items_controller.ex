@@ -25,7 +25,6 @@ defmodule NanoPlanner.PlanItemsController do
       |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
       |> Repo.all
       |> PlanItem.convert_datetime
-      # .or(PlanItem.where('ends_at > ? AND ends_at <= ?', t0, t1))
 
     continued_plan_items =
       PlanItem
