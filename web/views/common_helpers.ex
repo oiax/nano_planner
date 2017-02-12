@@ -1,7 +1,7 @@
 defmodule NanoPlanner.CommonHelpers do
   defmacro __using__(_) do
     quote do
-      def document_title(_conn) do
+      def document_title(_assigns) do
         "NanoPlanner"
       end
 

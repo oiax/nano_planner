@@ -2,15 +2,23 @@ defmodule NanoPlanner.PlanItemsView do
   use NanoPlanner.Web, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
-  def document_title(conn) do
-    case conn.private.phoenix_action do
-      :index -> "予定表 | NanoPlanner"
-      :show -> conn.assigns.plan_item.name <> " | NanoPlanner"
-      action when action in [:new, :create] ->
-        "予定の追加 | NanoPlanner"
-      action when action in [:edit, :update] ->
-        "予定の変更 | NanoPlanner"
-      _ -> "NanoPlanner"
+  @application_name "NanoPlanner"
+  def document_title(assigns) do
+    prefix = case assigns.view_template do
+      "index.html" ->
+        case assigns.conn.private.phoenix_action do
+          :index -> "予定表"
+          :of_today -> "今日の予定表"
+        end
+      "new.html" -> "予定の追加"
+      "show.html" -> "予定の詳細"
+      "edit.html" -> "予定の変更"
+      _ -> ""
+    end
+
+    case prefix do
+      "" -> @application_name
+      prefix -> prefix <> " | " <> @application_name
     end
   end
 
