@@ -2,6 +2,18 @@ defmodule NanoPlanner.PlanItemsView do
   use NanoPlanner.Web, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
+  def document_title(conn) do
+    case conn.private.phoenix_action do
+      :index -> "予定表 | NanoPlanner"
+      :show -> conn.assigns.plan_item.name <> " | NanoPlanner"
+      action when action in [:new, :create] ->
+        "予定の追加 | NanoPlanner"
+      action when action in [:edit, :update] ->
+        "予定の変更 | NanoPlanner"
+      _ -> "NanoPlanner"
+    end
+  end
+
   def format_duration(item) do
     [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join(" ")
   end
