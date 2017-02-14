@@ -3,8 +3,8 @@ defmodule NanoPlanner.PlanItemsView do
   alias Timex.Format.DateTime.Formatters.Strftime
 
   @application_name "NanoPlanner"
-  def document_title(assigns) do
-    prefix = case assigns.view_template do
+  def document_title(view_template, assigns) do
+    prefix = case view_template do
       "index.html" ->
         case assigns.conn.private.phoenix_action do
           :index -> "予定表"

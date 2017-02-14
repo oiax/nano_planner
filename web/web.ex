@@ -53,8 +53,6 @@ defmodule NanoPlanner.Web do
       import NanoPlanner.Router.Helpers
       import NanoPlanner.ErrorHelpers
       import NanoPlanner.Gettext
-
-      use NanoPlanner.CommonHelpers
     end
   end
 

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= @view_module.document_title assigns %></title>
+    <title><%= document_title @view_module, @view_template, assigns %></title>
     <%= tag :link, rel: "stylesheet",
       href: static_path(@conn, "/css/vendor.css") %>
     <%= tag :link, rel: "stylesheet",
