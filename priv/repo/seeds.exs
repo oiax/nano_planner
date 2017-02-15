@@ -1,4 +1,4 @@
-import NanoPlanner.Repo, only: [insert!: 1]
+import NanoPlanner.Repo
 alias NanoPlanner.PlanItem
 
 time0 = Timex.now("Asia/Tokyo") |> Timex.beginning_of_day
