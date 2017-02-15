@@ -9,8 +9,6 @@
 
     <title><%= document_title @view_module, @view_template, assigns %></title>
     <%= tag :link, rel: "stylesheet",
-      href: static_path(@conn, "/css/vendor.css") %>
-    <%= tag :link, rel: "stylesheet",
       href: static_path(@conn, "/css/app.css") %>
     <%= tag :link, rel: "shortcut icon",
       href: static_path(@conn, "/images/nano_planner.ico") %>
