@@ -22,6 +22,21 @@ defmodule NanoPlanner.PlanItemsView do
     end
   end
 
+  @action_label_map %{
+    index: "予定表",
+    of_today: "今日の予定表",
+  }
+  def plan_items_nav_link(conn, action) do
+    css_class = if conn.private.phoenix_action == action do
+      "nav-link active"
+    else
+      "nav-link"
+    end
+
+    link @action_label_map[action], to: plan_items_path(conn, action),
+      class: css_class
+  end
+
   def format_duration(item) do
     [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join(" ")
   end

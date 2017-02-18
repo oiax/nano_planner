@@ -1,3 +1,5 @@
+<%= render "_index_nav.html", conn: @conn %>
+
 <%= for item <- @plan_items do %>
   <%= render "_delete_confirmation.html", item: item, conn: @conn %>
 <% end %>
