@@ -1,4 +1,4 @@
-defmodule NanoPlanner.ErrorHelpers do
+defmodule NanoPlanner.Web.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

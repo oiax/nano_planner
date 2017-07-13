@@ -1,4 +1,4 @@
-defmodule NanoPlanner.Router do
+defmodule NanoPlanner.Web.Router do
   use NanoPlanner.Web, :router
 
   pipeline :browser do
@@ -9,7 +9,7 @@ defmodule NanoPlanner.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", NanoPlanner do
+  scope "/", NanoPlanner.Web do
     pipe_through :browser
 
     get "/", TopController, :index

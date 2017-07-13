@@ -29,20 +29,17 @@ defmodule NanoPlanner.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
-
-      alias NanoPlanner.Repo
-      import Ecto
-      import Ecto.Query
-
-      import NanoPlanner.Router.Helpers
-      import NanoPlanner.Gettext
+      use Phoenix.Controller, namespace: NanoPlanner.Web
+      import Plug.Conn
+      import NanoPlanner.Web.Router.Helpers
+      import NanoPlanner.Web.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/nano_planner/web/templates",
+                        namespace: NanoPlanner.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -50,26 +47,24 @@ defmodule NanoPlanner.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import NanoPlanner.Router.Helpers
-      import NanoPlanner.ErrorHelpers
-      import NanoPlanner.Gettext
+      import NanoPlanner.Web.Router.Helpers
+      import NanoPlanner.Web.ErrorHelpers
+      import NanoPlanner.Web.Gettext
     end
   end
 
   def router do
     quote do
       use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
     end
   end
 
   def channel do
     quote do
       use Phoenix.Channel
-
-      alias NanoPlanner.Repo
-      import Ecto
-      import Ecto.Query
-      import NanoPlanner.Gettext
+      import NanoPlanner.Web.Gettext
     end
   end
 

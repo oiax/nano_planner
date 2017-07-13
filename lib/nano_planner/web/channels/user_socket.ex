@@ -1,4 +1,4 @@
-defmodule NanoPlanner.UserSocket do
+defmodule NanoPlanner.Web.UserSocket do
   use Phoenix.Socket
 
   ## Channels

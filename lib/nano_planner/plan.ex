@@ -1,21 +1,14 @@
-defmodule NanoPlanner.PlanItem do
-  use NanoPlanner.Web, :model
+defmodule NanoPlanner.Plan do
+  alias NanoPlanner.Plan.Item
 
-  schema "plan_items" do
-    field :name, :string
-    field :description, :string
-    field :starts_at, Timex.Ecto.DateTime
-    field :ends_at, Timex.Ecto.DateTime
-
-    timestamps()
-  end
+  import Ecto.{Query, Changeset}, warn: false
 
   @doc """
-  Builds a changeset based on the `struct` and `params`.
+  Builds a changeset based on the `struct` and `attrs`.
   """
-  def changeset(struct, params \\ %{}) do
+  def item_changeset(struct, attrs \\ %{}) do
     struct
-    |> cast(params, [])
+    |> cast(attrs, [])
     |> validate_required([])
   end
 
@@ -23,7 +16,7 @@ defmodule NanoPlanner.PlanItem do
     Enum.map items, &(convert_datetime &1)
   end
 
-  def convert_datetime(%__MODULE__{} = item) do
+  def convert_datetime(%Item{} = item) do
     alias Timex.Timezone
 
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
