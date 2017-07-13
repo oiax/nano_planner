@@ -1,0 +1,23 @@
+<div class="container-fluid plan-items">
+  <%= for item <- @plan_items do %>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <span class="plan-item-name">
+        <%= link item.name, to: plan_items_path(@conn, :show, item.id) %>
+      </span>
+    </div>
+    <div class="col-12 col-md-8">
+      <span class="plan-item-description">
+        <%= for line <- String.split(item.description, "\n") do %>
+          <%= line %><br>
+        <% end %>
+      </span>
+    </div>
+    <div class="col-12">
+      <span class="plan-item-duration">
+        <%= format_duration(item) %>
+      </span>
+    </div>
+  </div>
+  <% end %>
+</div>
