@@ -1,20 +1,41 @@
-# NanoPlanner
+# NanoPlanner: 簡易予定表管理システム
 
-To start your Phoenix server:
+これは『Elixir/Phoenix 入門②』の学習用 Phoenix アプリケーションです。
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## 対象 OS
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+* OS X v10.11
+* macOS Sierra v10.12
+* Ubuntu 16.04
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+## 稼働条件
 
-## Learn more
+* Erlang 20.0
+* Elixir 1.5.0-rc.1
+* Phoenix 1.3.0-rc.2
+* PostgreSQL 9.6
+* Node.js 8.0
+* npm 5.0
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Ubuntu 16.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールしてください。
+
+```text
+$ sudo apt-get -y install inotify-tools
+```
+
+## インストール方法
+
+```text
+$ mix local.hex --force
+$ mix local.rebar --force
+$ mix deps.get
+$ mix ecto.create
+$ mix ecto.load
+$ mix run priv/repo/seeds.exs
+```
+
+## 起動方法
+
+```text
+$ mix phoenix.server
+```
