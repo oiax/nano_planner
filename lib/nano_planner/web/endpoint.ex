@@ -1,7 +1,7 @@
-defmodule NanoPlanner.Endpoint do
+defmodule NanoPlanner.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :nano_planner
 
-  socket "/socket", NanoPlanner.UserSocket
+  socket "/socket", NanoPlanner.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -36,7 +36,19 @@ defmodule NanoPlanner.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_nano_planner_key",
-    signing_salt: "GyUwyX/1"
+    signing_salt: "DHCgvms7"
 
-  plug NanoPlanner.Router
+  plug NanoPlanner.Web.Router
+
+  @doc """
+  Dynamically loads configuration from the system environment
+  on startup.
+
+  It receives the endpoint configuration from the config files
+  and must return the updated configuration.
+  """
+  def load_from_system_env(config) do
+    port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+    {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+  end
 end

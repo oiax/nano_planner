@@ -1,4 +1,4 @@
-defmodule NanoPlanner.Router do
+defmodule NanoPlanner.Web.Router do
   use NanoPlanner.Web, :router
 
   pipeline :browser do
@@ -13,14 +13,14 @@ defmodule NanoPlanner.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", NanoPlanner do
+  scope "/", NanoPlanner.Web do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", NanoPlanner do
+  # scope "/api", NanoPlanner.Web do
   #   pipe_through :api
   # end
 end

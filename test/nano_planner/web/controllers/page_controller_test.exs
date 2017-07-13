@@ -1,5 +1,5 @@
-defmodule NanoPlanner.PageControllerTest do
-  use NanoPlanner.ConnCase
+defmodule NanoPlanner.Web.PageControllerTest do
+  use NanoPlanner.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
