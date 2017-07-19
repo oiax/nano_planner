@@ -3,11 +3,24 @@ defmodule NanoPlanner.Calendar do
   alias NanoPlanner.Repo
   alias NanoPlanner.Calendar.PlanItem
 
-  def convert_datetime(items) when is_list(items) do
+  def list_plan_items do
+    PlanItem
+    |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
+    |> Repo.all
+    |> convert_datetime
+  end
+
+  def get_plan_item!(id) do
+    PlanItem
+    |> Repo.get!(id)
+    |> convert_datetime
+  end
+
+  defp convert_datetime(items) when is_list(items) do
     Enum.map items, &(convert_datetime &1)
   end
 
-  def convert_datetime(%PlanItem{} = item) do
+  defp convert_datetime(%PlanItem{} = item) do
     alias Timex.Timezone
 
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
