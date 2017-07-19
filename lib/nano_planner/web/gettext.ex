@@ -1,4 +1,4 @@
-defmodule NanoPlanner.Gettext do
+defmodule NanoPlanner.Web.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 

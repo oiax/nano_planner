@@ -1,4 +1,4 @@
-defmodule NanoPlanner.ErrorView do
+defmodule NanoPlanner.Web.ErrorView do
   use NanoPlanner.Web, :view
 
   def render("404.html", _assigns) do

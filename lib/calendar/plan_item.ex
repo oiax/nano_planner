@@ -1,5 +1,6 @@
 defmodule NanoPlanner.Calendar.PlanItem do
   use Ecto.Schema
+  use Timex.Ecto.Timestamps
   import Ecto.Changeset
   alias NanoPlanner.Calendar.PlanItem
 
@@ -12,12 +13,10 @@ defmodule NanoPlanner.Calendar.PlanItem do
     timestamps()
   end
 
-  @doc """
-  Builds a changeset based on the `struct` and `params`.
-  """
-  def changeset(struct, params \\ %{}) do
-    struct
-    |> cast(params, [])
+  @doc false
+  def changeset(%PlanItem{} = plan_item, attrs) do
+    plan_item
+    |> cast(attrs, [])
     |> validate_required([])
   end
 end

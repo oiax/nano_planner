@@ -1,4 +1,4 @@
-defmodule NanoPlanner.TopController do
+defmodule NanoPlanner.Web.TopController do
   use NanoPlanner.Web, :controller
 
   def index(conn, _params) do

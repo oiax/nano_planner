@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :nano_planner, NanoPlanner.Endpoint,
+config :nano_planner, NanoPlanner.Web.Endpoint,
   secret_key_base: "CHANGE_HERE"
 
 config :nano_planner, NanoPlanner.Repo,

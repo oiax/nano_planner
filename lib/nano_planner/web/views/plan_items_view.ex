@@ -1,4 +1,4 @@
-defmodule NanoPlanner.PlanItemsView do
+defmodule NanoPlanner.Web.PlanItemsView do
   use NanoPlanner.Web, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
