@@ -13,7 +13,6 @@ defmodule NanoPlanner.Calendar.PlanItem do
     timestamps()
   end
 
-  @doc false
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
     |> cast(attrs, [])
