@@ -8,8 +8,8 @@ defmodule NanoPlanner.Web.PlanItemController do
   end
 
   def new(conn, _params) do
-    plan_item = %Calendar.PlanItem{}
-    changeset = Calendar.PlanItem.changeset(plan_item, %{})
+    plan_item = Calendar.new_plan_item
+    changeset = Calendar.change_plan_item(plan_item)
     render(conn, "new.html", changeset: changeset)
   end
 
