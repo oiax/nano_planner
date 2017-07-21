@@ -13,6 +13,10 @@ defmodule NanoPlanner.Web.PlanItemController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def create(conn, _params) do
+    redirect(conn, to: plan_item_path(conn, :index))
+  end
+
   def show(conn, %{"id" => id}) do
     plan_item = Calendar.get_plan_item!(id)
     render conn, "show.html", plan_item: plan_item
