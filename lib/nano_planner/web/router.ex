@@ -13,9 +13,7 @@ defmodule NanoPlanner.Web.Router do
     pipe_through :browser
 
     get "/", TopController, :index
-    get "/plan_items", PlanItemController, :index
-    get "/plan_items/new", PlanItemController, :new
-    get "/plan_items/:id", PlanItemController, :show
-    post "/plan_items", PlanItemController, :create
+    resources "/plan_items", PlanItemController, 
+      only: [:index, :new, :show, :create]
   end
 end
