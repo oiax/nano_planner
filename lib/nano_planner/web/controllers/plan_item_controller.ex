@@ -7,6 +7,12 @@ defmodule NanoPlanner.Web.PlanItemController do
     render conn, "index.html", plan_items: plan_items
   end
 
+  def new(conn, _params) do
+    plan_item = %Calendar.PlanItem{}
+    changeset = Calendar.PlanItem.changeset(plan_item, %{})
+    render(conn, "new.html", changeset: changeset)
+  end
+
   def show(conn, %{"id" => id}) do
     plan_item = Calendar.get_plan_item!(id)
     render conn, "show.html", plan_item: plan_item
