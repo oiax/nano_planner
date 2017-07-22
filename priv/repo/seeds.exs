@@ -1,5 +1,5 @@
 import NanoPlanner.Repo
-alias NanoPlanner.PlanItem
+alias NanoPlanner.Calendar.PlanItem
 
 time0 = Timex.now("Asia/Tokyo") |> Timex.beginning_of_day
 time1 = time0 |> Timex.beginning_of_year
