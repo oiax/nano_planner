@@ -17,11 +17,20 @@ defmodule NanoPlanner.Calendar do
   end
 
   def build_plan_item do
-    %PlanItem{}
+    now = Timex.now("Asia/Tokyo")
+    time0 = now |> Timex.beginning_of_day |> Timex.shift(hours: now.hour + 1)
+    time1 = time0 |> Timex.shift(hours: 1)
+    %PlanItem{ starts_at: time0, ends_at: time1 }
   end
 
   def change_plan_item(%PlanItem{} = item) do
     PlanItem.changeset(item, %{})
+  end
+
+  def create_plan_item(attrs \\ %{}) do
+    %PlanItem{}
+    |> PlanItem.changeset(attrs)
+    |> Repo.insert!()
   end
 
   defp convert_datetime(items) when is_list(items) do
