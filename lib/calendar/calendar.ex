@@ -16,7 +16,7 @@ defmodule NanoPlanner.Calendar do
     |> convert_datetime
   end
 
-  def new_plan_item do
+  def build_plan_item do
     %PlanItem{}
   end
 
