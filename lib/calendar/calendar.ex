@@ -49,7 +49,28 @@ defmodule NanoPlanner.Calendar do
   end
 
   def change_plan_item(%PlanItem{} = item) do
-    PlanItem.changeset(item, %{})
+    item
+    |> populate_s_fields()
+    |> populate_e_fields()
+    |> PlanItem.changeset(%{})
+  end
+
+  defp populate_s_fields(%PlanItem{starts_at: nil} = item), do: item
+  defp populate_s_fields(%PlanItem{} = item) do
+    Map.merge(item, %{
+      s_date: Timex.to_date(item.starts_at),
+      s_hour: item.starts_at.hour,
+      s_minute: item.starts_at.minute
+    })
+  end
+
+  defp populate_e_fields(%PlanItem{ends_at: nil} = item), do: item
+  defp populate_e_fields(%PlanItem{} = item) do
+    Map.merge(item, %{
+      e_date: Timex.to_date(item.ends_at),
+      e_hour: item.ends_at.hour,
+      e_minute: item.ends_at.minute
+    })
   end
 
   defp convert_datetime(items) when is_list(items) do
