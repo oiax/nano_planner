@@ -27,5 +27,34 @@ defmodule NanoPlanner.Calendar.PlanItem do
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
     |> cast(attrs, @allowed_fields)
+    |> change_starts_at()
+    |> change_ends_at()
+  end
+
+  defp change_starts_at(changeset) do
+    d = get_field(changeset, :s_date)
+    h = get_field(changeset, :s_hour, 0)
+    m = get_field(changeset, :s_minute, 0)
+    dt = get_local_datetime(d, h, m)
+    put_change(changeset, :starts_at, dt)
+  end
+
+  defp change_ends_at(changeset) do
+    d = get_field(changeset, :e_date)
+    h = get_field(changeset, :e_hour, 0)
+    m = get_field(changeset, :e_minute, 0)
+    dt = get_local_datetime(d, h, m)
+    put_change(changeset, :ends_at, dt)
+  end
+
+  defp get_local_datetime(date = nil, _hour, _minute), do: nil
+  defp get_local_datetime(date, hour, minute) do
+    date
+    |> Timex.to_datetime(time_zone())
+    |> Timex.shift(hours: hour, minutes: minute)
+  end
+
+  defp time_zone do
+    Application.get_env(:nano_planner, :default_time_zone)
   end
 end
