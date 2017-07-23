@@ -17,10 +17,19 @@ defmodule NanoPlanner.Calendar do
   end
 
   def build_plan_item do
-    now = Timex.now("Asia/Tokyo")
-    time0 = now |> Timex.beginning_of_day |> Timex.shift(hours: now.hour + 1)
-    time1 = time0 |> Timex.shift(hours: 1)
-    %PlanItem{ starts_at: time0, ends_at: time1 }
+    time0 = beginning_of_hour()
+    %PlanItem{
+      starts_at: Timex.shift(time0, hours: 1),
+      ends_at: Timex.shift(time0, hours: 2)
+    }
+  end
+
+  defp beginning_of_hour do
+    %{Timex.now(time_zone()) | minute: 0, second: 0, microsecond: {0,0}}
+  end
+
+  defp time_zone do
+    Application.get_env(:nano_planner, :default_time_zone)
   end
 
   def create_plan_item(attrs) do
