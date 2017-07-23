@@ -1,0 +1,4 @@
+<%= link to: plan_item_path(@conn, :edit, @item.id),
+  class: "btn btn-secondary btn-sm" do %>
+  <i class="fa fa-pencil-square"></i> 変更
+<% end %>
