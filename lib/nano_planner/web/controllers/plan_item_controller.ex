@@ -34,4 +34,10 @@ defmodule NanoPlanner.Web.PlanItemController do
     Calendar.update_plan_item(plan_item, plan_item_params)
     redirect(conn, to: plan_item_path(conn, :index))
   end
+
+  def delete(conn, %{"id" => id}) do
+    plan_item = Calendar.get_plan_item!(id)
+    Calendar.delete_plan_item(plan_item)
+    redirect(conn, to: plan_item_path(conn, :index))
+  end
 end

@@ -23,10 +23,6 @@ defmodule NanoPlanner.Calendar do
     %PlanItem{ starts_at: time0, ends_at: time1 }
   end
 
-  def change_plan_item(%PlanItem{} = item) do
-    PlanItem.changeset(item, %{})
-  end
-
   def create_plan_item(attrs) do
     %PlanItem{}
     |> PlanItem.changeset(attrs)
@@ -37,6 +33,14 @@ defmodule NanoPlanner.Calendar do
     plan_item
     |> PlanItem.changeset(attrs)
     |> Repo.update!()
+  end
+
+  def delete_plan_item(%PlanItem{} = plan_item) do
+    Repo.delete(plan_item)
+  end
+
+  def change_plan_item(%PlanItem{} = item) do
+    PlanItem.changeset(item, %{})
   end
 
   defp convert_datetime(items) when is_list(items) do

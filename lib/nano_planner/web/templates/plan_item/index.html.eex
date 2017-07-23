@@ -6,7 +6,7 @@
         <%= link item.name, to: plan_item_path(@conn, :show, item.id) %>
       </span>
     </div>
-    <div class='col-4 hidden-md-up text-right'>
+    <div class='col-4 hidden-md-up text-right toolbar'>
       <%= render "xs_toolbar.html", conn: @conn, item: item %>
     </div>
     <div class="col-12 col-md-5">
@@ -16,7 +16,7 @@
         <% end %>
       </span>
     </div>
-    <div class='col-3 hidden-sm-down text-right'>
+    <div class='col-3 hidden-sm-down text-right toolbar'>
       <%= render "md_toolbar.html", conn: @conn, item: item %>
     </div>
     <div class="col-12">
