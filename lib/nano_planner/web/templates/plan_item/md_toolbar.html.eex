@@ -2,7 +2,7 @@
   class: "btn btn-secondary btn-sm" do %>
   <i class="fa fa-pencil-square"></i> 変更
 <% end %>
-<%= link to: plan_item_path(@conn, :delete, @item.id),
+<%= link to: plan_item_path(@conn, :delete, @item.id), method: :delete,
   class: "btn btn-secondary btn-sm" do %>
   <i class="fa fa-trash"></i> 削除
 <% end %>
