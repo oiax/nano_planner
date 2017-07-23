@@ -1,3 +1,20 @@
 form.link {
   display: inline;
 }
+div.date-and-time {
+  margin-bottom: -0.5rem;
+
+  div {
+    display: inline-block;
+    padding-bottom: 0.5rem;
+
+    .form-control {
+      display: inline-block;
+      width: auto;
+      vertical-align: middle;
+    }
+  }
+  div:first-child {
+    margin-right: 1rem;
+  }
+}
