@@ -10,10 +10,22 @@
     <title>NanoPlanner</title>
     <%= tag :link, rel: "stylesheet",
       href: static_path(@conn, "/css/app.css") %>
+    <%= tag :link, rel: "shortcut icon",
+      href: static_path(@conn, "/images/nano_planner.ico") %>
+    <%= tag :link, rel: "apple-touch-icon",
+      href: static_path(@conn, "/images/clock256.png") %>
   </head>
 
   <body>
-    <%= render @view_module, @view_template, assigns %>
+    <header>
+      <h1><%= link "NanoPlanner", to: :root %></h1>
+    </header>
+    <main>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <footer>
+      &copy; 2017 Oiax Inc.
+    </footer>
     <%= content_tag :script, "", src: static_path(@conn, "/js/app.js") %>
   </body>
 </html>
