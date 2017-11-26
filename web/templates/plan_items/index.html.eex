@@ -1,11 +1,15 @@
-<div>
+<div class="container-fluid plan-items">
   <%= for item <- @plan_items do %>
-  <div>
-    <div>
-      <%= item.name %>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <span class="plan-item-name"><%= item.name %></span>
     </div>
-    <div>
-      <%= item.description %>
+    <div class="col-12 col-md-8">
+      <span class="plan-item-description">
+        <%= for line <- String.split(item.description, "\n") do %>
+          <%= line %><br>
+        <% end %>
+      </span>
     </div>
   </div>
   <% end %>
