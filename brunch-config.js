@@ -77,5 +77,9 @@ exports.config = {
       Popper: "popper.js",
       Tether: "tether"
     }
+  },
+
+  watcher: {
+    usePolling: true
   }
 };
