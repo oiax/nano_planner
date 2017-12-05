@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-4">件名</div>
+    <div class="col-12 col-md-8"><%= @plan_item.name %></div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4">説明</div>
+    <div class="col-12 col-md-8">
+      <%= for line <- String.split(@plan_item.description, "\n") do %>
+        <%= line %><br>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4">開始日時</div>
+    <div class="col-12 col-md-8">
+      <%= Strftime.format! @plan_item.starts_at, "%Y年%-m月%-d日 %H:%M" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4">終了日時</div>
+    <div class="col-12 col-md-8">
+      <%= Strftime.format! @plan_item.ends_at, "%Y年%-m月%-d日 %H:%M" %>
+    </div>
+  </div>
+</div>
