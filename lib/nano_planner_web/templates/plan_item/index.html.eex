@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-12 col-md-4">
       <span class="plan-item-name">
-        <%= link item.name, to: plan_items_path(@conn, :show, item.id) %>
+        <%= link item.name, to: plan_item_path(@conn, :show, item.id) %>
       </span>
     </div>
     <div class="col-12 col-md-8">
