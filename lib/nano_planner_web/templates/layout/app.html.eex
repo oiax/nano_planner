@@ -7,29 +7,25 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello NanoPlanner!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <title>NanoPlanner</title>
+    <%= tag :link, rel: "stylesheet",
+      href: static_path(@conn, "/css/app.css") %>
+    <%= tag :link, rel: "shortcut icon",
+      href: static_path(@conn, "/images/nano_planner.ico") %>
+    <%= tag :link, rel: "apple-touch-icon",
+      href: static_path(@conn, "/images/clock256.png") %>
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <header>
+      <h1><%= link "NanoPlanner", to: top_path(@conn, :index, []) %></h1>
+    </header>
+    <main>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <footer>
+      &copy; 2017 Oiax Inc.
+    </footer>
+    <%= content_tag :script, "", src: static_path(@conn, "/js/app.js") %>
   </body>
 </html>

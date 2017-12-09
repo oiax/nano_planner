@@ -60,6 +60,19 @@ exports.config = {
   },
 
   npm: {
-    enabled: true
+    enabled: true,
+    styles: {
+      bootstrap: ["dist/css/bootstrap.css"]
+    },
+    globals: {
+      $: "jquery",
+      jQuery: "jquery",
+      Popper: "popper.js",
+      Tether: "tether"
+    }
+  },
+
+  watcher: {
+    usePolling: true
   }
 };
