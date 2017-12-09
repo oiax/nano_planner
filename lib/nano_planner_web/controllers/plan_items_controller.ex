@@ -1,5 +1,7 @@
-defmodule NanoPlanner.PlanItemsController do
-  use NanoPlanner.Web, :controller
+defmodule NanoPlannerWeb.PlanItemsController do
+  use NanoPlannerWeb, :controller
+  import Ecto.Query
+  alias NanoPlanner.Repo
   alias NanoPlanner.Calendar
   alias NanoPlanner.Calendar.PlanItem
 

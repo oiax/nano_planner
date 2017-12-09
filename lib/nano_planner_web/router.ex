@@ -1,5 +1,5 @@
-defmodule NanoPlanner.Router do
-  use NanoPlanner.Web, :router
+defmodule NanoPlannerWeb.Router do
+  use NanoPlannerWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -9,7 +9,7 @@ defmodule NanoPlanner.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", NanoPlanner do
+  scope "/", NanoPlannerWeb do
     pipe_through :browser
 
     get "/", TopController, :index

@@ -1,5 +1,5 @@
-defmodule NanoPlanner.ErrorView do
-  use NanoPlanner.Web, :view
+defmodule NanoPlannerWeb.ErrorView do
+  use NanoPlannerWeb, :view
 
   def render("404.html", _assigns) do
     "Page not found"

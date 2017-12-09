@@ -1,5 +1,5 @@
-defmodule NanoPlanner.PlanItemsView do
-  use NanoPlanner.Web, :view
+defmodule NanoPlannerWeb.PlanItemsView do
+  use NanoPlannerWeb, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
   def format_duration(item) do

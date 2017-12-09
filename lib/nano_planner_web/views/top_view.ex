@@ -1,3 +1,3 @@
-defmodule NanoPlanner.TopView do
-  use NanoPlanner.Web, :view
+defmodule NanoPlannerWeb.TopView do
+  use NanoPlannerWeb, :view
 end
