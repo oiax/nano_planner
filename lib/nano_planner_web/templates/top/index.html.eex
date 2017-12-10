@@ -1,5 +1,10 @@
-<div>
-  <%= link to: plan_item_path(@conn, :index, []) do %>
+<div class="list-group">
+  <%= link to: plan_item_path(@conn, :index, []),
+    class: "list-group-item" do %>
     <i class="fa fa-list"></i> 予定表
+  <% end %>
+  <%= link to: plan_item_path(@conn, :new, []),
+    class: "list-group-item" do %>
+    <i class="fa fa-plus"></i> 予定の追加
   <% end %>
 </div>
