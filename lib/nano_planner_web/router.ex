@@ -14,6 +14,6 @@ defmodule NanoPlannerWeb.Router do
 
     get "/", TopController, :index
     resources "/plan_items", PlanItemController,
-      only: [:index, :new, :show, :create]
+      only: [:index, :new, :show, :create, :edit, :update]
   end
 end
