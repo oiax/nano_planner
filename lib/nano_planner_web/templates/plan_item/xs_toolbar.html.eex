@@ -1,6 +1,7 @@
 <%= link to: plan_item_path(@conn, :edit, @item.id) do %>
   <i class="fa fa-pencil-square fa-lg"></i>
 <% end %>
-<%= link to: plan_item_path(@conn, :delete, @item.id), method: :delete do %>
+<%= link to: plan_item_path(@conn, :delete, @item.id), method: :delete,
+  data: [confirm: "本当に削除しますか？"] do %>
   <i class="fa fa-trash fa-lg"></i>
 <% end %>
