@@ -1,7 +1,7 @@
 <%= link to: plan_item_path(@conn, :edit, @item.id) do %>
   <i class="fa fa-pencil-square fa-lg"></i>
 <% end %>
-<%= link to: plan_item_path(@conn, :delete, @item.id), method: :delete,
-  data: [confirm: "本当に削除しますか？"] do %>
+<%= link to: "#delete-confirmation-#{@item.id}",
+  data: [toggle: "modal"] do %>
   <i class="fa fa-trash fa-lg"></i>
 <% end %>
