@@ -45,6 +45,10 @@ defmodule NanoPlanner.Calendar do
     |> Repo.update!()
   end
 
+  def delete_plan_item(%PlanItem{} = plan_item) do
+    Repo.delete(plan_item)
+  end
+
   def change_plan_item(%PlanItem{} = item) do
     PlanItem.changeset(item, %{})
   end
