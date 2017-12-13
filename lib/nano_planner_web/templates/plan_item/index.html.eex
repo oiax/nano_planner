@@ -7,9 +7,7 @@
       </span>
     </div>
     <div class="col-4 d-md-none text-right">
-      <%= link to: plan_item_path(@conn, :edit, item.id) do %>
-        <i class="fa fa-pencil-square fa-lg"></i>
-      <% end %>
+      <%= render "xs_toolbar.html", conn: @conn, item: item %>
     </div>
     <div class="col-12 col-md-5">
       <span class="plan-item-description">
@@ -19,10 +17,7 @@
       </span>
     </div>
     <div class="col-3 d-none d-md-block text-right">
-      <%= link to: plan_item_path(@conn, :edit, item.id),
-        class: "btn btn-secondary btn-sm" do %>
-        <i class="fa fa-pencil-square"></i> 変更
-      <% end %>
+      <%= render "md_toolbar.html", conn: @conn, item: item %>
     </div>
     <div class="col-12">
       <span class="plan-item-duration">
