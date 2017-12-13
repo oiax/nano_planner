@@ -1,4 +1,5 @@
-<%= form_for @changeset, plan_item_path(@conn, :create), fn f -> %>
+<% action = plan_item_path(@conn, :create) %>
+<%= form_for @changeset, action, fn f -> %>
   <div class="form-group">
     <%= render "fields.html", f: f %>
     <%= submit "追加", class: "btn btn-success" %>
