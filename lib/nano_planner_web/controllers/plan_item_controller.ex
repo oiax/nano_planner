@@ -10,7 +10,7 @@ defmodule NanoPlannerWeb.PlanItemController do
   def new(conn, _params) do
     plan_item = Calendar.build_plan_item
     changeset = Calendar.change_plan_item(plan_item)
-    render(conn, "new.html", changeset: changeset)
+    render conn, "new.html", changeset: changeset
   end
 
   def create(conn, %{"plan_item" => plan_item_params}) do
@@ -28,7 +28,7 @@ defmodule NanoPlannerWeb.PlanItemController do
   def edit(conn, %{"id" => id}) do
     plan_item = Calendar.get_plan_item!(id)
     changeset = Calendar.change_plan_item(plan_item)
-    render(conn, "edit.html", plan_item: plan_item, changeset: changeset)
+    render conn, "edit.html", plan_item: plan_item, changeset: changeset
   end
 
   def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
