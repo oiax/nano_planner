@@ -1,5 +1,5 @@
 defmodule NanoPlanner.Calendar do
-  import Ecto.Query, warn: false
+  import Ecto.Query
   alias NanoPlanner.Repo
   alias NanoPlanner.Calendar.PlanItem
 
