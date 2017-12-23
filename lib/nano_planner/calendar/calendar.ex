@@ -26,7 +26,11 @@ defmodule NanoPlanner.Calendar do
   end
 
   defp beginning_of_hour do
-    %{Timex.now(time_zone()) | minute: 0, second: 0, microsecond: {0, 0}}
+    Timex.set(current_time(), minute: 0, second: 0, microsecond: {0, 6})
+  end
+
+  defp current_time do
+    Timex.now(time_zone())
   end
 
   defp time_zone do
