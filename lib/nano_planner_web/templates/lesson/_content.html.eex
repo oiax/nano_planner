@@ -1,0 +1,1 @@
+<p class="card-text">Hello, <%= @name %>!</p>
