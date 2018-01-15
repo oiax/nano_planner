@@ -38,16 +38,16 @@ defmodule NanoPlanner.Calendar.PlanItem do
 
   defp change_starts_at(changeset) do
     d = get_field(changeset, :s_date)
-    h = get_field(changeset, :s_hour, 0)
-    m = get_field(changeset, :s_minute, 0)
+    h = get_field(changeset, :s_hour)
+    m = get_field(changeset, :s_minute)
     dt = get_local_datetime(d, h, m)
     put_change(changeset, :starts_at, dt)
   end
 
   defp change_ends_at(changeset) do
     d = get_field(changeset, :e_date)
-    h = get_field(changeset, :e_hour, 0)
-    m = get_field(changeset, :e_minute, 0)
+    h = get_field(changeset, :e_hour)
+    m = get_field(changeset, :e_minute)
     dt = get_local_datetime(d, h, m)
     put_change(changeset, :ends_at, dt)
   end
