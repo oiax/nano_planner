@@ -6,7 +6,7 @@ defmodule NanoPlanner.Calendar.PlanItem do
 
   schema "plan_items" do
     field :name, :string
-    field :description, :string
+    field :description, :string, default: ""
     field :starts_at, Timex.Ecto.DateTime
     field :ends_at, Timex.Ecto.DateTime
 
@@ -15,7 +15,6 @@ defmodule NanoPlanner.Calendar.PlanItem do
 
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:name, :description, :starts_at, :ends_at])
   end
 end

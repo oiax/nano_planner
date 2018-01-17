@@ -37,6 +37,12 @@ defmodule NanoPlanner.Calendar do
     Application.get_env(:nano_planner, :default_time_zone)
   end
 
+  def create_plan_item(attrs) do
+    %PlanItem{}
+    |> PlanItem.changeset(attrs)
+    |> Repo.insert!()
+  end
+
   def change_plan_item(%PlanItem{} = item) do
     PlanItem.changeset(item, %{})
   end
