@@ -17,7 +17,24 @@ defmodule NanoPlanner.Calendar do
   end
 
   def build_plan_item do
-    %PlanItem{}
+    time0 = beginning_of_hour()
+
+    %PlanItem{
+      starts_at: Timex.shift(time0, hours: 1),
+      ends_at: Timex.shift(time0, hours: 2)
+    }
+  end
+
+  defp beginning_of_hour do
+    %{current_time | minute: 0, second: 0, microsecond: {0, 0}}
+  end
+
+  defp current_time do
+    Timex.now(time_zone())
+  end
+
+  defp time_zone do
+    Application.get_env(:nano_planner, :default_time_zone)
   end
 
   def change_plan_item(%PlanItem{} = item) do
@@ -31,11 +48,9 @@ defmodule NanoPlanner.Calendar do
   defp convert_datetime(%PlanItem{} = item) do
     alias Timex.Timezone
 
-    time_zone = Application.get_env(:nano_planner, :default_time_zone)
-
     Map.merge(item, %{
-      starts_at: Timezone.convert(item.starts_at, time_zone),
-      ends_at: Timezone.convert(item.ends_at, time_zone)
+      starts_at: Timezone.convert(item.starts_at, time_zone()),
+      ends_at: Timezone.convert(item.ends_at, time_zone())
     })
   end
 end
