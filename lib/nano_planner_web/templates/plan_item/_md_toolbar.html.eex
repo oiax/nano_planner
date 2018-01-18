@@ -2,6 +2,7 @@
   class: "btn btn-secondary btn-sm" do %>
   <i class="fa fa-pencil-square"></i> 変更
 <% end %>
+
 <%= link to: "#delete-confirmation-#{@item.id}",
   data: [toggle: "modal"], class: "btn btn-secondary btn-sm" do %>
   <i class="fa fa-trash"></i> 削除
