@@ -21,6 +21,7 @@
       <h1><%= link "NanoPlanner", to: top_path(@conn, :index, []) %></h1>
     </header>
     <main>
+      <%= render "_flash_messages.html", conn: @conn %>
       <%= render @view_module, @view_template, assigns %>
     </main>
     <footer>
