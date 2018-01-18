@@ -1,8 +1,8 @@
-defmodule NanoPlanner.Calendar.PlanItem do
+defmodule NanoPlanner.Schedule.PlanItem do
   use Ecto.Schema
   use Timex.Ecto.Timestamps
   import Ecto.Changeset
-  alias NanoPlanner.Calendar.PlanItem
+  alias NanoPlanner.Schedule.PlanItem
 
   schema "plan_items" do
     field :name, :string

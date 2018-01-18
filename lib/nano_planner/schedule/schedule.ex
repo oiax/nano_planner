@@ -1,7 +1,7 @@
-defmodule NanoPlanner.Calendar do
+defmodule NanoPlanner.Schedule do
   import Ecto.Query
   alias NanoPlanner.Repo
-  alias NanoPlanner.Calendar.PlanItem
+  alias NanoPlanner.Schedule.PlanItem
 
   def list_plan_items do
     PlanItem
