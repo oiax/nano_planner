@@ -6,16 +6,14 @@
 use Mix.Config
 
 # General application configuration
-config :nano_planner,
-  ecto_repos: [NanoPlanner.Repo]
+config :nano_planner, ecto_repos: [NanoPlanner.Repo]
 
 # Configures the endpoint
 config :nano_planner, NanoPlannerWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "eFgOw7Ovm3WVIOl/xZrq4hLRDXxl/VpKoAWDMjZvaAy5RkN32q5Z46CS080BRLu4",
   render_errors: [view: NanoPlannerWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: NanoPlanner.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: NanoPlanner.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -23,9 +21,8 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Configures the default time zone
-config :nano_planner,
-  default_time_zone: "Asia/Tokyo"
+config :nano_planner, default_time_zone: "Asia/Tokyo"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

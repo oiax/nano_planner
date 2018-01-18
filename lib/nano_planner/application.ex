@@ -11,7 +11,7 @@ defmodule NanoPlanner.Application do
       # Start the Ecto repository
       supervisor(NanoPlanner.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(NanoPlannerWeb.Endpoint, []),
+      supervisor(NanoPlannerWeb.Endpoint, [])
       # Start your own worker by calling: NanoPlanner.Worker.start_link(arg1, arg2, arg3)
       # worker(NanoPlanner.Worker, [arg1, arg2, arg3]),
     ]

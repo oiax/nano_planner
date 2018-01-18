@@ -26,13 +26,13 @@ defmodule NanoPlannerWeb.ConnCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(NanoPlanner.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(NanoPlanner.Repo, {:shared, self()})
     end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
-
 end
