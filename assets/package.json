@@ -6,7 +6,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-beta.3",
+    "bootstrap": "^4.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "phoenix": "file:../deps/phoenix",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "babel-brunch": "6.1.1",
-    "brunch": "2.10.9",
+    "brunch": "2.10.12",
     "clean-css-brunch": "2.10.0",
     "copycat-brunch": "^1.1.0",
     "sass-brunch": "^2.10.4",
