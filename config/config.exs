@@ -11,7 +11,8 @@ config :nano_planner, ecto_repos: [NanoPlanner.Repo]
 # Configures the endpoint
 config :nano_planner, NanoPlannerWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "eFgOw7Ovm3WVIOl/xZrq4hLRDXxl/VpKoAWDMjZvaAy5RkN32q5Z46CS080BRLu4",
+  secret_key_base:
+    "eFgOw7Ovm3WVIOl/xZrq4hLRDXxl/VpKoAWDMjZvaAy5RkN32q5Z46CS080BRLu4",
   render_errors: [view: NanoPlannerWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: NanoPlanner.PubSub, adapter: Phoenix.PubSub.PG2]
 

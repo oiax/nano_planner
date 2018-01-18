@@ -7,13 +7,13 @@ defmodule NanoPlanner.Schedule do
     PlanItem
     |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
     |> Repo.all()
-    |> convert_datetime
+    |> convert_datetime()
   end
 
   def get_plan_item!(id) do
     PlanItem
     |> Repo.get!(id)
-    |> convert_datetime
+    |> convert_datetime()
   end
 
   def build_plan_item do
