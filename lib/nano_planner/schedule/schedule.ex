@@ -26,7 +26,7 @@ defmodule NanoPlanner.Schedule do
   end
 
   defp beginning_of_hour do
-    Timex.set(current_time(), minute: 0, second: 0, microsecond: {0, 6})
+    Timex.set(current_time(), minute: 0, second: 0, microsecond: {0, 0})
   end
 
   defp current_time do
