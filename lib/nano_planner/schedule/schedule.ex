@@ -5,9 +5,7 @@ defmodule NanoPlanner.Schedule do
 
   def list_plan_items do
     PlanItem
-    |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
-    |> Repo.all()
-    |> convert_datetime()
+    |> fetch_plan_items()
   end
 
   def list_plan_items_of_today do
@@ -16,6 +14,11 @@ defmodule NanoPlanner.Schedule do
 
     PlanItem
     |> where([i], i.starts_at >= ^t0 and i.starts_at < ^t1)
+    |> fetch_plan_items()
+  end
+
+  defp fetch_plan_items(query) do
+    query
     |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
     |> Repo.all()
     |> convert_datetime()
