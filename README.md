@@ -4,18 +4,20 @@
 
 ## 対象 OS
 
-* OS X v10.11
+* macOS High Sierra v10.13
 * macOS Sierra v10.12
-* Ubuntu 16.04
+* OS X v10.11 El Capitan
+* OS X v10.10 Yosemite
+* Ubuntu Desktop 16.04 LTS (64-bit)
 
 ## 稼働条件
 
-* Erlang 20.1
-* Elixir 1.6.0
-* Phoenix 1.3.0
-* PostgreSQL 9.6
-* Node.js 8.9.1
-* npm 5.6.0
+* Erlang 20.2
+* Elixir 1.6.3
+* Phoenix 1.3.2
+* PostgreSQL 9.5/9.6
+* Node.js 8.10.0
+* npm 5.7.1
 
 Ubuntu 16.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールしてください。
 
