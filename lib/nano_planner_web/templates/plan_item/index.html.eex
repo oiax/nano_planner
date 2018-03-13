@@ -4,30 +4,16 @@
 
 <div class="container-fluid plan-items">
   <%= for item <- @plan_items do %>
-  <div class="row">
-    <div class="col-8 col-md-4">
-      <span class="plan-item-name">
-        <%= link item.name, to: plan_item_path(@conn, :show, item.id) %>
-      </span>
-    </div>
-    <div class="col-4 d-md-none text-right toolbar">
-      <%= render "_xs_toolbar.html", conn: @conn, item: item %>
-    </div>
-    <div class="col-12 col-md-5">
-      <span class="plan-item-description">
-        <%= for line <- String.split(item.description, "\n") do %>
-          <%= line %><br>
-        <% end %>
-      </span>
-    </div>
-    <div class="col-3 d-none d-md-block text-right toolbar">
-      <%= render "_md_toolbar.html", conn: @conn, item: item %>
-    </div>
-    <div class="col-12">
-      <span class="plan-item-duration">
-        <%= format_duration(item) %>
-      </span>
-    </div>
-  </div>
+    <%= render "_index_row.html", item: item, conn: @conn %>
   <% end %>
 </div>
+
+<% unless Enum.empty?(@continued_plan_items) do %>
+  <hr>
+
+  <div class="container-fluid plan-items">
+    <%= for item <- @continued_plan_items do %>
+      <%= render "_index_row.html", item: item, conn: @conn %>
+    <% end %>
+  </div>
+<% end %>

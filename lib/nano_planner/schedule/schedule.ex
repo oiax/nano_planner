@@ -14,6 +14,16 @@ defmodule NanoPlanner.Schedule do
 
     PlanItem
     |> where([i], i.starts_at >= ^t0 and i.starts_at < ^t1)
+    |> or_where([i], i.ends_at > ^t0 and i.ends_at <= ^t1)
+    |> fetch_plan_items()
+  end
+
+  def list_continued_plan_items do
+    t0 = current_time() |> Timex.beginning_of_day()
+    t1 = t0 |> Timex.shift(hours: 24)
+
+    PlanItem
+    |> where([i], i.starts_at < ^t0 and i.starts_at > ^t1)
     |> fetch_plan_items()
   end
 
