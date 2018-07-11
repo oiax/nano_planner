@@ -12,12 +12,12 @@
 
 ## 稼働条件
 
-* Erlang 20.2
-* Elixir 1.6.3
-* Phoenix 1.3.2
+* Erlang 21.0
+* Elixir 1.6.6
+* Phoenix 1.3.3
 * PostgreSQL 9.5/9.6
-* Node.js 8.10.0
-* npm 5.7.1
+* Node.js 8.11.3
+* npm 6.1.0
 
 Ubuntu 16.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールしてください。
 
