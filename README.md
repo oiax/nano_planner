@@ -32,12 +32,15 @@ $ mix local.hex --force
 $ mix local.rebar --force
 $ mix deps.get
 $ mix ecto.create
-$ mix ecto.load
+$ mix ecto.migrate
 $ mix run priv/repo/seeds.exs
+$ cd assets
+$ npm install
+$ cd ..
 ```
 
 ## 起動方法
 
 ```text
-$ mix phoenix.server
+$ mix phx.server
 ```
