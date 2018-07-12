@@ -4,7 +4,7 @@ defmodule Counter.Agent do
   @doc """
   Starts a new counter.
   """
-  def start_link(_opts) do
+  def start_link() do
     Agent.start_link(fn -> 0 end)
   end
 
