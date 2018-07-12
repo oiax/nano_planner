@@ -5,20 +5,21 @@ defmodule Counter.Agent do
   Starts a new counter.
   """
   def start_link() do
-    Agent.start_link(fn -> 0 end)
+    Agent.start_link(fn -> 0 end, name: __MODULE__)
   end
 
   @doc """
   Gets the current value.
   """
-  def get_value(agent) do
-    Agent.get(agent, fn value -> value end)
+  def get_value() do
+    Agent.get(__MODULE__, fn value -> value end)
   end
 
   @doc """
   Increment the current value by one.
   """
-  def increment(agent) do
-    Agent.update(agent, fn value -> value + 1 end)
+  def increment() do
+    Agent.update(__MODULE__, fn value -> value + 1 end)
+    get_value()
   end
 end

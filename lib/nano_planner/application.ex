@@ -10,12 +10,10 @@ defmodule NanoPlanner.Application do
     children = [
       # Start the Ecto repository
       supervisor(NanoPlanner.Repo, []),
-      # Start the endpoint when the application starts
-      supervisor(NanoPlannerWeb.Endpoint, []),
       # Start the counter
-      supervisor(Counter.Agent, [])
-      # Start your own worker by calling: NanoPlanner.Worker.start_link(arg1, arg2, arg3)
-      # worker(NanoPlanner.Worker, [arg1, arg2, arg3]),
+      %{id: Counter.Agent, start: {Counter.Agent, :start_link, []}},
+      # Start the endpoint when the application starts
+      supervisor(NanoPlannerWeb.Endpoint, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

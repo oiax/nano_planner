@@ -3,9 +3,17 @@ header {
   border-style: solid;
   border-width: 1px;
   border-color: #ccc;
+  position: relative;
 
   h1 {
     font-size: 1.25rem;
     margin: 0.5rem;
+  }
+
+  span.counter {
+    display: inline-block;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
   }
 }
