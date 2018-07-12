@@ -11,7 +11,7 @@ defmodule NanoPlanner.Application do
       # Start the Ecto repository
       supervisor(NanoPlanner.Repo, []),
       # Start the counter
-      %{id: Counter.Agent, start: {Counter.Agent, :start_link, []}},
+      {Counter.Agent, []},
       # Start the endpoint when the application starts
       supervisor(NanoPlannerWeb.Endpoint, [])
     ]
