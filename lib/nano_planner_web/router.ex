@@ -7,6 +7,7 @@ defmodule NanoPlannerWeb.Router do
     plug(:fetch_flash)
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(NanoPlannerWeb.CounterPlug)
   end
 
   scope "/", NanoPlannerWeb do

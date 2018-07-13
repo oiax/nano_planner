@@ -20,7 +20,7 @@
     <header>
       <h1><%= link "NanoPlanner", to: top_path(@conn, :index, []) %></h1>
       <span class="counter">
-        Access Counter: <%= Counter.Agent.increment() %>
+        Access Counter: <%= Counter.Agent.get_value() %>
       </span>
     </header>
     <main>

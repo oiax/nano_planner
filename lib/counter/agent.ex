@@ -19,7 +19,6 @@ defmodule Counter.Agent do
   Increment the current value by one.
   """
   def increment() do
-    value = Agent.get_and_update(__MODULE__, fn state -> {state, state + 1} end)
-    value + 1
+    Agent.update(__MODULE__, fn state -> state + 1 end)
   end
 end
