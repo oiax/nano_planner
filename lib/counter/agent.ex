@@ -12,7 +12,7 @@ defmodule Counter.Agent do
   Gets the current value.
   """
   def get_value() do
-    Agent.get(__MODULE__, &(&1))
+    Agent.get(__MODULE__, & &1)
   end
 
   @doc """
