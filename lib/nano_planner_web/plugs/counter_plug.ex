@@ -7,11 +7,13 @@ defmodule NanoPlannerWeb.CounterPlug do
   end
 
   @impl true
-  def call(conn, _opts) do
-    if conn.method == "GET" do
-      Counter.Agent.increment()
-    end
+  def call(%{:method => "GET"} = conn, _opts) do
+    Counter.Agent.increment()
 
+    conn
+  end
+
+  def call(conn, _opts) do
     conn
   end
 end
