@@ -12,13 +12,13 @@ defmodule Counter.Agent do
   Gets the current value.
   """
   def get_value() do
-    Agent.get(__MODULE__, fn state -> state end)
+    Agent.get(__MODULE__, &(&1))
   end
 
   @doc """
   Increment the current value by one.
   """
   def increment() do
-    Agent.update(__MODULE__, fn state -> state + 1 end)
+    Agent.update(__MODULE__, &(&1 + 1))
   end
 end
