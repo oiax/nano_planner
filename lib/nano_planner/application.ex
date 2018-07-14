@@ -29,23 +29,28 @@ defmodule NanoPlanner.Application do
     ip0 = Enum.find(ips, fn(ip) -> elem(ip, 0) == 192 end)
 
     # Connect to peer nodes.
-    #
-    # TODO: Task を使って並列処理を行う。
-    for n <- 100..105 do
-      unless n == elem(ip0, 3) do
-        node_name = :"np@192.168.56.#{n}"
-        case Node.connect(node_name) do
-          true -> Logger.info("Connected to #{node_name}.")
-          false -> Logger.info("Rejected by #{node_name}.")
-          :ignored -> Logger.info("Ignorned by #{node_name}.")
-        end
+    tasks = Enum.map(101..105, fn(n) ->
+      node_name = :"np@192.168.56.#{n}"
+      case elem(ip0, 3) do
+        ^n -> Task.async(fn -> Logger.info("Skipping #{node_name}.") end)
+        _ -> Task.async(fn -> connect_to_peer(node_name) end)
       end
-    end
+    end)
+
+    for task <- tasks, do: Task.await(task, 10000)
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: NanoPlanner.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defp connect_to_peer(node_name) do
+    case Node.connect(node_name) do
+      true -> Logger.info("Connected to #{node_name}.")
+      false -> Logger.info("Rejected by #{node_name}.")
+      :ignored -> Logger.info("Ignorned by #{node_name}.")
+    end
   end
 
   # Tell Phoenix to update the endpoint configuration
