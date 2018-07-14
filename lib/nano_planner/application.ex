@@ -10,11 +10,21 @@ defmodule NanoPlanner.Application do
     children = [
       # Start the Ecto repository
       supervisor(NanoPlanner.Repo, []),
-      # Start the counter
-      {Counter.Agent, []},
       # Start the endpoint when the application starts
       supervisor(NanoPlannerWeb.Endpoint, [])
     ]
+
+    # Start the counter on master node.
+    children =
+      case System.get_env("MASTER") do
+        "1" -> [{Counter.Agent, []} | children]
+        _ -> children
+      end
+
+    # Connect to the master from slave nodes.
+    if System.get_env("MASTER") != "1" do
+      Node.connect(:foo@oiax)
+    end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
