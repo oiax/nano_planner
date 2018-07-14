@@ -26,7 +26,7 @@ defmodule NanoPlanner.Application do
     # Connect to the master from slave nodes.
     if System.get_env("MASTER") != "1" do
       Logger.info("Connecting to the master node...")
-      case Node.connect(:"foo@192.168.56.101") do
+      case Node.connect(:"np@host1.local") do
         true -> Logger.info("Connected.")
         false -> Logger.info("Failed.")
         :ignored -> Logger.info("Ignored.")

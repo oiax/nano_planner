@@ -39,18 +39,31 @@ $ npm install
 $ cd ..
 ```
 
+## 準備作業
+
+`192.168.56.101` と `192.168.56.102` で動くふたつのホストを用意する。
+
+それぞれの `/etc/hosts` に次のような記載を加えておく。
+
+```text
+192.168.56.101  host1.local
+192.168.56.102  host2.local
+```
+
+ホスト名には `oiax` のようなドットを含まないものではなく、FQDN のように見えるものを指定する。
+
 ## 起動方法
 
 `192.168.56.101` において。
 
 ```console
-$ MASTER=1 elixir --name foo@192.168.56.101 -S mix phx.server
+$ MASTER=1 elixir --name np@host1.local -S mix phx.server
 ```
 
 `192.168.56.102` において。
 
 ```console
-$ elixir --name bar@192.168.56.102 -S mix phx.server
+$ elixir --name np@host2.local -S mix phx.server
 ```
 
 ### 注意点
