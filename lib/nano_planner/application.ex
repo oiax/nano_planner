@@ -23,13 +23,22 @@ defmodule NanoPlanner.Application do
         _ -> children
       end
 
-    # Connect to the master from slave nodes.
-    if System.get_env("MASTER") != "1" do
-      Logger.info("Connecting to the master node...")
-      case Node.connect(:"np@host1.local") do
-        true -> Logger.info("Connected.")
-        false -> Logger.info("Failed.")
-        :ignored -> Logger.info("Ignored.")
+    # Get the ip address of this node.
+    {:ok, ifs} = :inet.getif()
+    ips = Enum.map(ifs, fn {ip, _, _} -> ip end)
+    ip0 = Enum.find(ips, fn(ip) -> elem(ip, 0) == 192 end)
+
+    # Connect to peer nodes.
+    #
+    # TODO: Task を使って並列処理を行う。
+    for n <- 100..105 do
+      unless n == elem(ip0, 3) do
+        node_name = :"np@192.168.56.#{n}"
+        case Node.connect(node_name) do
+          true -> Logger.info("Connected to #{node_name}.")
+          false -> Logger.info("Rejected by #{node_name}.")
+          :ignored -> Logger.info("Ignorned by #{node_name}.")
+        end
       end
     end
 

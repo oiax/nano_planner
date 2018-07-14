@@ -57,13 +57,13 @@ $ cd ..
 `192.168.56.101` において。
 
 ```console
-$ MASTER=1 elixir --name np@host1.local -S mix phx.server
+$ MASTER=1 elixir --name np@192.168.56.101 -S mix phx.server
 ```
 
 `192.168.56.102` において。
 
 ```console
-$ elixir --name np@host2.local -S mix phx.server
+$ elixir --name np@192.168.56.102 -S mix phx.server
 ```
 
 ### 注意点
