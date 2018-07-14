@@ -1,3 +1,5 @@
+require Logger
+
 defmodule NanoPlanner.Application do
   use Application
 
@@ -23,7 +25,12 @@ defmodule NanoPlanner.Application do
 
     # Connect to the master from slave nodes.
     if System.get_env("MASTER") != "1" do
-      Node.connect(:foo@oiax)
+      Logger.info("Connecting to the master node...")
+      case Node.connect(:"foo@192.168.56.101") do
+        true -> Logger.info("Connected.")
+        false -> Logger.info("Failed.")
+        :ignored -> Logger.info("Ignored.")
+      end
     end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
