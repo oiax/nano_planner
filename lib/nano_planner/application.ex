@@ -23,6 +23,13 @@ defmodule NanoPlanner.Application do
         _ -> children
       end
 
+    # Start the global registry on master node.
+    children =
+      case System.get_env("MASTER") do
+        "1" -> [{Registry, keys: :unique, name: Registry.Global} | children]
+        _ -> children
+      end
+
     # Get the ip address of this node.
     {:ok, ifs} = :inet.getif()
     ips = Enum.map(ifs, fn {ip, _, _} -> ip end)
