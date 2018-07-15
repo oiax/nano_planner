@@ -9,19 +9,14 @@ defmodule NanoPlannerWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
-  pipeline :api do
-    plug(:accepts, ["json"])
-  end
-
   scope "/", NanoPlannerWeb do
-    # Use the default browser stack
     pipe_through(:browser)
 
-    get("/", PageController, :index)
-  end
+    get("/", TopController, :index)
+    get("/lessons/form", LessonController, :form)
+    get("/lessons/register", LessonController, :register)
+    get("/lessons/hello", LessonController, :hello)
 
-  # Other scopes may use custom stacks.
-  # scope "/api", NanoPlannerWeb do
-  #   pipe_through :api
-  # end
+    resources("/plan_items", PlanItemController)
+  end
 end
