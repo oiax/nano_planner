@@ -14,7 +14,7 @@ defmodule NanoPlannerWeb.Endpoint do
     at: "/",
     from: :nano_planner,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico robots.txt webfonts)
   )
 
   # Code reloading can be explicitly enabled under the
