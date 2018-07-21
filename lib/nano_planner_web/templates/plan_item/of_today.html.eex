@@ -1,6 +1,6 @@
 <%= render "index.html", plan_items: @plan_items, conn: @conn %>
 
-<% unless Enum.empty?(@continued_plan_items) do %>
+<%= unless Enum.empty?(@continued_plan_items) do %>
   <hr>
 
   <div class="container-fluid plan-items">
