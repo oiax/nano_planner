@@ -1,6 +1,6 @@
 # NanoPlanner: 簡易予定表管理システム
 
-これは『Elixir/Phoenix 入門④』の学習用 Phoenix アプリケーションです。
+これは『Elixir/Phoenix 入門②〜④』の学習用 Phoenix アプリケーションです。
 
 ## 対象 OS
 
