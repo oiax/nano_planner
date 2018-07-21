@@ -59,4 +59,12 @@ defmodule NanoPlannerWeb.PlanItemView do
   defp two_digits(n) do
     n |> Integer.to_string() |> String.pad_leading(2, "0")
   end
+
+  @action_label_map %{
+    index: "予定表",
+    of_today: "今日の予定表"
+  }
+  def nav_link_label(action) do
+    @action_label_map[action]
+  end
 end
