@@ -6,7 +6,9 @@ pattern = "%買う%"
 
 items =
   PlanItem
-  |> where([i], like(i.description, ^pattern))
+  |> where([i], not like(i.description, ^pattern))
+  |> or_where([i], i.name == "帰省")
+  |> or_where([i], i.name == "買い物")
   |> order_by(asc: :id)
   |> Repo.all()
   |> Enum.map(& &1.name)
