@@ -2,7 +2,9 @@
   <%= for action <- [:index, :of_today] do %>
     <li class="nav-item">
       <%= link nav_link_label(action),
-        to: Routes.plan_item_path(@conn, action), class: "nav-link" %>
+        to: Routes.plan_item_path(@conn, action),
+        class: nav_link_class(@conn, action)
+      %>
     </li>
   <% end %>
 </ul>

@@ -67,4 +67,12 @@ defmodule NanoPlannerWeb.PlanItemView do
   def nav_link_label(action) do
     @action_label_map[action]
   end
+
+  def nav_link_class(conn, action) do
+    if Phoenix.Controller.action_name(conn) == action do
+      "nav-link active"
+    else
+      "nav-link"
+    end
+  end
 end
