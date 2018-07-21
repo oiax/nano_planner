@@ -2,6 +2,24 @@ defmodule NanoPlannerWeb.PlanItemView do
   use NanoPlannerWeb, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
+  def document_title(assigns) do
+    page_title =
+      case assigns.view_template do
+        "index.html" -> "予定表"
+        "of_today.html" -> "今日の予定表"
+        "show.html" -> "予定の詳細"
+        "new.html" -> "予定の追加"
+        "edit.html" -> "予定の変更"
+        _ -> nil
+      end
+
+    if page_title do
+      "#{page_title} - NanoPlanner"
+    else
+      "NanoPlanner"
+    end
+  end
+
   def format_duration(item) do
     [format_starts_at(item), "～", format_ends_at(item)] |> Enum.join(" ")
   end
