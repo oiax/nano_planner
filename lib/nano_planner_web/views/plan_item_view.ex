@@ -64,15 +64,18 @@ defmodule NanoPlannerWeb.PlanItemView do
     index: "予定表",
     of_today: "今日の予定表"
   }
-  def nav_link_label(action) do
-    @action_label_map[action]
-  end
+  def nav_link(conn, action) do
+    class =
+      if Phoenix.Controller.action_name(conn) == action do
+        "nav-link active"
+      else
+        "nav-link"
+      end
 
-  def nav_link_class(conn, action) do
-    if Phoenix.Controller.action_name(conn) == action do
-      "nav-link active"
-    else
-      "nav-link"
-    end
+    link(
+      @action_label_map[action],
+      to: Routes.plan_item_path(conn, action),
+      class: class
+    )
   end
 end
