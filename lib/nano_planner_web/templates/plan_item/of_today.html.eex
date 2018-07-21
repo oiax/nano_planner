@@ -1,9 +1,11 @@
 <%= render "index.html", plan_items: @plan_items, conn: @conn %>
 
-<hr>
+<% unless Enum.empty?(@continued_plan_items) do %>
+  <hr>
 
-<div class="container-fluid plan-items">
-  <%= for item <- @continued_plan_items do %>
-    <%= render "_index_row.html", item: item, conn: @conn %>
-  <% end %>
-</div>
+  <div class="container-fluid plan-items">
+    <%= for item <- @continued_plan_items do %>
+      <%= render "_index_row.html", item: item, conn: @conn %>
+    <% end %>
+  </div>
+<% end %>
