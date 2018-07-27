@@ -7,6 +7,12 @@
   <%= textarea @f, :description, class: "form-control", rows: 4 %>
 </div>
 <div class="form-group">
+  <div class="form-check">
+    <%= checkbox @f, :all_day, class: "form-check-input" %>
+    <%= label @f, :all_day, "終日", class: "form-check-label" %>
+  </div>
+</div>
+<div class="form-group">
   <%= label @f, :starts_at, "開始日時", class: "control-label" %>
   <%= render "_date_and_time.html", f: @f, prefix: "s" %>
 </div>
