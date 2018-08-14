@@ -20,3 +20,9 @@ div.date-and-time {
     margin-right: 1rem;
   }
 }
+div.date-picker {
+  input.form-control {
+    display: inline-block;
+    width: auto;
+  }
+}
