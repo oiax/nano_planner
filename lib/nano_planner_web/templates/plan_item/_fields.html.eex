@@ -7,9 +7,9 @@
   <%= textarea @f, :description, class: "form-control", rows: 4 %>
 </div>
 <div class="form-group">
-  <div class="form-check">
-    <%= checkbox @f, :all_day, class: "form-check-input" %>
-    <%= label @f, :all_day, "終日", class: "form-check-label" %>
+  <div class="custom-control custom-checkbox">
+    <%= checkbox @f, :all_day, class: "custom-control-input" %>
+    <%= label @f, :all_day, "終日", class: "custom-control-label" %>
   </div>
 </div>
 <div class="form-group">
