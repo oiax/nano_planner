@@ -42,10 +42,13 @@ defmodule NanoPlanner.Schedule do
 
   def build_plan_item do
     time0 = beginning_of_hour()
+    today = current_time() |> Timex.to_date()
 
     %PlanItem{
       starts_at: Timex.shift(time0, hours: 1),
-      ends_at: Timex.shift(time0, hours: 2)
+      ends_at: Timex.shift(time0, hours: 2),
+      starts_on: today,
+      ends_on: today
     }
   end
 
