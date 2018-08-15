@@ -83,6 +83,7 @@ defmodule NanoPlanner.Schedule do
   def change_plan_item(%PlanItem{} = item) do
     item
     |> populate_virtual_fields()
+    |> populate_dates()
     |> PlanItem.changeset(%{})
   end
 
@@ -96,6 +97,22 @@ defmodule NanoPlanner.Schedule do
       e_minute: item.ends_at.minute
     })
   end
+
+  defp populate_dates(%PlanItem{all_day: false} = item) do
+    ends_on =
+      case item.ends_at do
+        %DateTime{hour: 0, minute: 0} ->
+          item.ends_at |> Timex.to_date() |> Timex.shift(days: -1)
+        _ ->
+          item.ends_at |> Timex.to_date()
+      end
+
+    Map.merge(item, %{
+      starts_on: Timex.to_date(item.starts_at),
+      ends_on: ends_on
+    })
+  end
+  defp populate_dates(%PlanItem{all_day: true} = item), do: item
 
   defp convert_datetime(items) when is_list(items) do
     Enum.map(items, &convert_datetime(&1))
