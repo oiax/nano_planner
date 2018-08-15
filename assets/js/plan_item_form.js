@@ -1,7 +1,10 @@
 import $ from "jquery";
 
 $(() => {
-  const checkbox = $("#plan_item_all_day");
+  const checkBox = $("#plan_item_all_day");
 
-  if (checkbox.length > 0) console.log("Loaded!");
+  if (checkBox.length > 0) {
+    const allDay = checkBox.prop("checked");
+    console.log(allDay);
+  }
 });
