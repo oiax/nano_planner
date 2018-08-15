@@ -22,9 +22,13 @@ defmodule NanoPlanner.Schedule.PlanItem do
     timestamps()
   end
 
-  @allowed_fields [
+  @common_fields [
     :name,
     :description,
+    :all_day
+  ]
+
+  @date_time_fields [
     :s_date,
     :s_hour,
     :s_minute,
@@ -32,11 +36,27 @@ defmodule NanoPlanner.Schedule.PlanItem do
     :e_hour,
     :e_minute
   ]
-  def changeset(%PlanItem{} = plan_item, attrs) do
+
+  @date_fields [
+    :starts_on,
+    :ends_on
+  ]
+
+  def changeset(%PlanItem{} = plan_item, %{"all_day" => "false"} = attrs) do
     plan_item
-    |> cast(attrs, @allowed_fields)
+    |> cast(attrs, @common_fields ++ @date_time_fields)
     |> change_starts_at()
     |> change_ends_at()
+  end
+
+  def changeset(%PlanItem{} = plan_item, %{"all_day" => "true"} = attrs) do
+    plan_item
+    |> cast(attrs, @common_fields ++ @date_fields)
+  end
+
+  def changeset(%PlanItem{} = plan_item, attrs) do
+    plan_item
+    |> cast(attrs, @common_fields)
   end
 
   defp change_starts_at(changeset) do

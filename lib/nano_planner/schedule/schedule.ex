@@ -103,6 +103,7 @@ defmodule NanoPlanner.Schedule do
       case item.ends_at do
         %DateTime{hour: 0, minute: 0} ->
           item.ends_at |> Timex.to_date() |> Timex.shift(days: -1)
+
         _ ->
           item.ends_at |> Timex.to_date()
       end
@@ -112,6 +113,7 @@ defmodule NanoPlanner.Schedule do
       ends_on: ends_on
     })
   end
+
   defp populate_dates(%PlanItem{all_day: true} = item), do: item
 
   defp convert_datetime(items) when is_list(items) do
