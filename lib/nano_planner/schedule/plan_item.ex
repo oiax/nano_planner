@@ -47,16 +47,19 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> cast(attrs, @common_fields ++ @date_time_fields)
     |> change_starts_at()
     |> change_ends_at()
+    |> validate_required([:name])
   end
 
   def changeset(%PlanItem{} = plan_item, %{"all_day" => "true"} = attrs) do
     plan_item
     |> cast(attrs, @common_fields ++ @date_fields)
+    |> validate_required([:name])
   end
 
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
     |> cast(attrs, @common_fields)
+    |> validate_required([:name])
   end
 
   defp change_starts_at(changeset) do
