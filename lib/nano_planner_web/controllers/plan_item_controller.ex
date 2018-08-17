@@ -33,7 +33,9 @@ defmodule NanoPlannerWeb.PlanItemController do
         |> redirect(to: Routes.plan_item_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "入力に誤りがあります。")
+        |> render("new.html", changeset: changeset)
     end
   end
 
@@ -50,11 +52,18 @@ defmodule NanoPlannerWeb.PlanItemController do
 
   def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
     plan_item = Schedule.get_plan_item!(id)
-    Schedule.update_plan_item(plan_item, plan_item_params)
 
-    conn
-    |> put_flash(:info, "予定を変更しました。")
-    |> redirect(to: Routes.plan_item_path(conn, :index))
+    case Schedule.update_plan_item(plan_item, plan_item_params) do
+      {:ok, _plan_item} ->
+        conn
+        |> put_flash(:info, "予定を変更しました。")
+        |> redirect(to: Routes.plan_item_path(conn, :index))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_flash(:error, "入力に誤りがあります。")
+        |> render("edit.html", plan_item: plan_item, changeset: changeset)
+    end
   end
 
   def delete(conn, %{"id" => id}) do
