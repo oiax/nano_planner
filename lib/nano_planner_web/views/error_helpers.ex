@@ -10,7 +10,18 @@ defmodule NanoPlannerWeb.ErrorHelpers do
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:span, translate_error(error), class: "help-block")
+      predicate = translate_error(error)
+
+      message =
+        Gettext.dgettext(
+          NanoPlannerWeb.Gettext,
+          "errors",
+          "%{subject} %{predicate}.",
+          subject: field,
+          predicate: predicate
+        )
+
+      content_tag(:span, message, class: "help-block")
     end)
   end
 

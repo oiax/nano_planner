@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=1\n"
 
 msgid "can't be blank"
-msgstr "を入力してください。"
+msgstr "を入力してください"
 
 msgid "has already been taken"
 msgstr ""
@@ -79,3 +79,7 @@ msgstr ""
 
 msgid "must be equal to %{number}"
 msgstr ""
+
+## From NanoPlannerWeb.ErrorHelpers
+msgid "%{subject} %{predicate}."
+msgstr "%{subject}%{predicate}。"
