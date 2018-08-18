@@ -1,5 +1,5 @@
 <div class="form-group">
-  <%= label @f, :name, "件名", class: "control-label" %>
+  <%= label @f, :name, dgettext("schema", "plan_item|name") %>
   <%= bootstrap_text_input @f, :name, required: true %>
   <%= bootstrap_feedback @f, :name %>
 </div>

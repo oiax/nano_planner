@@ -18,7 +18,25 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
       |> add_class("invalid-feedback", Keyword.has_key?(form.errors, field))
 
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:div, translate_error(error), opts)
+      subject =
+        Gettext.dgettext(
+          NanoPlannerWeb.Gettext,
+          "schema",
+          "plan_item|#{field}"
+        )
+
+      predicate = translate_error(error)
+
+      message =
+        Gettext.dgettext(
+          NanoPlannerWeb.Gettext,
+          "errors",
+          "%{subject} %{predicate}.",
+          subject: subject,
+          predicate: predicate
+        )
+
+      content_tag(:div, message, opts)
     end)
   end
 end
