@@ -81,5 +81,5 @@ msgid "must be equal to %{number}"
 msgstr ""
 
 ## From NanoPlannerWeb.ErrorHelpers
-msgid "%{subject} %{predicate}."
-msgstr "%{subject}%{predicate}。"
+msgid "%{attribute} %{message}."
+msgstr "%{attribute}%{message}。"
