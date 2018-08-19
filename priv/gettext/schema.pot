@@ -14,3 +14,8 @@ msgstr ""
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:2
 msgid "plan_item|name"
 msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:7
+msgid "plan_item|description"
+msgstr ""

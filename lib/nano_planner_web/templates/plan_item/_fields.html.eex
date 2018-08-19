@@ -4,8 +4,9 @@
   <%= bootstrap_feedback @f, :name %>
 </div>
 <div class="form-group">
-  <%= label @f, :description, "説明", class: "control-label" %>
-  <%= textarea @f, :description, class: "form-control", rows: 4 %>
+  <%= label @f, :description, dgettext("schema", "plan_item|description") %>
+  <%= bootstrap_textarea @f, :description %>
+  <%= bootstrap_feedback @f, :description %>
 </div>
 <div class="form-group">
   <div class="custom-control custom-checkbox">

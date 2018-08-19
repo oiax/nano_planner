@@ -12,6 +12,15 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     Phoenix.HTML.Form.text_input(form, field, opts)
   end
 
+  def bootstrap_textarea(form, field, opts \\ []) do
+    opts =
+      opts
+      |> add_class("form-control")
+      |> add_class("is-invalid", Keyword.has_key?(form.errors, field))
+
+    Phoenix.HTML.Form.textarea(form, field, opts)
+  end
+
   def bootstrap_feedback(form, field, opts \\ []) do
     opts =
       opts
