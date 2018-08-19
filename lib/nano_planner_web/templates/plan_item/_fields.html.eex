@@ -9,10 +9,8 @@
   <%= bootstrap_feedback @f, :description %>
 </div>
 <div class="form-group">
-  <div class="custom-control custom-checkbox">
-    <%= checkbox @f, :all_day, class: "custom-control-input" %>
-    <%= label @f, :all_day, "終日", class: "custom-control-label" %>
-  </div>
+  <%= boostrap_custom_checkbox @f, :all_day,
+    dgettext("schema", "plan_item|all_day") %>
 </div>
 <div class="form-group js-date-and-time">
   <%= label @f, :starts_at, "開始日時", class: "control-label" %>

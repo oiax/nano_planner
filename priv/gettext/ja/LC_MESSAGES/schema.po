@@ -20,3 +20,8 @@ msgstr "件名"
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:7
 msgid "plan_item|description"
 msgstr "説明"
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:13
+msgid "plan_item|all_day"
+msgstr "件名"

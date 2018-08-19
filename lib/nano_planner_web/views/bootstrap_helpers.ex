@@ -19,6 +19,20 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     |> add_class("is-invalid", Keyword.has_key?(form.errors, field))
   end
 
+  def boostrap_custom_checkbox(form, field, label_text, opts \\ []) do
+    opts =
+      opts
+      |> add_class("custom-control")
+      |> add_class("custom-checkbox")
+
+    content_tag(:div, opts) do
+      [
+        checkbox(form, field, class: "custom-control-input"),
+        label(form, field, label_text, class: "custom-control-label")
+      ]
+    end
+  end
+
   def bootstrap_feedback(form, field, opts \\ []) do
     opts =
       opts
