@@ -24,3 +24,23 @@ msgstr ""
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:13
 msgid "plan_item|all_day"
 msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:20
+msgid "plan_item|ends_at"
+msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:28
+msgid "plan_item|ends_on"
+msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:16
+msgid "plan_item|starts_at"
+msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:24
+msgid "plan_item|starts_on"
+msgstr ""

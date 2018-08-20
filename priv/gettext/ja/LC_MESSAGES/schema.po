@@ -25,3 +25,23 @@ msgstr "説明"
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:13
 msgid "plan_item|all_day"
 msgstr "件名"
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:20
+msgid "plan_item|ends_at"
+msgstr "終了日時"
+
+#, elixir-format
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:28
+msgid "plan_item|ends_on"
+msgstr "終了日"
+
+#, elixir-format, fuzzy
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:16
+msgid "plan_item|starts_at"
+msgstr "開始日時"
+
+#, elixir-format, fuzzy
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:24
+msgid "plan_item|starts_on"
+msgstr "開始日"
