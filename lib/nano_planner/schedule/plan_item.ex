@@ -102,22 +102,14 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> validate_length(:description, max: 400)
   end
 
+  @message "must not be earlier than start date"
   defp validate_date_order(changeset) do
-    validate_chronological_order(
-      changeset,
-      :starts_on,
-      :ends_on,
-      "must not be earlier than start date"
-    )
+    validate_chronological_order(changeset, :starts_on, :ends_on, @message)
   end
 
+  @message "must not be earlier than start time"
   defp validate_datetime_order(changeset) do
-    validate_chronological_order(
-      changeset,
-      :starts_at,
-      :ends_at,
-      "must not be earlier than start time"
-    )
+    validate_chronological_order(changeset, :starts_at, :ends_at, @message)
   end
 
   defp validate_chronological_order(changeset, field1, field2, message) do
