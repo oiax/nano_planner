@@ -44,3 +44,11 @@ msgstr ""
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:24
 msgid "plan_item|starts_on"
 msgstr ""
+
+## Manually added
+msgid "plan_item|s_date"
+msgstr ""
+
+## Manually added
+msgid "plan_item|e_date"
+msgstr ""

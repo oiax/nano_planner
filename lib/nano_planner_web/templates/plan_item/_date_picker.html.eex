@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-12 date-picker">
     <%= bootstrap_date_input @f, @field, required: true %>
+    <%= bootstrap_feedback @f, @field %>
   </div>
 </div>

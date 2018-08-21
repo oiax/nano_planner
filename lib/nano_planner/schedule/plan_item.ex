@@ -49,6 +49,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> change_ends_at()
     |> validate_common_fields()
     |> validate_required(@date_time_fields)
+    |> validate_datetime_order()
   end
 
   def changeset(%PlanItem{} = plan_item, %{"all_day" => "true"} = attrs) do
@@ -56,6 +57,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> cast(attrs, @common_fields ++ @date_fields)
     |> validate_common_fields()
     |> validate_required(@date_fields)
+    |> validate_date_order()
   end
 
   def changeset(%PlanItem{} = plan_item, attrs) do
@@ -80,11 +82,14 @@ defmodule NanoPlanner.Schedule.PlanItem do
     put_change(changeset, :ends_at, dt)
   end
 
-  defp get_local_datetime(date, hour, minute) do
+  defp get_local_datetime(%Date{} = date, hour, minute)
+       when is_integer(hour) and is_integer(minute) do
     date
     |> Timex.to_datetime(time_zone())
     |> Timex.shift(hours: hour, minutes: minute)
   end
+
+  defp get_local_datetime(_date, _hour, _minute), do: nil
 
   defp time_zone do
     Application.get_env(:nano_planner, :default_time_zone)
@@ -95,5 +100,39 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> validate_required([:name])
     |> validate_length(:name, max: 80)
     |> validate_length(:description, max: 400)
+  end
+
+  defp validate_date_order(changeset) do
+    s = get_field(changeset, :starts_on)
+    e = get_field(changeset, :ends_on)
+
+    case Timex.before?(e, s) do
+      true ->
+        add_error(
+          changeset,
+          :ends_on,
+          "must not be earlier than start date"
+        )
+
+      _ ->
+        changeset
+    end
+  end
+
+  defp validate_datetime_order(changeset) do
+    s = get_field(changeset, :starts_at)
+    e = get_field(changeset, :ends_at)
+
+    case Timex.before?(e, s) do
+      true ->
+        add_error(
+          changeset,
+          :ends_at,
+          "must not be earlier than start time"
+        )
+
+      _ ->
+        changeset
+    end
   end
 end

@@ -36,12 +36,18 @@ msgstr "終了日時"
 msgid "plan_item|ends_on"
 msgstr "終了日"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:16
 msgid "plan_item|starts_at"
 msgstr "開始日時"
 
-#, elixir-format, fuzzy
+#, elixir-format
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:24
 msgid "plan_item|starts_on"
 msgstr "開始日"
+
+msgid "plan_item|s_date"
+msgstr "開始日"
+
+msgid "plan_item|e_date"
+msgstr "終了日"
