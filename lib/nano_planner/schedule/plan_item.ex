@@ -124,12 +124,14 @@ defmodule NanoPlanner.Schedule.PlanItem do
     s = get_field(changeset, field1)
     e = get_field(changeset, field2)
 
-    case Timex.before?(e, s) do
-      true ->
+    if s && e do
+      if Timex.before?(e, s) do
         add_error(changeset, field2, message)
-
-      _ ->
+      else
         changeset
+      end
+    else
+      changeset
     end
   end
 end
