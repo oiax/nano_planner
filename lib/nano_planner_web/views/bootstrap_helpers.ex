@@ -18,10 +18,20 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     Phoenix.HTML.Form.textarea(form, field, opts)
   end
 
+  def bootstrap_select(form, field, options, opts \\ []) do
+    opts = add_form_control_classes(form, field, opts)
+    Phoenix.HTML.Form.select(form, field, options, opts)
+  end
+
   defp add_form_control_classes(form, field, opts) do
+    invalid =
+      Keyword.has_key?(form.errors, field) ||
+        Keyword.has_key?(form.errors, opts[:parent])
+
     opts
+    |> Keyword.delete(:parent)
     |> add_class("form-control")
-    |> add_class("is-invalid", Keyword.has_key?(form.errors, field))
+    |> add_class("is-invalid", invalid)
   end
 
   def boostrap_custom_checkbox(form, field, label_text, opts \\ []) do

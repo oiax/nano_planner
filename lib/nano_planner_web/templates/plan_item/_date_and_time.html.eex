@@ -1,11 +1,12 @@
 <div class="row">
   <div class="col-12 date-and-time">
     <div>
-      <%= bootstrap_date_input @f, :"#{@prefix}_date", required: true %>
+      <%= bootstrap_date_input @f, :"#{@prefix}_date", required: true,
+        parent: @field %>
     </div>
     <div>
-      <%= select_for_hours @f, :"#{@prefix}_hour" %> :
-      <%= select_for_minutes @f, :"#{@prefix}_minute" %>
+      <%= select_for_hours @f, :"#{@prefix}_hour", parent: @field %> :
+      <%= select_for_minutes @f, :"#{@prefix}_minute", parent: @field %>
     </div>
     <%= bootstrap_feedback @f, :"#{@prefix}_date" %>
     <%= bootstrap_feedback @f, @field %>
