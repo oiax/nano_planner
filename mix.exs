@@ -57,6 +57,10 @@ defmodule NanoPlanner.MixProject do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "gettext.make": [
+        "gettext.extract",
+        "gettext.merge priv/gettext --locale ja"
+      ],
       test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
