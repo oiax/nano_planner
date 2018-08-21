@@ -8,6 +8,11 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     Phoenix.HTML.Form.text_input(form, field, opts)
   end
 
+  def bootstrap_date_input(form, field, opts \\ []) do
+    opts = add_form_control_classes(form, field, opts)
+    Phoenix.HTML.Form.date_input(form, field, opts)
+  end
+
   def bootstrap_textarea(form, field, opts \\ []) do
     opts = add_form_control_classes(form, field, opts)
     Phoenix.HTML.Form.textarea(form, field, opts)
