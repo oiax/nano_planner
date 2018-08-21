@@ -103,33 +103,30 @@ defmodule NanoPlanner.Schedule.PlanItem do
   end
 
   defp validate_date_order(changeset) do
-    s = get_field(changeset, :starts_on)
-    e = get_field(changeset, :ends_on)
-
-    case Timex.before?(e, s) do
-      true ->
-        add_error(
-          changeset,
-          :ends_on,
-          "must not be earlier than start date"
-        )
-
-      _ ->
-        changeset
-    end
+    validate_chronological_order(
+      changeset,
+      :starts_on,
+      :ends_on,
+      "must not be earlier than start date"
+    )
   end
 
   defp validate_datetime_order(changeset) do
-    s = get_field(changeset, :starts_at)
-    e = get_field(changeset, :ends_at)
+    validate_chronological_order(
+      changeset,
+      :starts_at,
+      :ends_at,
+      "must not be earlier than start time"
+    )
+  end
+
+  defp validate_chronological_order(changeset, field1, field2, message) do
+    s = get_field(changeset, field1)
+    e = get_field(changeset, field2)
 
     case Timex.before?(e, s) do
       true ->
-        add_error(
-          changeset,
-          :ends_at,
-          "must not be earlier than start time"
-        )
+        add_error(changeset, field2, message)
 
       _ ->
         changeset
