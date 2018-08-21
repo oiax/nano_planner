@@ -24,7 +24,7 @@ msgstr "説明"
 #, elixir-format
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:13
 msgid "plan_item|all_day"
-msgstr "件名"
+msgstr "終日"
 
 #, elixir-format
 #: lib/nano_planner_web/templates/plan_item/_fields.html.eex:20
