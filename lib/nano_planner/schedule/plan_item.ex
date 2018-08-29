@@ -60,6 +60,10 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> validate_date_order()
   end
 
+  def changeset(%PlanItem{id: nil} = plan_item, attrs) do
+    changeset(plan_item, Map.merge(attrs, %{"all_day" => "false"}))
+  end
+
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
     |> cast(attrs, @common_fields)
