@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no"/>
-    <title>NanoPlanner · Phoenix Framework</title>
-    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NanoPlanner</title>
+    <%= tag :link, rel: "stylesheet",
+      href: static_path(@conn, "/css/app.css") %>
+    <%= tag :link, rel: "shortcut icon",
+      href: static_path(@conn, "/images/nano_planner.ico") %>
+    <%= tag :link, rel: "apple-touch-icon",
+      href: static_path(@conn, "/images/clock256.png") %>
   </head>
+
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-          </ul>
-        </nav>
-        <a href="http://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
+      <h1><%= link "NanoPlanner", to: top_path(@conn, :index, []) %></h1>
     </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <main>
+      <%= render "_flash_messages.html", conn: @conn %>
       <%= render @view_module, @view_template, assigns %>
     </main>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <footer>
+      &copy; 2017 Oiax Inc.
+    </footer>
+    <%= content_tag :script, "", src: static_path(@conn, "/js/app.js") %>
   </body>
 </html>

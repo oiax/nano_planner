@@ -1,0 +1,20 @@
+<form action="/lessons/register">
+  <div class="form-group">
+    <label for="user-name">ユーザー名</label>
+    <input type="text" name="user[name]" id="user-name"
+      class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="user-password">パスワード</label>
+    <input type="password" name="user[password]" id="user-password"
+      class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="user-remarks">備考</label>
+    <textarea name="user[remarks]" id="user-remarks"
+      class="form-control" rows="4"></textarea>
+  </div>
+  <div>
+    <input type="submit" value="登録" class="btn btn-primary">
+  </div>
+</form>
