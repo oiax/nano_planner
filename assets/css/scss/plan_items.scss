@@ -1,0 +1,17 @@
+div.plan-items {
+  div.row {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: #ddd;
+    span.plan-item-name {
+      font-weight: bold;
+    }
+    span.plan-item-description {
+      font-size: 0.75rem;
+    }
+  }
+  div.row:last-child {
+    margin-bottom: 0;
+  }
+}
