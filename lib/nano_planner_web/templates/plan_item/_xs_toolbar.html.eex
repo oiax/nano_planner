@@ -1,4 +1,4 @@
-<%= link to: plan_item_path(@conn, :edit, @item.id) do %>
+<%= link to: Routes.plan_item_path(@conn, :edit, @item.id) do %>
   <i class="fa fa-pencil-square fa-lg"></i>
 <% end %>
 

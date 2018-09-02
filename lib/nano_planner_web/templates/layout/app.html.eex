@@ -9,16 +9,16 @@
 
     <title>NanoPlanner</title>
     <%= tag :link, rel: "stylesheet",
-      href: static_path(@conn, "/css/app.css") %>
+      href: Routes.static_path(@conn, "/css/app.css") %>
     <%= tag :link, rel: "shortcut icon",
-      href: static_path(@conn, "/images/nano_planner.ico") %>
+      href: Routes.static_path(@conn, "/images/nano_planner.ico") %>
     <%= tag :link, rel: "apple-touch-icon",
-      href: static_path(@conn, "/images/clock256.png") %>
+      href: Routes.static_path(@conn, "/images/clock256.png") %>
   </head>
 
   <body>
     <header>
-      <h1><%= link "NanoPlanner", to: top_path(@conn, :index, []) %></h1>
+      <h1><%= link "NanoPlanner", to: Routes.top_path(@conn, :index, []) %></h1>
     </header>
     <main>
       <%= render "_flash_messages.html", conn: @conn %>
@@ -27,6 +27,6 @@
     <footer>
       &copy; 2017 Oiax Inc.
     </footer>
-    <%= content_tag :script, "", src: static_path(@conn, "/js/app.js") %>
+    <%= content_tag :script, "", src: Routes.static_path(@conn, "/js/app.js") %>
   </body>
 </html>

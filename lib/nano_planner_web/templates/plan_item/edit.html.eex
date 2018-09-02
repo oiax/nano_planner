@@ -1,4 +1,4 @@
-<% action = plan_item_path(@conn, :update, @plan_item) %>
+<% action = Routes.plan_item_path(@conn, :update, @plan_item) %>
 <%= form_for @changeset, action, fn f -> %>
   <%= render "_fields.html", f: f %>
   <div class="form-group">
