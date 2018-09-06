@@ -1,0 +1,7 @@
+<ul class="nav nav-pills my-1">
+  <%= for action <- [:index, :of_today] do %>
+    <li class="nav-item">
+      <%= nav_link(@conn, action) %>
+    </li>
+  <% end %>
+</ul>

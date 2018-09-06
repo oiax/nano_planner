@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NanoPlanner</title>
+    <title><%= @view_module.document_title(assigns) %></title>
     <%= tag :link, rel: "stylesheet",
       href: Routes.static_path(@conn, "/css/app.css") %>
     <%= tag :link, rel: "shortcut icon",
