@@ -7,8 +7,11 @@ defmodule NanoPlanner.Schedule.PlanItem do
   schema "plan_items" do
     field(:name, :string)
     field(:description, :string, default: "")
+    field(:all_day, :boolean, default: false)
     field(:starts_at, Timex.Ecto.DateTime)
     field(:ends_at, Timex.Ecto.DateTime)
+    field(:starts_on, Timex.Ecto.Date)
+    field(:ends_on, Timex.Ecto.Date)
     field(:s_date, Timex.Ecto.Date, virtual: true)
     field(:s_hour, :integer, virtual: true)
     field(:s_minute, :integer, virtual: true)
