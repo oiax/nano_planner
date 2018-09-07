@@ -27,11 +27,13 @@
       <% end %>
     </div>
   </div>
-  <%=
-    if @plan_item.all_day do
-      render "_date_duration.html", conn: @conn, plan_item: @plan_item
-    else
-      render "_datetime_duration.html", conn: @conn, plan_item: @plan_item
-    end
+  <%
+    template_name =
+      if @plan_item.all_day do
+        "_date_duration.html"
+      else
+        "_datetime_duration.html"
+      end
   %>
+  <%= render template_name, conn: @conn, plan_item: @plan_item %>
 </div>
