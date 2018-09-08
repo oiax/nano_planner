@@ -55,6 +55,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
   def changeset(%PlanItem{} = plan_item, %{"all_day" => "true"} = attrs) do
     plan_item
     |> cast(attrs, @common_fields ++ @date_fields)
+    |> change_time_boundaries()
     |> validate_common_fields()
     |> validate_required(@date_fields)
     |> validate_date_order()
@@ -94,6 +95,23 @@ defmodule NanoPlanner.Schedule.PlanItem do
   end
 
   defp get_local_datetime(_date, _hour, _minute), do: nil
+
+  defp change_time_boundaries(changeset) do
+    tz = time_zone()
+
+    s =
+      get_field(changeset, :starts_on)
+      |> Timex.to_datetime(tz)
+
+    e =
+      get_field(changeset, :ends_on)
+      |> Timex.to_datetime(tz)
+      |> Timex.shift(days: 1)
+
+    changeset
+    |> put_change(:starts_at, s)
+    |> put_change(:ends_at, e)
+  end
 
   defp time_zone do
     Application.get_env(:nano_planner, :default_time_zone)
