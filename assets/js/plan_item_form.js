@@ -1,5 +1,7 @@
 import $ from "jquery";
 
 $(() => {
-  console.log("Loaded!");
+  const form = $("form.js-plan-item")
+
+  if (form.length > 0) console.log("Loaded!");
 });

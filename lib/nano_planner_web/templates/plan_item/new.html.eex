@@ -1,5 +1,5 @@
 <% action = Routes.plan_item_path(@conn, :create) %>
-<%= form_for @changeset, action, fn f -> %>
+<%= form_for @changeset, action, [class: "js-plan-item"], fn f -> %>
   <%= render "_fields.html", f: f %>
   <div class="form-group">
     <%= submit "追加", class: "btn btn-success" %>
