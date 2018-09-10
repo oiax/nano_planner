@@ -4,7 +4,8 @@ $(() => {
   const form = $("form.plan-item")
 
   if (form.length > 0) {
-    const checkBox = $("#plan_item_all_day");
+    const checkBox =
+      form.find("input[name='plan_item[all_day]'][type='checkbox']");
 
     const toggleInputFields = () => {
       const allDay = checkBox.prop("checked");

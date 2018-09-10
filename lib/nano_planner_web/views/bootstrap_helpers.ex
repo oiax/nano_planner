@@ -34,13 +34,8 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     |> add_class("is-invalid", invalid)
   end
 
-  def boostrap_custom_checkbox(form, field, label_text, opts \\ []) do
-    opts =
-      opts
-      |> add_class("custom-control")
-      |> add_class("custom-checkbox")
-
-    content_tag(:div, opts) do
+  def boostrap_custom_checkbox(form, field, label_text) do
+    content_tag(:div, class: "custom-control custom-checkbox") do
       [
         checkbox(form, field, class: "custom-control-input"),
         label(form, field, label_text, class: "custom-control-label")
