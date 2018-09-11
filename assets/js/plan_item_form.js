@@ -8,6 +8,7 @@ $(() => {
       form.find("input[name='plan_item[all_day]'][type='checkbox']");
 
     const allDay = checkBox.prop("checked");
-    console.log(allDay);
+    form.find(".js-date-and-time").toggle(!allDay);
+    form.find(".js-date-picker").toggle(allDay);
   }
 });
