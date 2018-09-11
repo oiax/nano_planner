@@ -20,10 +20,10 @@ $(() => {
         div1.show().find("input").attr("required", true);
         div2.hide().find("input").removeAttr("required");
       }
-    }
+    };
 
     toggleInputFields();
 
-    checkBox.on("change", toggleInputFields)
+    checkBox.on("change", toggleInputFields);
   }
 });
