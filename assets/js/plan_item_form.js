@@ -10,5 +10,11 @@ $(() => {
     const allDay = checkBox.prop("checked");
     form.find(".js-date-and-time").toggle(!allDay);
     form.find(".js-date-picker").toggle(allDay);
+
+    checkBox.on("change", () => {
+      const allDay = checkBox.prop("checked");
+      form.find(".js-date-and-time").toggle(!allDay);
+      form.find(".js-date-picker").toggle(allDay);
+    })
   }
 });
