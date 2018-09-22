@@ -1,6 +1,7 @@
 <div class="form-group">
   <%= label @f, :name, "件名" %>
   <%= text_input @f, :name, class: "form-control", required: true %>
+  <%= error_tag @f, :name %>
 </div>
 <div class="form-group">
   <%= label @f, :description, "説明" %>
