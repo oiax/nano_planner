@@ -26,11 +26,17 @@ defmodule NanoPlannerWeb.PlanItemController do
   end
 
   def create(conn, %{"plan_item" => plan_item_params}) do
-    Schedule.create_plan_item(plan_item_params)
+    case Schedule.create_plan_item(plan_item_params) do
+      {:ok, _plan_item} ->
+        conn
+        |> put_flash(:info, "予定を追加しました。")
+        |> redirect(to: Routes.plan_item_path(conn, :index))
 
-    conn
-    |> put_flash(:info, "予定を追加しました。")
-    |> redirect(to: Routes.plan_item_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_flash(:error, "入力に誤りがあります。")
+        |> render("new.html", changeset: changeset)
+    end
   end
 
   def show(conn, %{"id" => id}) do
