@@ -63,7 +63,8 @@ defmodule NanoPlanner.Schedule.PlanItem do
 
   def changeset(%PlanItem{} = plan_item, attrs) do
     plan_item
-    |> cast(attrs, [])
+    |> cast(attrs, @common_fields)
+    |> validate_required([:name])
   end
 
   defp change_starts_at(changeset) do
