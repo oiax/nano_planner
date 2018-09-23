@@ -6,19 +6,21 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   end
 
   defp form_control_class(form, field, opts) do
-    class = Keyword.get(opts, :class, "")
+    opts
+    |> Keyword.get(:class, "")
+    |> add_class("form-control")
+    |> add_class("is-invalid", Keyword.has_key?(form.errors, field))
+  end
 
-    class =
-      if class == "" do
-        class
-      else
-        class <> " " <> "form-control"
-      end
-
-    if Keyword.has_key?(form.errors, field) do
-      class <> " " <> "is-invalid"
+  defp add_class(class, new_class) do
+    if class == "" do
+      new_class
     else
-      class
+      class <> " " <> new_class
     end
   end
+
+  defp add_class(class, new_class, true), do: add_class(class, new_class)
+
+  defp add_class(class, new_class, false), do: class
 end
