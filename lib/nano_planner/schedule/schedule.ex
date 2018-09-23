@@ -135,13 +135,17 @@ defmodule NanoPlanner.Schedule do
   def set_time_boundaries(%PlanItem{all_day: true} = item) do
     tz = time_zone()
 
-    Map.merge(item, %{
-      starts_at: Timex.to_datetime(item.starts_on, tz),
-      ends_at: Timex.shift(Timex.to_datetime(item.ends_on, tz), days: 1)
-    })
+    s =
+      item.starts_on
+      |> Timex.to_datetime(tz)
+
+    e =
+      item.ends_on
+      |> Timex.to_datetime(tz)
+      |> Timex.shift(days: 1)
+
+    Map.merge(item, %{starts_at: s, ends_at: e})
   end
 
-  def set_time_boundaries(%PlanItem{all_day: false} = item) do
-    item
-  end
+  def set_time_boundaries(%PlanItem{all_day: false} = item), do: item
 end
