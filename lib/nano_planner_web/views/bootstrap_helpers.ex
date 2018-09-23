@@ -1,6 +1,7 @@
 defmodule NanoPlannerWeb.BootstrapHelpers do
   def bootstrap_text_input(form, field, opts \\ []) do
-    opts = Keyword.put(opts, :class, form_control_class(form, field, opts))
+    class = form_control_class(form, field, opts)
+    opts = Keyword.put(opts, :class, class)
 
     Phoenix.HTML.Form.text_input(form, field, opts)
   end
