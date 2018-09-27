@@ -10,6 +10,13 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     Phoenix.HTML.Form.text_input(form, field, opts)
   end
 
+  def bootstrap_textarea(form, field, opts \\ []) do
+    class = form_control_class(form, field, opts)
+    opts = Keyword.put(opts, :class, class)
+
+    Phoenix.HTML.Form.textarea(form, field, opts)
+  end
+
   defp form_control_class(form, field, opts) do
     opts
     |> Keyword.get(:class, "")
