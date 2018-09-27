@@ -1,20 +1,20 @@
 defmodule NanoPlannerWeb.BootstrapHelpers do
-  use Phoenix.HTML
+  import Phoenix.HTML.Form
+  import Phoenix.HTML.Tag
   import NanoPlannerWeb.ErrorHelpers, only: [translate_error: 1]
   import NanoPlannerWeb.Gettext
 
   def bootstrap_text_input(form, field, opts \\ []) do
-    class = form_control_class(form, field, opts)
-    opts = Keyword.put(opts, :class, class)
-
-    Phoenix.HTML.Form.text_input(form, field, opts)
+    text_input(form, field, html_opts(form, field, opts))
   end
 
   def bootstrap_textarea(form, field, opts \\ []) do
-    class = form_control_class(form, field, opts)
-    opts = Keyword.put(opts, :class, class)
+    textarea(form, field, html_opts(form, field, opts))
+  end
 
-    Phoenix.HTML.Form.textarea(form, field, opts)
+  defp html_opts(form, field, opts) do
+    class = form_control_class(form, field, opts)
+    Keyword.put(opts, :class, class)
   end
 
   defp form_control_class(form, field, opts) do
