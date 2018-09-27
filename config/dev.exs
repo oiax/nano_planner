@@ -71,5 +71,5 @@ config :nano_planner, NanoPlanner.Repo,
   password: "phoenix",
   database: "nano_planner_dev",
   hostname: "localhost",
-  port: 5435,
+  port: 5432,
   pool_size: 10
