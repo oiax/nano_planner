@@ -1,14 +1,7 @@
 <div class="form-group">
   <%= label @f, :name, "件名" %>
-  <%
-    class =
-      if Keyword.has_key?(@f.errors, :name) do
-        "form-control is-invalid"
-      else
-        "form-control"
-      end
-  %>
-  <%= text_input @f, :name, class: class, required: true %>
+  <%= text_input @f, :name, class: form_control_class(@f, :name),
+    required: true %>
   <%= error_tag @f, :name %>
 </div>
 <div class="form-group">
