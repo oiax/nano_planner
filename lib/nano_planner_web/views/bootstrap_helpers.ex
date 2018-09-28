@@ -27,4 +27,13 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
       content_tag(:div, translate_error(error), class: "invalid-feedback")
     end)
   end
+
+  def boostrap_custom_checkbox(form, field, label_text) do
+    content_tag(:div, class: "custom-control custom-checkbox") do
+      [
+        checkbox(form, field, class: "custom-control-input"),
+        label(form, field, label_text, class: "custom-control-label")
+      ]
+    end
+  end
 end
