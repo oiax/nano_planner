@@ -92,3 +92,8 @@ msgstr ""
 
 msgid "must be equal to %{number}"
 msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/views/bootstrap_helpers.ex:44
+msgid "%{attribute} %{message}."
+msgstr ""

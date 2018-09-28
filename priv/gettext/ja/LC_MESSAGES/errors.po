@@ -12,7 +12,7 @@ msgstr ""
 "Plural-Forms: nplurals=1\n"
 
 msgid "can't be blank"
-msgstr ""
+msgstr "を入力してください"
 
 msgid "has already been taken"
 msgstr ""
@@ -79,3 +79,8 @@ msgstr ""
 
 msgid "must be equal to %{number}"
 msgstr ""
+
+#, elixir-format
+#: lib/nano_planner_web/views/bootstrap_helpers.ex:44
+msgid "%{attribute} %{message}."
+msgstr "%{attribute}%{message}。"
