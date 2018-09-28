@@ -25,6 +25,9 @@ config :logger, :console,
 # Configures the default time zone
 config :nano_planner, default_time_zone: "Asia/Tokyo"
 
+# Configures the default locale
+config :nano_planner, NanoPlannerWeb.Gettext, default_locale: "ja"
+
 # Use Jason for JSON parsing in Phoenix and Ecto
 config :phoenix, :json_library, Jason
 config :ecto, :json_library, Jason
