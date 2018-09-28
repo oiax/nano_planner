@@ -1,5 +1,7 @@
 defmodule NanoPlannerWeb.BootstrapHelpers do
   import Phoenix.HTML.Form
+  import Phoenix.HTML.Tag
+  import NanoPlannerWeb.ErrorHelpers, only: [translate_error: 1]
 
   def bootstrap_text_input(form, field, opts \\ []) do
     class = form_control_class(form, field, opts)
@@ -19,4 +21,10 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   defp add_class(class, new_class), do: class <> " " <> new_class
   defp add_class(class, new_class, true), do: add_class(class, new_class)
   defp add_class(class, _new_class, false), do: class
+
+  def bootstrap_feedback(form, field) do
+    Enum.map(Keyword.get_values(form.errors, field), fn error ->
+      content_tag(:div, translate_error(error), class: "invalid-feedback")
+    end)
+  end
 end
