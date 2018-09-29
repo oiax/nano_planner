@@ -5,17 +5,16 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   import NanoPlannerWeb.Gettext
 
   def bootstrap_text_input(form, field, opts \\ []) do
-    class = form_control_class(form, field, opts)
-    opts = Keyword.put(opts, :class, class)
-
-    text_input(form, field, opts)
+    text_input(form, field, html_opts(form, field, opts))
   end
 
   def bootstrap_textarea(form, field, opts \\ []) do
-    class = form_control_class(form, field, opts)
-    opts = Keyword.put(opts, :class, class)
+    textarea(form, field, html_opts(form, field, opts))
+  end
 
-    textarea(form, field, opts)
+  defp html_opts(form, field, opts) do
+    class = form_control_class(form, field, opts)
+    Keyword.put(opts, :class, class)
   end
 
   defp form_control_class(form, field, opts) do
