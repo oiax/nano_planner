@@ -109,5 +109,6 @@ defmodule NanoPlanner.Schedule.PlanItem do
     changeset
     |> validate_required([:name])
     |> validate_length(:name, max: 80)
+    |> validate_length(:description, max: 400)
   end
 end
