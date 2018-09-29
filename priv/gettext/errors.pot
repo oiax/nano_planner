@@ -75,7 +75,7 @@ msgstr[1] ""
 msgid "should have at most %{count} item(s)"
 msgid_plural "should have at most %{count} item(s)"
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "は%{count}文字以内で入力してください"
 
 ## From Ecto.Changeset.validate_number/3
 msgid "must be less than %{number}"
