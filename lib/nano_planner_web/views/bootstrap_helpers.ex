@@ -35,8 +35,8 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   defp feedback_attribute(form, field) do
     Gettext.dgettext(
       NanoPlannerWeb.Gettext,
-      "schema",
-      "#{form.name}|#{field}"
+      "schema.#{form.name}",
+      Atom.to_string(field)
     )
   end
 
