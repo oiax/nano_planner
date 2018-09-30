@@ -12,6 +12,10 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     textarea(form, field, html_opts(form, field, opts))
   end
 
+  def bootstrap_date_input(form, field, opts \\ []) do
+    date_input(form, field, html_opts(form, field, opts))
+  end
+
   defp html_opts(form, field, opts) do
     class = form_control_class(form, field, opts)
     Keyword.put(opts, :class, class)

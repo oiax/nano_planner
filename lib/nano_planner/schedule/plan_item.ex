@@ -54,6 +54,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> cast(attrs, @common_fields ++ @date_fields)
     |> change_time_boundaries()
     |> validate_common_fields()
+    |> validate_required(@date_fields)
   end
 
   def changeset(%PlanItem{} = plan_item, attrs) do
