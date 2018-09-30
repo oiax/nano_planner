@@ -55,6 +55,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> change_time_boundaries()
     |> validate_common_fields()
     |> validate_required(@date_fields)
+    |> validate_date_order()
   end
 
   def changeset(%PlanItem{} = plan_item, attrs) do
@@ -111,5 +112,21 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> validate_required([:name])
     |> validate_length(:name, max: 80)
     |> validate_length(:description, max: 400)
+  end
+
+  @message "must not be earlier than start date"
+  defp validate_date_order(changeset) do
+    s = get_field(changeset, :starts_on)
+    e = get_field(changeset, :ends_on)
+
+    if s && e do
+      if Timex.before?(e, s) do
+        add_error(changeset, :ends_on, @message)
+      else
+        changeset
+      end
+    else
+      changeset
+    end
   end
 end

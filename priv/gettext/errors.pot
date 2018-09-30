@@ -97,3 +97,7 @@ msgstr ""
 #: lib/nano_planner_web/views/bootstrap_helpers.ex:44
 msgid "%{attribute} %{message}."
 msgstr ""
+
+## From NanoPlanner.Schedule.PlanItem.validate_date_order/1
+msgid "must not be earlier than start date"
+msgstr ""
