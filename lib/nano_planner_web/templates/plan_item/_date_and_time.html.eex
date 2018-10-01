@@ -5,8 +5,8 @@
         parent: @field %>
     </div>
     <div>
-      <%= select_for_hours @f, :"#{@prefix}_hour" %> :
-      <%= select_for_minutes @f, :"#{@prefix}_minute" %>
+      <%= select_for_hours @f, :"#{@prefix}_hour", parent: @field %> :
+      <%= select_for_minutes @f, :"#{@prefix}_minute", parent: @field %>
     </div>
     <%= bootstrap_feedback @f, :"#{@prefix}_date" %>
     <%= bootstrap_feedback @f, @field %>

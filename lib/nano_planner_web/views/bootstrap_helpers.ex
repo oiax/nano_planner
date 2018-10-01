@@ -16,6 +16,10 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     date_input(form, field, html_opts(form, field, opts))
   end
 
+  def bootstrap_select(form, field, options, opts \\ []) do
+    select(form, field, options, html_opts(form, field, opts))
+  end
+
   defp html_opts(form, field, opts) do
     class = form_control_class(form, field, opts)
 

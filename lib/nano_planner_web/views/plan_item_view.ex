@@ -96,18 +96,20 @@ defmodule NanoPlannerWeb.PlanItemView do
     Enum.at(@weekday_names, Timex.days_to_beginning_of_week(datetime, :sun))
   end
 
-  def select_for_hours(form, field) do
+  def select_for_hours(form, field, opts \\ []) do
     options = Enum.map(0..23, &{two_digits(&1), &1})
-    select(form, field, options, class: "form-control", required: true)
+    opts = Keyword.merge(opts, required: true)
+    bootstrap_select(form, field, options, opts)
   end
 
-  def select_for_minutes(form, field) do
+  def select_for_minutes(form, field, opts \\ []) do
     options =
       0..11
       |> Enum.map(&(&1 * 5))
       |> Enum.map(&{two_digits(&1), &1})
 
-    select(form, field, options, class: "form-control", required: true)
+    opts = Keyword.merge(opts, required: true)
+    bootstrap_select(form, field, options, opts)
   end
 
   defp two_digits(n) do
