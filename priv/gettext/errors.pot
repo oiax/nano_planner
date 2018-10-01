@@ -101,3 +101,7 @@ msgstr ""
 ## From NanoPlanner.Schedule.PlanItem.validate_date_order/1
 msgid "must not be earlier than start date"
 msgstr ""
+
+## From NanoPlanner.Schedule.PlanItem.validate_datetime_order/1
+msgid "must not be earlier than start time"
+msgstr ""
