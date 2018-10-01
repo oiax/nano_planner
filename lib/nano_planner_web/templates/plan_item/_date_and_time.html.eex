@@ -8,5 +8,6 @@
       <%= select_for_minutes @f, :"#{@prefix}_minute" %>
     </div>
     <%= bootstrap_feedback @f, :"#{@prefix}_date" %>
+    <%= bootstrap_feedback @f, @field %>
   </div>
 </div>
