@@ -14,6 +14,8 @@ import "bootstrap"
 
 // Import local files
 //
-// Local files can be imported directly using relative paths, for example:
+// Local files can be imported directly using relative
+// paths "./socket" or full ones "web/static/js/socket".
+
 // import socket from "./socket"
 import "./plan_item_form"
