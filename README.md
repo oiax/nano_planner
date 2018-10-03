@@ -13,16 +13,18 @@
 ## 稼働条件
 
 * Erlang 21.0
-* Elixir 1.7.0
-* Phoenix 1.4.0
-* PostgreSQL 9.5/9.6
-* Node.js 8.11.3
-* npm 6.1.0
+* Elixir 1.7.3
+* Phoenix 1.4.0-dev
+* PostgreSQL 9.5/9.6/10
+* Node.js 8.12.0
+* npm 6.4.0
+* webpack 4.17.1
 
 Ubuntu 16.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールしてください。
 
 ```text
 $ sudo apt-get -y install inotify-tools
+$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
 ## インストール方法
