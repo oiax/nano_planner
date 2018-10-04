@@ -82,7 +82,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
     put_change(changeset, :ends_at, dt)
   end
 
-  defp get_local_datetime(%Date = date, hour, minute) do
+  defp get_local_datetime(%Date{} = date, hour, minute) do
     date
     |> Timex.to_datetime(time_zone())
     |> Timex.shift(hours: hour, minutes: minute)
