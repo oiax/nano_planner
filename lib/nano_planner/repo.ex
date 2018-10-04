@@ -1,5 +1,5 @@
 defmodule NanoPlanner.Repo do
   use Ecto.Repo,
     otp_app: :nano_planner,
-    adapter: Ecto.Adapters.Postgres
+    adapter: Ecto.Adapters.MySQL
 end
