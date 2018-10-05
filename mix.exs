@@ -43,7 +43,9 @@ defmodule NanoPlanner.MixProject do
       {:jason, "~> 1.0"},
       {:cowboy, "~> 1.0"},
       {:timex, "~> 3.1"},
-      {:timex_ecto, "~> 3.2"}
+      {:timex_ecto, "~> 3.2"},
+      {:edeliver, "~> 1.6.0"},
+      {:distillery, "~> 2.0"}
     ]
   end
 
