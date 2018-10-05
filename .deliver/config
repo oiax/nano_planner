@@ -1,0 +1,18 @@
+APP="nano_planner"
+
+BUILD_HOST="nanoplanner.oiax.jp"
+BUILD_USER="kuroda"
+BUILD_AT="/home/kuroda/app_build"
+
+PRODUCTION_HOSTS="nanoplanner.oiax.jp"
+PRODUCTION_USER="kuroda"
+DELIVER_TO="/home/kuroda/app_release"
+
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/home/kuroda/app_config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
