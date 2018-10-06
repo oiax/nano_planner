@@ -2,7 +2,8 @@ APP="nano_planner"
 
 BUILD_HOST="nanoplanner.oiax.jp"
 BUILD_USER="kuroda"
-BUILD_AT="/home/kuroda/app_build"
+BUILD_HOME="/home/kuroda"
+BUILD_AT="$BUILD_HOME/app_build"
 
 PRODUCTION_HOSTS="nanoplanner.oiax.jp"
 PRODUCTION_USER="kuroda"
@@ -15,4 +16,34 @@ pre_erlang_get_and_update_deps() {
       ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
     "
   fi
+}
+
+pre_erlang_clean_compile() {
+  status "Installing NPM dependencies"
+  __sync_remote "
+    [ -f '$BUILD_HOME/.profile' ] && source '$BUILD_HOME/.profile'
+    set -e
+
+    cd '$BUILD_AT/assets'
+    npm install
+  "
+
+  status "Building static files"
+  __sync_remote "
+    [ -f '$BUILD_HOME/.profile' ] && source '$BUILD_HOME/.profile'
+    set -e
+
+    cd '$BUILD_AT/assets'
+    mkdir -p priv/static
+    npm run deploy
+  "
+
+  status "Running phx.digest"
+  __sync_remote "
+    [ -f '$BUILD_HOME/.profile' ] && source '$BUILD_HOME/.profile'
+    set -e
+
+    cd '$BUILD_AT'
+    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest
+  "
 }

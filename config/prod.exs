@@ -66,6 +66,13 @@ config :logger, level: :info
 # Note you can't rely on `System.get_env/1` when using releases.
 # See the releases documentation accordingly.
 
+config :deploy_test_app, NanoPlannerWeb.Endpoint,
+  load_from_system_env: true,
+  http: [port: 4000],
+  url: [host: "nanoplanner.oiax.jp", port: 80],
+  server: true,
+  cache_static_manifest: "priv/static/cache_manifest.json"
+
 # Finally import the config/prod.secret.exs which should be versioned
 # separately.
 import_config "prod.secret.exs"
