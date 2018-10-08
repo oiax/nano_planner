@@ -24,7 +24,8 @@ defmodule NanoPlanner.Schedule.PlanItem do
 
   @common_fields [
     :name,
-    :description
+    :description,
+    :all_day
   ]
 
   @date_time_fields [
