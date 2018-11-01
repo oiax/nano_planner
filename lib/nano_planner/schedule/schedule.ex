@@ -136,8 +136,15 @@ defmodule NanoPlanner.Schedule do
     tz = time_zone()
 
     Map.merge(item, %{
-      starts_at: Timex.to_datetime(item.starts_on, tz),
-      ends_at: Timex.shift(Timex.to_datetime(item.ends_on, tz), days: 1)
+      starts_at:
+        item.starts_on
+        |> Timex.to_datetime(tz)
+        |> Timex.Timezone.convert("Etc/UTC"),
+      ends_at:
+        item.ends_on
+        |> Timex.to_datetime(tz)
+        |> Timex.shift(days: 1)
+        |> Timex.Timezone.convert("Etc/UTC")
     })
   end
 

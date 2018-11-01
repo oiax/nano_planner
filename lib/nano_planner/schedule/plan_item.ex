@@ -1,23 +1,22 @@
 defmodule NanoPlanner.Schedule.PlanItem do
   use Ecto.Schema
-  use Timex.Ecto.Timestamps
   import Ecto.Changeset
   alias NanoPlanner.Schedule.PlanItem
 
   schema "plan_items" do
-    field(:name, :string)
-    field(:description, :string, default: "")
-    field(:all_day, :boolean, default: false)
-    field(:starts_at, Timex.Ecto.DateTime)
-    field(:ends_at, Timex.Ecto.DateTime)
-    field(:starts_on, Timex.Ecto.Date)
-    field(:ends_on, Timex.Ecto.Date)
-    field(:s_date, Timex.Ecto.Date, virtual: true)
-    field(:s_hour, :integer, virtual: true)
-    field(:s_minute, :integer, virtual: true)
-    field(:e_date, Timex.Ecto.Date, virtual: true)
-    field(:e_hour, :integer, virtual: true)
-    field(:e_minute, :integer, virtual: true)
+    field :name, :string
+    field :description, :string, default: ""
+    field :all_day, :boolean, default: false
+    field :starts_at, NanoPlanner.Ecto.Datetime
+    field :ends_at, NanoPlanner.Ecto.Datetime
+    field :starts_on, :date
+    field :ends_on, :date
+    field :s_date, :date, virtual: true
+    field :s_hour, :integer, virtual: true
+    field :s_minute, :integer, virtual: true
+    field :e_date, :date, virtual: true
+    field :e_hour, :integer, virtual: true
+    field :e_minute, :integer, virtual: true
 
     timestamps()
   end
