@@ -76,5 +76,9 @@ exports.config = {
       jQuery: "jquery",
       Tether: "tether"
     }
+  },
+
+  watcher: {
+    usePolling: true
   }
 };
