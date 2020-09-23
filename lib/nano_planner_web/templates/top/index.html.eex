@@ -1,0 +1,5 @@
+<div>
+  <%= link to: Routes.plan_item_path(@conn, :index) do %>
+    <i class="fa fa-list"></i> 予定表
+  <% end %>
+</div>
