@@ -3,19 +3,20 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-use Mix.Config
 
 # General application configuration
+use Mix.Config
+
 config :nano_planner,
   ecto_repos: [NanoPlanner.Repo]
 
 # Configures the endpoint
-config :nano_planner, NanoPlanner.Endpoint,
+config :nano_planner, NanoPlannerWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "ZRIyn58Bxq3ss7orT24lWl/EtgTF94SHBJfqF5qzBSlchgdKqRfnJEpetyAWsBal",
-  render_errors: [view: NanoPlanner.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: NanoPlanner.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  secret_key_base: "oUFN2cV2kfVDgWCVpth6ZqVIN2CkHAxXhlFXBWl88KjzHkFFA910UF8jwjDWB9ZO",
+  render_errors: [view: NanoPlannerWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: NanoPlanner.PubSub,
+  live_view: [signing_salt: "y3Ipgh+6"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -26,6 +27,9 @@ config :logger, :console,
 config :nano_planner,
   default_time_zone: "Asia/Tokyo"
 
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
