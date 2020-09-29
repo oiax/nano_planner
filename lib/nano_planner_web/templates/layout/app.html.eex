@@ -10,7 +10,7 @@
     <%= tag :link, rel: "shortcut icon",
       href: Routes.static_path(@conn, "/images/nano_planner.ico") %>
     <%= tag :link, rel: "shortcut icon",
-      href: Routes.static_path(@conn, "/images/clock256.ico") %>
+      href: Routes.static_path(@conn, "/images/clock256.png") %>
     <%= content_tag :script, "", src: Routes.static_path(@conn, "/js/app.js") %>
   </head>
   <body>
