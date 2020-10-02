@@ -7,11 +7,12 @@
     <title>NanoPlanner</title>
     <%= tag :link, rel: "stylesheet",
       href: Routes.static_path(@conn, "/css/app.css") %>
+    <%= content_tag :script, "",
+      src: Routes.static_path(@conn, "/js/app.js") %>
     <%= tag :link, rel: "shortcut icon",
       href: Routes.static_path(@conn, "/images/nano_planner.ico") %>
-    <%= tag :link, rel: "shortcut icon",
+    <%= tag :link, rel: "apple-touch-icon",
       href: Routes.static_path(@conn, "/images/clock256.png") %>
-    <%= content_tag :script, "", src: Routes.static_path(@conn, "/js/app.js") %>
   </head>
   <body>
     <header>

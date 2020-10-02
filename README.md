@@ -1,15 +1,12 @@
 # NanoPlanner: 簡易予定表管理システム
 
-これは『Elixir/Phoenix初級②〜④』の学習用 Phoenix アプリケーションです。
+これは『Elixir/Phoenix初級②』の学習用 Phoenix アプリケーションです。
 
 ## 対象 OS
 
 * macOS Catalina v10.15
 * macOS Mojave v10.14
 * macOS High Sierra v10.13
-* macOS Sierra v10.12
-* OS X v10.11 El Capitan
-* OS X v10.10 Yosemite
 * Ubuntu Desktop 20.04 LTS (64-bit)
 
 ## 稼働条件
@@ -22,7 +19,7 @@
 * npm 6.14.6
 * webpack 4.41.5
 
-Ubuntu 20.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールしてください。
+Ubuntu 20.04 では、さらに次のコマンドで `inotify-tools` パッケージをインストールし、 `max_user_watches` の上限を変更してください。
 
 ```text
 $ sudo apt-get -y install inotify-tools
@@ -35,9 +32,7 @@ $ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo
 $ mix local.hex --force
 $ mix local.rebar --force
 $ mix deps.get
-$ mix ecto.create
-$ mix ecto.migrate
-$ mix run priv/repo/seeds.exs
+$ mix ecto.setup
 $ cd assets
 $ npm install
 $ cd ..
@@ -54,3 +49,4 @@ $ mix phx.server
 Copyright (c) 2020, Tsutomu Kuroda.
 
 NanoPlanner source code is licensed under the [MIT License](LICENSE.md).
+

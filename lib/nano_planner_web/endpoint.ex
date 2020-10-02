@@ -7,14 +7,15 @@ defmodule NanoPlannerWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_nano_planner_key",
-    signing_salt: "nqL9Pcbi"
+    signing_salt: "pafIKlZo"
   ]
 
   socket "/socket", NanoPlannerWeb.UserSocket,
     websocket: true,
     longpoll: false
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
