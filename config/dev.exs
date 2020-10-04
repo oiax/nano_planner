@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :nano_planner, NanoPlanner.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "phoenix",
+  password: "phoenix",
   database: "nano_planner_dev",
   hostname: "postgres",
   show_sensitive_data_on_connection_error: true,

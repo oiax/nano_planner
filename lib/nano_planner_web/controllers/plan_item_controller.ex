@@ -7,8 +7,8 @@ defmodule NanoPlannerWeb.PlanItemController do
     render(conn, "index.html", plan_items: plan_items)
   end
 
-  def show(conn, params) do
-    plan_item = Schedule.get_plan_item!(params["id"])
+  def show(conn, %{"id" => id}) do
+    plan_item = Schedule.get_plan_item!(id)
     render(conn, "show.html", plan_item: plan_item)
   end
 end

@@ -91,4 +91,4 @@ ALTER TABLE ONLY public.schema_migrations
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20200909041543);
+INSERT INTO public."schema_migrations" (version) VALUES (20201002211620);

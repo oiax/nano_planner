@@ -7,9 +7,7 @@ time0 =
   |> Timex.Timezone.convert("Etc/UTC")
   |> DateTime.truncate(:second)
 
-time1 =
-  time0
-  |> Timex.beginning_of_year()
+time1 = time0 |> Timex.beginning_of_year()
 
 insert!(%PlanItem{
   name: "読書",

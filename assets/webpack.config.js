@@ -46,11 +46,11 @@ module.exports = (env, options) => {
         {
           test: /\.(ttf|eot|woff|woff2|svg)$/,
           use: {
-           loader: 'file-loader',
-           options: {
-            name: '[name].[ext]',
-            outputPath: '../webfonts'
-           }
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: '../webfonts'
+            }
           }
         }
       ]

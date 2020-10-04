@@ -8,12 +8,12 @@ defmodule NanoPlanner.Schedule do
     PlanItem
     |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
     |> Repo.all()
-    |> convert_datetime()
+    |> convert_datetime
   end
 
   def get_plan_item!(id) do
     Repo.get!(PlanItem, id)
-    |> convert_datetime()
+    |> convert_datetime
   end
 
   defp convert_datetime(items) when is_list(items) do
