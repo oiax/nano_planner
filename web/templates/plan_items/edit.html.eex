@@ -1,7 +1,0 @@
-<%= form_for @changeset,
-  plan_items_path(@conn, :update, @changeset.data), fn f -> %>
-  <div class="form-group">
-    <%= render "_fields.html", changeset: @changeset, f: f %>
-    <%= submit "更新", class: "btn btn-primary" %>
-  </div>
-<% end %>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>NanoPlanner</title>
+    <%= tag :link, rel: "stylesheet",
+      href: Routes.static_path(@conn, "/css/app.css") %>
+    <%= tag :link, rel: "shortcut icon", type: "image/x-icon",
+      href: Routes.static_path(@conn, "/images/nano_planner.ico") %>
+    <%= tag :link, rel: "apple-touch-icon", type: "image/x-icon",
+      href: Routes.static_path(@conn, "/images/clock256.png") %>
+    <%= content_tag :script, "",
+      src: Routes.static_path(@conn, "/js/app.js") %>
+  </head>
+  <body>
+    <header>
+      <h1>
+        <%= link "NanoPlanner", to: Routes.top_path(@conn, :index, []) %>
+      </h1>
+    </header>
+    <main>
+      <%= render "_flash_messages.html", conn: @conn %>
+      <%= @inner_content %>
+    </main>
+    <footer>
+      &copy; 2021 Coregenik Inc.
+    </footer>
+  </body>
+</html>

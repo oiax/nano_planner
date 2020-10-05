@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-body">
+    <%= render "_content.html", name: "Alice" %>
+    <%= render "_content.html", name: "Bob" %>
+    <%= render NanoPlannerWeb.SharedView, "_notes.html" %>
+  </div>
+</div>
