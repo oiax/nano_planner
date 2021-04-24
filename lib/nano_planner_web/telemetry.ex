@@ -31,10 +31,18 @@ defmodule NanoPlannerWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("nano_planner.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("nano_planner.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("nano_planner.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("nano_planner.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("nano_planner.repo.query.total_time",
+        unit: {:native, :millisecond}
+      ),
+      summary("nano_planner.repo.query.decode_time",
+        unit: {:native, :millisecond}
+      ),
+      summary("nano_planner.repo.query.query_time",
+        unit: {:native, :millisecond}
+      ),
+      summary("nano_planner.repo.query.queue_time",
+        unit: {:native, :millisecond}
+      ),
       summary("nano_planner.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
