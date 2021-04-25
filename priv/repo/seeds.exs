@@ -1,7 +1,10 @@
 import NanoPlanner.Repo, only: [insert!: 1]
 alias NanoPlanner.Schedule.PlanItem
 
-time0 = DateTime.from_unix!(0)
+time0 =
+  "Etc/UTC"
+  |> DateTime.now!()
+  |> DateTime.truncate(:second)
 
 insert!(%PlanItem{
   name: "読書",
