@@ -45,7 +45,8 @@ defmodule NanoPlanner.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:tzdata, "~> 1.1"}
+      {:tzdata, "~> 1.1"},
+      {:timex, "~> 3.7.5"}
     ]
   end
 
