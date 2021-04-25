@@ -5,10 +5,10 @@ defmodule NanoPlanner.Schedule.PlanItem do
   schema "plan_items" do
     field :name, :string
     field :description, :string
-    field :starts_at, :utc_datetime 
+    field :starts_at, :utc_datetime
     field :ends_at, :utc_datetime
 
-    timestamps()
+    timestamps(type: :utc_datetime_usec)
   end
 
   @doc false

@@ -20,7 +20,7 @@ insert!(%PlanItem{
   name: "読書",
   description: "『走れメロス』を読む",
   starts_at: Timex.shift(time0, days: 1, hours: 10),
-  ends_at: Timex.shift(time0, days: 1, hours: 11),
+  ends_at: Timex.shift(time0, days: 1, hours: 11)
 })
 
 insert!(%PlanItem{
