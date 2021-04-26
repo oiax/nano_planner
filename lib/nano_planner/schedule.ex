@@ -4,6 +4,8 @@ defmodule NanoPlanner.Schedule do
   alias NanoPlanner.Schedule.PlanItem
 
   def list_plan_items do
-    Repo.all(PlanItem)
+    PlanItem
+    |> order_by(asc: :starts_at)
+    |> Repo.all()
   end
 end
