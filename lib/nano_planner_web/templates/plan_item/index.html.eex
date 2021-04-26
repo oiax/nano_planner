@@ -11,7 +11,7 @@
         <% end %>
       </span>
     </div>
-    <div class="col-12"> 
+    <div class="col-12">
       <span class="plan-item-duration">
         <%= item.starts_at %>
         ～

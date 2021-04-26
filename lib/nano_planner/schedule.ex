@@ -7,5 +7,17 @@ defmodule NanoPlanner.Schedule do
     PlanItem
     |> order_by(asc: :starts_at)
     |> Repo.all()
+    |> convert_datetime()
+  end
+
+  defp convert_datetime(items) do
+    time_zone = Application.get_env(:nano_planner, :default_time_zone)
+
+    Enum.map(items, fn(item) ->
+      Map.merge(item, %{
+        starts_at: DateTime.shift_zone!(item.starts_at, time_zone),
+        ends_at: DateTime.shift_zone!(item.ends_at, time_zone)
+      })
+    end)
   end
 end
