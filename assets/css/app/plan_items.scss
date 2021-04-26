@@ -7,7 +7,8 @@ div.plan-items {
     span.plan-item-name {
       font-weight: bold;
     }
-    span.plan-item-description {
+    span.plan-item-description,
+    span.plan-item-duration {
       font-size: 0.75rem;
     }
   }
