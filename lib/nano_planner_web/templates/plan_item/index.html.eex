@@ -2,7 +2,10 @@
   <%= for item <- @plan_items do %>
   <div class="row">
     <div class="col-12 col-md-4">
-      <span class="plan-item-name"><%= item.name %></span>
+      <span class="plan-item-name">
+        <%= link(item.name,
+          to: Routes.plan_item_path(@conn, :show, item.id)) %>
+      </span>
     </div>
     <div class="col-12 col-md-8">
       <span class="plan-item-description">
