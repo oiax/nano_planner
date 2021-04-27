@@ -10,14 +10,22 @@ defmodule NanoPlanner.Schedule do
     |> convert_datetime()
   end
 
-  defp convert_datetime(items) do
+  def get_plan_item!(id) do
+    PlanItem
+    |> Repo.get!(id)
+    |> convert_datetime()
+  end
+
+  defp convert_datetime(items) when is_list(items) do
+    Enum.map(items, &convert_datetime(&1))
+  end
+
+  defp convert_datetime(%PlanItem{} = item) do
     time_zone = Application.get_env(:nano_planner, :default_time_zone)
 
-    Enum.map(items, fn item ->
-      Map.merge(item, %{
-        starts_at: DateTime.shift_zone!(item.starts_at, time_zone),
-        ends_at: DateTime.shift_zone!(item.ends_at, time_zone)
-      })
-    end)
+    Map.merge(item, %{
+      starts_at: DateTime.shift_zone!(item.starts_at, time_zone),
+      ends_at: DateTime.shift_zone!(item.ends_at, time_zone)
+    })
   end
 end
