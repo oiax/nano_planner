@@ -1,3 +1,3 @@
-defmodule NanoPlannerWeb.LessonView do 
+defmodule NanoPlannerWeb.LessonView do
   use NanoPlannerWeb, :view
 end
