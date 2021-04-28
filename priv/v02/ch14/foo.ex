@@ -1,5 +1,5 @@
 defmodule Foo do
-  def hello(users) when is_list(users) do 
+  def hello(users) when is_list(users) do
     for user <- users do
       Foo.hello(user)
     end
