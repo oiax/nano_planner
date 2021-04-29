@@ -1,18 +1,29 @@
 <div class="container-fluid plan-items">
   <%= for item <- @plan_items do %>
   <div class="row">
-    <div class="col-12 col-md-4">
+    <div class="col-8 col-md-4">
       <span class="plan-item-name">
         <%= link item.name,
           to: Routes.plan_item_path(@conn, :show, item.id) %>
       </span>
     </div>
-    <div class="col-12 col-md-8">
+    <div class="col-4 d-md-none text-right">
+      <%= link to: Routes.plan_item_path(@conn, :edit, item.id) do %>
+        <i class="fa fa-pen-square fa-lg"></i>
+      <% end %>
+    </div>
+    <div class="col-12 col-md-5">
       <span class="plan-item-description">
         <%= for line <- String.split(item.description, "\n") do %>
           <%= line %><br>
         <% end %>
       </span>
+    </div>
+    <div class="col-3 d-none d-md-block text-right">
+      <%= link to: Routes.plan_item_path(@conn, :edit, item.id),
+        class: "btn btn-secondary btn-sm" do %>
+        <i class="fa fa-pen-square"></i> 変更
+      <% end %>
     </div>
     <div class="col-12">
       <span class="plan-item-duration">

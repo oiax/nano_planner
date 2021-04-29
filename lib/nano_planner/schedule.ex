@@ -45,6 +45,12 @@ defmodule NanoPlanner.Schedule do
     |> Repo.insert!()
   end
 
+  def update_plan_item(%PlanItem{} = plan_item, attrs) do
+    plan_item
+    |> PlanItem.changeset(attrs)
+    |> Repo.update!()
+  end
+
   def change_plan_item(%PlanItem{} = item) do
     PlanItem.changeset(item, %{})
   end
