@@ -17,7 +17,26 @@ defmodule NanoPlanner.Schedule do
   end
 
   def build_plan_item do
-    %PlanItem{}
+    time0 = beginning_of_hour()
+
+    %PlanItem{
+      starts_at: Timex.shift(time0, hours: 1),
+      ends_at: Timex.shift(time0, hours: 2)
+    }
+  end
+
+  defp beginning_of_hour do
+    Timex.set(current_time(), [minute: 0, second: 0])
+  end
+
+  defp current_time do
+    time_zone()
+    |> DateTime.now!()
+    |> DateTime.truncate(:second)
+  end
+
+  defp time_zone do
+    Application.get_env(:nano_planner, :default_time_zone)
   end
 
   def change_plan_item(%PlanItem{} = item) do
