@@ -8,4 +8,8 @@ defmodule NanoPlannerWeb.LessonController do
   def register(conn, %{"user" => user_params}) do
     render(conn, "register.html", user_name: user_params["name"])
   end
+
+  def hello(conn, _params) do
+    render(conn, "hello.html")
+  end
 end
