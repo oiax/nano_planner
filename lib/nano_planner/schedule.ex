@@ -16,6 +16,14 @@ defmodule NanoPlanner.Schedule do
     |> convert_datetime()
   end
 
+  def build_plan_item do
+    %PlanItem{}
+  end
+
+  def change_plan_item(%PlanItem{} = item) do
+    PlanItem.changeset(item, %{})
+  end
+
   defp convert_datetime(items) when is_list(items) do
     Enum.map(items, &convert_datetime(&1))
   end

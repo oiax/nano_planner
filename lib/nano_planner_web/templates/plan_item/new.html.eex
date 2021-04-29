@@ -1,0 +1,5 @@
+<%= form_for @changeset, Routes.plan_item_path(@conn, :create), fn f -> %>
+  <div class="form-group">
+    <%= submit "追加", class: "btn btn-success" %>
+  </div>
+<% end %>
