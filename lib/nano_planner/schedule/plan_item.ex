@@ -4,7 +4,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
 
   schema "plan_items" do
     field :name, :string
-    field :description, :string
+    field :description, :string, default: ""
     field :starts_at, :utc_datetime
     field :ends_at, :utc_datetime
 
@@ -14,7 +14,7 @@ defmodule NanoPlanner.Schedule.PlanItem do
   @doc false
   def changeset(plan_item, attrs) do
     plan_item
-    |> cast(attrs, [])
+    |> cast(attrs, [:name, :description, :starts_at, :ends_at])
     |> validate_required([])
   end
 end
