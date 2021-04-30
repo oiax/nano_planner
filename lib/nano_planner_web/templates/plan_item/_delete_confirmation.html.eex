@@ -1,0 +1,23 @@
+<div class="modal" id="delete-confirmation-<%= @item.id %>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">予定を削除します</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>予定「<%= @item.name %>」を削除してもよろしいですか。</p>
+        <p>削除した予定を元に戻すことはできません。</p>
+      </div>
+      <div class="modal-footer">
+        <%= link "はい", to: Routes.plan_item_path(@conn, :show, @item.id),
+          method: :delete, class: "btn btn-primary" %>
+        <a href="#" class="btn btn-secondary" data-dismiss="modal">
+          いいえ
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

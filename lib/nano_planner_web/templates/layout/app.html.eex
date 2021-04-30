@@ -19,6 +19,7 @@
       </h1>
     </header>
     <main>
+      <%= render "_flash_messages.html", conn: @conn %>
       <%= @inner_content %>
     </main>
     <footer>
