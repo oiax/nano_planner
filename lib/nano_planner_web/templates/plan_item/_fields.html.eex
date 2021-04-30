@@ -8,11 +8,9 @@
 </div>
 <div class="form-group">
   <%= label @f, :starts_at, "開始日時" %>
-  <%= text_input @f, :starts_at, class: "form-control", required: true,
-    value: DateTime.to_iso8601(input_value(@f, :starts_at)) %>
+  <%= render "_date_and_time.html", f: @f, prefix: "s" %>
 </div>
 <div class="form-group">
   <%= label @f, :ends_at, "終了日時" %>
-  <%= text_input @f, :ends_at, class: "form-control", required: true,
-    value: DateTime.to_iso8601(input_value(@f, :ends_at)) %>
+  <%= render "_date_and_time.html", f: @f, prefix: "e" %>
 </div>

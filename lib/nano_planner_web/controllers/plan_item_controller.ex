@@ -8,7 +8,7 @@ defmodule NanoPlannerWeb.PlanItemController do
   end
 
   def new(conn, _params) do
-    plan_item = Schedule.build_plan_item
+    plan_item = Schedule.build_plan_item()
     changeset = Schedule.change_plan_item(plan_item)
     render(conn, "new.html", changeset: changeset)
   end
