@@ -5,7 +5,7 @@ defmodule NanoPlanner.Schedule do
 
   def list_plan_items do
     PlanItem
-    |> order_by(asc: :starts_at)
+    |> order_by(asc: :starts_at, asc: :ends_at, asc: :id)
     |> Repo.all()
     |> convert_datetime()
   end
