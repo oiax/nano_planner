@@ -111,4 +111,23 @@ defmodule NanoPlanner.Schedule do
       ends_at: DateTime.shift_zone!(item.ends_at, time_zone)
     })
   end
+
+  def set_time_boundaries(%PlanItem{all_day: true} = item) do
+    tz = time_zone()
+
+    s =
+      item.starts_on
+      |> DateTime.new!(Time.new!(0, 0, 0), tz)
+      |> DateTime.shift_zone!("Etc/UTC")
+
+    e =
+      item.ends_on
+      |> DateTime.new!(Time.new!(0, 0, 0), tz)
+      |> DateTime.shift_zone!("Etc/UTC")
+      |> Timex.shift(days: 1)
+
+    Map.merge(item, %{starts_at: s, ends_at: e})
+  end
+
+  def set_time_boundaries(%PlanItem{all_day: false} = item), do: item
 end
