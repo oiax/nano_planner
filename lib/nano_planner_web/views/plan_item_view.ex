@@ -2,6 +2,24 @@ defmodule NanoPlannerWeb.PlanItemView do
   use NanoPlannerWeb, :view
   alias Timex.Format.DateTime.Formatters.Strftime
 
+  def document_title(assigns) do
+    page_title =
+      case assigns.view_template do
+        "index.html" -> "予定表"
+        "of_today.html" -> "今日の予定表"
+        "show.html" -> "予定の詳細"
+        "new.html" -> "予定の追加"
+        "edit.html" -> "予定の変更"
+        _ -> nil
+      end
+
+    if page_title do
+      "#{page_title} - NanoPlanner"
+    else
+      "NanoPlanner"
+    end
+  end
+
   def format_duration(item) do
     Enum.join([format_starts_at(item), "～", format_ends_at(item)], " ")
   end
@@ -61,5 +79,24 @@ defmodule NanoPlannerWeb.PlanItemView do
     n
     |> Integer.to_string()
     |> String.pad_leading(2, "0")
+  end
+
+  @action_label_map %{
+    index: "予定表",
+    of_today: "今日の予定表"
+  }
+  def nav_link(conn, action) do
+    class =
+      if Phoenix.Controller.action_name(conn) == action do
+        "nav-link active"
+      else
+        "nav-link"
+      end
+
+    link(
+      @action_label_map[action],
+      to: Routes.plan_item_path(conn, action),
+      class: class
+    )
   end
 end
