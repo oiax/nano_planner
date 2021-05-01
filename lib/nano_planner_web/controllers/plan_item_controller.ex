@@ -34,6 +34,7 @@ defmodule NanoPlannerWeb.PlanItemController do
 
   def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
     plan_item = Schedule.get_plan_item!(id)
+    Schedule.update_plan_item(plan_item, plan_item_params)
 
     conn
     |> put_flash(:info, "予定を変更しました。")
