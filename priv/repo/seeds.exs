@@ -50,3 +50,17 @@ insert!(%PlanItem{
   starts_at: Timex.shift(time0, days: 10, hours: 15),
   ends_at: Timex.shift(time0, days: 10, hours: 16)
 })
+
+insert!(%PlanItem{
+  name: "DVD鑑賞",
+  description: "作品未定",
+  starts_at: Timex.shift(time0, hours: 23),
+  ends_at: Timex.shift(time0, hours: 25)
+})
+
+insert!(%PlanItem{
+  name: "姉の出張",
+  description: "札幌",
+  starts_at: Timex.shift(time0, days: -1, hours: 10),
+  ends_at: Timex.shift(time0, hours: 17)
+})

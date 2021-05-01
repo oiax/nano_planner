@@ -23,7 +23,7 @@
       <%= @inner_content %>
     </main>
     <footer>
-      &copy; 2021 Coregenik Inc.
+      &copy; <%= this_year() %> Coregenik Inc.
     </footer>
   </body>
 </html>

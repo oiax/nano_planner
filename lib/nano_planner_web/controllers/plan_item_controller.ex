@@ -7,6 +7,11 @@ defmodule NanoPlannerWeb.PlanItemController do
     render(conn, "index.html", plan_items: plan_items)
   end
 
+  def of_today(conn, _params) do
+    plan_items = Schedule.list_plan_items_of_today()
+    render(conn, "index.html", plan_items: plan_items)
+  end
+
   def new(conn, _params) do
     plan_item = Schedule.build_plan_item()
     changeset = Schedule.change_plan_item(plan_item)

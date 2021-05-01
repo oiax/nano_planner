@@ -3,6 +3,10 @@
     class: "list-group-item" do %>
     <i class="fa fa-list"></i> 予定表
   <% end %>
+  <%= link to: Routes.plan_item_path(@conn, :of_today),
+    class: "list-group-item" do %>
+    <i class="fa fa-list"></i> 今日の予定表
+  <% end %>
   <%= link to: Routes.plan_item_path(@conn, :new),
     class: "list-group-item" do %>
     <i class="fa fa-plus"></i> 予定の追加
