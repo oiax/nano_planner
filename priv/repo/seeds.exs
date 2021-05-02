@@ -65,7 +65,7 @@ insert!(%PlanItem{
   ends_at: Timex.shift(time0, days: 1, hours: 17)
 })
 
-date0 = Timex.to_date(time0)
+date0 = DateTime.to_date(time0)
 
 %PlanItem{
   name: "私の誕生日",
