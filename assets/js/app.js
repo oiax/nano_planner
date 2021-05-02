@@ -20,6 +20,5 @@ import "@fortawesome/fontawesome-free/js/solid"
 import "@fortawesome/fontawesome-free/js/regular"
 import "@fortawesome/fontawesome-free/js/brands"
 
-import $ from "jquery"
-window.jQuery = $
-window.$ = $
+import "./app/modal_viewer.js"
+import "./app/plan_item_form.js"

@@ -1,5 +1,5 @@
 <%= form_for @changeset, Routes.plan_item_path(@conn, :update, @plan_item),
-    fn f -> %>
+    [class: "js-plan-item"], fn f -> %>
   <%= render "_fields.html", f: f %>
   <div class="form-group">
     <%= submit "更新", class: "btn btn-success" %>
