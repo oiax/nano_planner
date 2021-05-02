@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-12 col-md-4 bg-info text-white text-md-right">開始日時</div>
+  <div class="col-12 col-md-8">
+    <%= format_datetime(@plan_item.starts_at) %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-md-4 bg-info text-white text-md-right">終了日時</div>
+  <div class="col-12 col-md-8">
+    <%= format_datetime(@plan_item.ends_at) %>
+  </div>
+</div>
