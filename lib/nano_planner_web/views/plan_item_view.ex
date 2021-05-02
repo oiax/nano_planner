@@ -32,7 +32,7 @@ defmodule NanoPlannerWeb.PlanItemView do
     end
   end
 
-  defp format_datetime(datetime) do
+  def format_datetime(datetime) do
     w = format_wday(datetime)
     Strftime.format!(datetime, "%Y年%-m月%-d日 (#{w}) %H:%M")
   end
