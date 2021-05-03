@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= label @f, :name, "件名" %>
-  <%= text_input @f, :name, class: "form-control" %>
+  <%= bootstrap_text_input @f, :name %>
   <%= error_tag(@f, :name) %>
 </div>
 <div class="form-group">
@@ -8,10 +8,7 @@
   <%= textarea @f, :description, class: "form-control", rows: 4 %>
 </div>
 <div class="form-group">
-  <div class="custom-control custom-checkbox">
-    <%= checkbox @f, :all_day, class: "custom-control-input" %>
-    <%= label @f, :all_day, "終日", class: "custom-control-label" %>
-  </div>
+  <%= boostrap_custom_checkbox @f, :all_day, "終日" %>
 </div>
 <div class="form-group js-date-and-time d-none">
   <%= label @f, :starts_at, "開始日時" %>

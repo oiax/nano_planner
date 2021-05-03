@@ -2,6 +2,7 @@ defmodule NanoPlannerWeb.PlanItemView do
   use NanoPlannerWeb, :view
   alias Timex.Format.DateTime.Formatters.Strftime
   alias NanoPlanner.Schedule.PlanItem
+  import NanoPlannerWeb.BootstrapHelpers
 
   def document_title(assigns) do
     page_title =
@@ -134,13 +135,5 @@ defmodule NanoPlannerWeb.PlanItemView do
       to: Routes.plan_item_path(conn, action),
       class: class
     )
-  end
-
-  def form_control_class(form, field) do
-    if Keyword.get_values(form.errors, field) == [] do
-      "form-control"
-    else
-      "form-control is-invalid"
-    end
   end
 end
