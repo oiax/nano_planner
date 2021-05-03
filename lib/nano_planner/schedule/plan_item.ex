@@ -46,20 +46,20 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> cast(attrs, @common_fields ++ @date_time_fields)
     |> change_starts_at()
     |> change_ends_at()
-    |> validate_required([:name])
+    |> validate_common_fields()
   end
 
   def changeset(plan_item, %{"all_day" => "true"} = attrs) do
     plan_item
     |> cast(attrs, @common_fields ++ @date_fields)
     |> change_time_boundaries()
-    |> validate_required([:name])
+    |> validate_common_fields()
   end
 
   def changeset(plan_item, attrs) do
     plan_item
     |> cast(attrs, @common_fields)
-    |> validate_required([:name])
+    |> validate_common_fields()
   end
 
   defp change_starts_at(changeset) do
@@ -105,5 +105,12 @@ defmodule NanoPlanner.Schedule.PlanItem do
 
   defp time_zone do
     Application.get_env(:nano_planner, :default_time_zone)
+  end
+
+  defp validate_common_fields(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> validate_length(:name, max: 80)
+    |> validate_length(:description, max: 400)
   end
 end

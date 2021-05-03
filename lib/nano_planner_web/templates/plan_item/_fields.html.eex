@@ -4,8 +4,9 @@
   <%= error_tag(@f, :name) %>
 </div>
 <div class="form-group">
-   <%= label @f, :description, dgettext("plan_item", "Description") %>
-  <%= textarea @f, :description, class: "form-control", rows: 4 %>
+  <%= label @f, :description, dgettext("plan_item", "Description") %>
+  <%= bootstrap_textarea @f, :description, rows: 4 %>
+  <%= error_tag(@f, :description) %>
 </div>
 <div class="form-group">
   <%= boostrap_custom_checkbox @f, :all_day,
