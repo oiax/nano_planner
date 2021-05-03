@@ -8,7 +8,7 @@ defmodule NanoPlanner.Repo.Migrations.CreatePlanItems do
       add :all_day, :boolean, null: false, default: false
       add :starts_at, :utc_datetime, null: false
       add :ends_at, :utc_datetime, null: false
-      add :starts_on, :date 
+      add :starts_on, :date
       add :ends_on, :date
 
       timestamps()

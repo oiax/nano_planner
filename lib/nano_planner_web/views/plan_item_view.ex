@@ -135,4 +135,12 @@ defmodule NanoPlannerWeb.PlanItemView do
       class: class
     )
   end
+
+  def form_control_class(form, field) do
+    if Keyword.get_values(form.errors, field) == [] do
+      "form-control"
+    else
+      "form-control is-invalid"
+    end
+  end
 end
