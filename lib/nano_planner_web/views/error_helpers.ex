@@ -4,17 +4,39 @@ defmodule NanoPlannerWeb.ErrorHelpers do
   """
 
   use Phoenix.HTML
+  require NanoPlannerWeb.Gettext
 
   @doc """
   Generates tag for inlined form input errors.
   """
   def error_tag(form, field) do
     Enum.map(Keyword.get_values(form.errors, field), fn error ->
-      content_tag(:div, translate_error(error),
+      attribute = feedback_attribute(form, field)
+      message = translate_error(error)
+      full_message = feedback_full_message(attribute, message)
+
+      content_tag(:div, full_message,
         class: "invalid-feedback",
         phx_feedback_for: input_name(form, field)
       )
     end)
+  end
+
+  defp feedback_attribute(form, field) do
+    Gettext.dgettext(
+      NanoPlannerWeb.Gettext,
+      form.name,
+      Phoenix.Naming.humanize(field)
+    )
+  end
+
+  defp feedback_full_message(attribute, message) do
+    NanoPlannerWeb.Gettext.dgettext(
+      "errors",
+      "%{attribute} %{message}.",
+      attribute: attribute,
+      message: message
+    )
   end
 
   @doc """

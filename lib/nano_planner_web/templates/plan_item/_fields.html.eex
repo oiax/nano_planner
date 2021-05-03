@@ -1,28 +1,29 @@
 <div class="form-group">
-  <%= label @f, :name, "件名" %>
+  <%= label @f, :name, dgettext("plan_item", "Name") %>
   <%= bootstrap_text_input @f, :name %>
   <%= error_tag(@f, :name) %>
 </div>
 <div class="form-group">
-  <%= label @f, :description, "説明" %>
+   <%= label @f, :description, dgettext("plan_item", "Description") %>
   <%= textarea @f, :description, class: "form-control", rows: 4 %>
 </div>
 <div class="form-group">
-  <%= boostrap_custom_checkbox @f, :all_day, "終日" %>
+  <%= boostrap_custom_checkbox @f, :all_day,
+    dgettext("plan_item", "All day") %>
 </div>
 <div class="form-group js-date-and-time d-none">
-  <%= label @f, :starts_at, "開始日時" %>
+  <%= label @f, :starts_at, dgettext("plan_item", "Starts at") %>
   <%= render "_date_and_time.html", f: @f, prefix: "s" %>
 </div>
 <div class="form-group js-date-and-time d-none">
-  <%= label @f, :ends_at, "終了日時" %>
+  <%= label @f, :ends_at, dgettext("plan_item", "Ends at") %>
   <%= render "_date_and_time.html", f: @f, prefix: "e" %>
 </div>
 <div class="form-group js-date-picker d-none">
-  <%= label @f, :starts_on, "開始日" %>
+  <%= label @f, :starts_on, dgettext("plan_item", "Starts on") %>
   <%= render "_date_picker.html", f: @f, field: :starts_on %>
 </div>
 <div class="form-group js-date-picker d-none">
-  <%= label @f, :ends_on, "終了日" %>
+  <%= label @f, :starts_on, dgettext("plan_item", "Ends on") %>
   <%= render "_date_picker.html", f: @f, field: :ends_on %>
 </div>

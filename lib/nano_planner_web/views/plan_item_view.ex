@@ -136,4 +136,7 @@ defmodule NanoPlannerWeb.PlanItemView do
       class: class
     )
   end
+  #
+  # @gettext_domain "plan_item"
+  # def t(message_id), do: dgettext(@gettext_domain, message_id)
 end
