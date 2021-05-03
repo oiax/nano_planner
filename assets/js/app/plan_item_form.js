@@ -10,14 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function toggleInputFields() {
       form.querySelectorAll(".js-date-and-time").forEach(function(div) {
         div.classList.toggle("d-none", allDay.checked);
-        div.querySelector("input")
-          .toggleAttribute("required", !allDay.checked);
       });
 
       form.querySelectorAll(".js-date-picker").forEach(function(div) {
         div.classList.toggle("d-none", !allDay.checked)
-        div.querySelector("input")
-          .toggleAttribute("required", allDay.checked);
       })
     }
 

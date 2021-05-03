@@ -84,3 +84,7 @@ msgstr ""
 #: lib/nano_planner_web/views/error_helpers.ex:34
 msgid "%{attribute} %{message}."
 msgstr "%{attribute}%{message}。"
+
+## From NanoPlanner.Schedule.PlanItem.validate_date_order/1
+msgid "must not be earlier than start date"
+msgstr "は開始日より前であってはなりません"

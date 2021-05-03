@@ -6,6 +6,10 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     text_input(form, field, html_opts(form, field, opts))
   end
 
+  def bootstrap_date_input(form, field, opts \\ []) do
+    date_input(form, field, html_opts(form, field, opts))
+  end
+
   def bootstrap_textarea(form, field, opts \\ []) do
     textarea(form, field, html_opts(form, field, opts))
   end

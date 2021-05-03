@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12 date-picker">
-    <%= text_input @f, @field, type: "date",
-      class: "form-control", required: true %>
+    <%= bootstrap_date_input @f, @field %>
+    <%= error_tag(@f, @field) %>
   </div>
 </div>

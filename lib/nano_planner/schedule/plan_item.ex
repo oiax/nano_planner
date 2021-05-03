@@ -54,6 +54,8 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> cast(attrs, @common_fields ++ @date_fields)
     |> change_time_boundaries()
     |> validate_common_fields()
+    |> validate_required(@date_fields)
+    |> validate_date_order()
   end
 
   def changeset(plan_item, attrs) do
@@ -85,23 +87,23 @@ defmodule NanoPlanner.Schedule.PlanItem do
   end
 
   defp change_time_boundaries(changeset) do
-    tz = time_zone()
-
-    s =
-      changeset
-      |> get_field(:starts_on)
-      |> DateTime.new!(Time.new!(0, 0, 0), tz)
-
-    e =
-      changeset
-      |> get_field(:ends_on)
-      |> DateTime.new!(Time.new!(0, 0, 0), tz)
-      |> Timex.shift(days: 1)
+    s = convert_to_datetime(get_field(changeset, :starts_on))
+    e = convert_to_datetime(get_field(changeset, :starts_on), 1)
 
     changeset
     |> put_change(:starts_at, s)
     |> put_change(:ends_at, e)
   end
+
+  defp convert_to_datetime(date, delta \\ 0)
+
+  defp convert_to_datetime(%Date{} = date, delta) do
+    date
+    |> DateTime.new!(Time.new!(0, 0, 0), time_zone())
+    |> Timex.shift(days: delta)
+  end
+
+  defp convert_to_datetime(_date, _delta), do: nil
 
   defp time_zone do
     Application.get_env(:nano_planner, :default_time_zone)
@@ -112,5 +114,21 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> validate_required([:name])
     |> validate_length(:name, max: 80)
     |> validate_length(:description, max: 400)
+  end
+
+  @message "must not be earlier than start date"
+  defp validate_date_order(changeset) do
+    s = get_field(changeset, :starts_on)
+    e = get_field(changeset, :ends_on)
+
+    if s && e do
+      if Date.compare(s, e) == :gt do
+        add_error(changeset, :ends_on, @message)
+      else
+        changeset
+      end
+    else
+      changeset
+    end
   end
 end
