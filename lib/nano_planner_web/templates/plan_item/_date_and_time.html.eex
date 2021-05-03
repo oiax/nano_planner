@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 date-and-time">
     <div>
-      <%= text_input @f, :"#{@prefix}_date", type: "date",
+      <%= date_input @f, :"#{@prefix}_date",
         class: "form-control", required: true %>
     </div>
     <div>
