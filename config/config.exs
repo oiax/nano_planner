@@ -28,14 +28,14 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configures the default time zone database
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
+
 # Configures the default time zone
-config :nano_planner,
-  default_time_zone: "Asia/Tokyo"
+config :nano_planner, default_time_zone: "Asia/Tokyo"
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 config :nano_planner, NanoPlanner.Repo,
   migration_timestamps: [type: :utc_datetime_usec]
