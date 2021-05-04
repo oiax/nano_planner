@@ -47,6 +47,8 @@ defmodule NanoPlanner.Schedule.PlanItem do
     |> change_starts_at()
     |> change_ends_at()
     |> validate_common_fields()
+    |> validate_required(@date_time_fields)
+    |> validate_datetime_order()
   end
 
   def changeset(plan_item, %{"all_day" => "true"} = attrs) do
@@ -68,9 +70,13 @@ defmodule NanoPlanner.Schedule.PlanItem do
     d = get_field(changeset, :s_date)
     h = get_field(changeset, :s_hour)
     m = get_field(changeset, :s_minute)
-    dt = get_local_datetime(d, h, m)
-    utc_dt = DateTime.shift_zone!(dt, "Etc/UTC")
-    put_change(changeset, :starts_at, utc_dt)
+
+    if dt = get_local_datetime(d, h, m) do
+      utc_dt = DateTime.shift_zone!(dt, "Etc/UTC")
+      put_change(changeset, :starts_at, utc_dt)
+    else
+      changeset
+    end
   end
 
   defp change_ends_at(changeset) do
@@ -78,13 +84,21 @@ defmodule NanoPlanner.Schedule.PlanItem do
     h = get_field(changeset, :e_hour)
     m = get_field(changeset, :e_minute)
     dt = get_local_datetime(d, h, m)
-    utc_dt = DateTime.shift_zone!(dt, "Etc/UTC")
-    put_change(changeset, :ends_at, utc_dt)
+
+    if dt = get_local_datetime(d, h, m) do
+      utc_dt = DateTime.shift_zone!(dt, "Etc/UTC")
+      put_change(changeset, :ends_at, utc_dt)
+    else
+      changeset
+    end
   end
 
-  defp get_local_datetime(date, hour, minute) do
+  defp get_local_datetime(%Date{} = date, hour, minute)
+       when hour in 0..23 and minute in 0..59 do
     DateTime.new!(date, Time.new!(hour, minute, 0), time_zone())
   end
+
+  defp get_local_datetime(_date, _hour, _minute), do: nil
 
   defp change_time_boundaries(changeset) do
     s = convert_to_datetime(get_field(changeset, :starts_on))
@@ -124,6 +138,22 @@ defmodule NanoPlanner.Schedule.PlanItem do
     if s && e do
       if Date.compare(s, e) == :gt do
         add_error(changeset, :ends_on, @message)
+      else
+        changeset
+      end
+    else
+      changeset
+    end
+  end
+
+  @message "must not be earlier than start time"
+  defp validate_datetime_order(changeset) do
+    s = get_field(changeset, :starts_at)
+    e = get_field(changeset, :ends_at)
+
+    if s && e do
+      if DateTime.compare(s, e) == :gt do
+        add_error(changeset, :ends_at, @message)
       else
         changeset
       end

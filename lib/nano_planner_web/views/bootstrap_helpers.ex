@@ -14,16 +14,27 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     textarea(form, field, html_opts(form, field, opts))
   end
 
+  def bootstrap_select(form, field, options, opts \\ []) do
+    select(form, field, options, html_opts(form, field, opts))
+  end
+
   defp html_opts(form, field, opts) do
     class = form_control_class(form, field, opts)
-    Keyword.put(opts, :class, class)
+
+    opts
+    |> Keyword.delete(:parent)
+    |> Keyword.put(:class, class)
   end
 
   defp form_control_class(form, field, opts) do
+    invalid? =
+      Keyword.has_key?(form.errors, field) or
+        Keyword.has_key?(form.errors, opts[:parent])
+
     opts
     |> Keyword.get(:class, "")
     |> add_class_token("form-control")
-    |> add_class_token("is-invalid", Keyword.has_key?(form.errors, field))
+    |> add_class_token("is-invalid", invalid?)
   end
 
   defp add_class_token("" = _class, token), do: token

@@ -2,7 +2,12 @@
   border-style: double;
   border-width: 4px;
 }
-.invalid-feedback { 
+input[type="date"].form-control.is-invalid,
+select.form-control.is-invalid {
+  background-image: none;
+  padding-right: 0.75rem;
+}
+.invalid-feedback {
   text-decoration-line: underline;
   text-decoration-style: dashed;
 }

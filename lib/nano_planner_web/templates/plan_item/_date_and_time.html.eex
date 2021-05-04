@@ -1,11 +1,13 @@
 <div class="row">
   <div class="col-12 date-and-time">
     <div>
-      <%= date_input @f, :"#{@prefix}_date", class: "form-control" %>
+      <%= bootstrap_date_input @f, :"#{@prefix}_date", parent: @field %>
     </div>
     <div>
-      <%= select_for_hours @f, :"#{@prefix}_hour" %> :
-      <%= select_for_minutes @f, :"#{@prefix}_minute" %>
+      <%= select_for_hours @f, :"#{@prefix}_hour", parent: @field %> :
+      <%= select_for_minutes @f, :"#{@prefix}_minute", parent: @field %>
     </div>
+    <%= error_tag(@f, :"#{@prefix}_date") %>
+    <%= error_tag(@f, @field) %>
   </div>
 </div>

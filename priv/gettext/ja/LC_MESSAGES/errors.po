@@ -88,3 +88,7 @@ msgstr "%{attribute}%{message}。"
 ## From NanoPlanner.Schedule.PlanItem.validate_date_order/1
 msgid "must not be earlier than start date"
 msgstr "は開始日より前であってはなりません"
+
+## From NanoPlanner.Schedule.PlanItem.validate_date_order/1
+msgid "must not be earlier than start time"
+msgstr "は開始日時より前であってはなりません"

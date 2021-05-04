@@ -17,7 +17,7 @@ msgid "Name"
 msgstr "件名"
 
 #, elixir-format
-#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:12
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:13
 msgid "All day"
 msgstr "終日"
 
@@ -27,21 +27,29 @@ msgid "Description"
 msgstr "説明"
 
 #, elixir-format
-#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:19
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:20
 msgid "Ends at"
 msgstr "終了日時"
 
 #, elixir-format
-#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:27
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:28
 msgid "Ends on"
 msgstr "終了日"
 
 #, elixir-format
-#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:15
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:16
 msgid "Starts at"
 msgstr "開始日時"
 
 #, elixir-format
-#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:23
+#: lib/nano_planner_web/templates/plan_item/_fields.html.eex:24
 msgid "Starts on"
 msgstr "開始日"
+
+## Manually added
+msgid "S date"
+msgstr ""
+
+## Manually added
+msgid "E date"
+msgstr ""
