@@ -83,7 +83,6 @@ defmodule NanoPlanner.Schedule.PlanItem do
     d = get_field(changeset, :e_date)
     h = get_field(changeset, :e_hour)
     m = get_field(changeset, :e_minute)
-    dt = get_local_datetime(d, h, m)
 
     if dt = get_local_datetime(d, h, m) do
       utc_dt = DateTime.shift_zone!(dt, "Etc/UTC")
