@@ -4,13 +4,12 @@ defmodule NanoPlanner.Schedule do
   alias NanoPlanner.Schedule.PlanItem
 
   def list_plan_items do
-    PlanItem
-    |> fetch_plan_items()
+    fetch_plan_items(PlanItem)
   end
 
   def list_plan_items_of_today do
-    t0 = current_time() |> Timex.beginning_of_day()
-    t1 = t0 |> Timex.shift(hours: 24)
+    t0 = Timex.beginning_of_day(current_time())
+    t1 = Timex.shift(t0, hours: 24)
 
     PlanItem
     |> where(
