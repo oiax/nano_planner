@@ -42,7 +42,7 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
   defp add_class_token(class, token, true), do: class <> " " <> token
   defp add_class_token(class, _token, false), do: class
 
-  def boostrap_custom_checkbox(form, field, label_text) do
+  def bootstrap_custom_checkbox(form, field, label_text) do
     content_tag(:div, class: "custom-control custom-checkbox") do
       [
         checkbox(form, field, class: "custom-control-input"),
