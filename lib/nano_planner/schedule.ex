@@ -127,11 +127,9 @@ defmodule NanoPlanner.Schedule do
   end
 
   defp convert_datetime(%PlanItem{} = item) do
-    time_zone = Application.get_env(:nano_planner, :default_time_zone)
-
     Map.merge(item, %{
-      starts_at: DateTime.shift_zone!(item.starts_at, time_zone),
-      ends_at: DateTime.shift_zone!(item.ends_at, time_zone)
+      starts_at: DateTime.shift_zone!(item.starts_at, time_zone()),
+      ends_at: DateTime.shift_zone!(item.ends_at, time_zone())
     })
   end
 
