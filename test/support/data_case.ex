@@ -24,6 +24,10 @@ defmodule NanoPlanner.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import NanoPlanner.DataCase
+
+      def i(term) do
+        IO.inspect(term)
+      end
     end
   end
 
