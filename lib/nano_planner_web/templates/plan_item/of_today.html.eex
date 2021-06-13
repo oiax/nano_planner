@@ -1,6 +1,10 @@
 <%= render "index.html", plan_items: @plan_items, conn: @conn %>
 
 <%= unless Enum.empty?(@continued_plan_items) do %>
+  <%= for item <- @continued_plan_items do %>
+    <%= render "_delete_confirmation.html", item: item, conn: @conn %>
+  <% end %>
+
   <hr>
 
   <div class="container-fluid plan-items">
