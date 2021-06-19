@@ -5,7 +5,7 @@ defmodule NanoPlanner.MixProject do
     [
       app: :nano_planner,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,9 +33,12 @@ defmodule NanoPlanner.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5.8"},
+      {:phoenix,
+       git: "https://github.com/phoenixframework/phoenix.git",
+       rev: "37ccc1f4ded9d0f8c1acb4e24d41d9c7ac254f27",
+       override: true},
       {:phoenix_ecto, "~> 4.1"},
-      {:ecto_sql, "~> 3.4"},
+      {:ecto_sql, "~> 3.5"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
