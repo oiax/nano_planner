@@ -66,10 +66,9 @@ defmodule NanoPlanner.AccountsTest do
 
     test "validates login_name and password when given" do
       {:error, changeset} =
-        Accounts.register_user(%{login_name: "not valid", password: "not valid"})
+        Accounts.register_user(%{password: "not valid"})
 
       assert %{
-               login_name: ["must have the @ sign and no spaces"],
                password: ["should be at least 12 character(s)"]
              } = errors_on(changeset)
     end
@@ -149,16 +148,6 @@ defmodule NanoPlanner.AccountsTest do
         Accounts.apply_user_login_name(user, valid_user_password(), %{})
 
       assert %{login_name: ["did not change"]} = errors_on(changeset)
-    end
-
-    test "validates login_name", %{user: user} do
-      {:error, changeset} =
-        Accounts.apply_user_login_name(user, valid_user_password(), %{
-          login_name: "not valid"
-        })
-
-      assert %{login_name: ["must have the @ sign and no spaces"]} =
-               errors_on(changeset)
     end
 
     test "validates maximum value for login_name for security", %{user: user} do

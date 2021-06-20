@@ -38,9 +38,6 @@ defmodule NanoPlanner.Accounts.User do
   defp validate_login_name(changeset) do
     changeset
     |> validate_required([:login_name])
-    |> validate_format(:login_name, ~r/^[^\s]+@[^\s]+$/,
-      message: "must have the @ sign and no spaces"
-    )
     |> validate_length(:login_name, max: 160)
     |> unsafe_validate_unique(:login_name, NanoPlanner.Repo)
     |> unique_constraint(:login_name)
