@@ -19,7 +19,10 @@ defmodule NanoPlanner.AccountsTest do
 
   describe "get_user_by_email_and_password/2" do
     test "does not return the user if the email does not exist" do
-      refute Accounts.get_user_by_email_and_password("unknown@example.com", "hello world!")
+      refute Accounts.get_user_by_email_and_password(
+               "unknown@example.com",
+               "hello world!"
+             )
     end
 
     test "does not return the user if the password is not valid" do
@@ -31,7 +34,10 @@ defmodule NanoPlanner.AccountsTest do
       %{id: id} = user = user_fixture()
 
       assert %User{id: ^id} =
-               Accounts.get_user_by_email_and_password(user.email, valid_user_password())
+               Accounts.get_user_by_email_and_password(
+                 user.email,
+                 valid_user_password()
+               )
     end
   end
 
@@ -59,7 +65,8 @@ defmodule NanoPlanner.AccountsTest do
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
+      {:error, changeset} =
+        Accounts.register_user(%{email: "not valid", password: "not valid"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
@@ -69,8 +76,12 @@ defmodule NanoPlanner.AccountsTest do
 
     test "validates maximum values for email and password for security" do
       too_long = String.duplicate("db", 100)
-      {:error, changeset} = Accounts.register_user(%{email: too_long, password: too_long})
+
+      {:error, changeset} =
+        Accounts.register_user(%{email: too_long, password: too_long})
+
       assert "should be at most 160 character(s)" in errors_on(changeset).email
+
       assert "should be at most 80 character(s)" in errors_on(changeset).password
     end
 
@@ -80,7 +91,9 @@ defmodule NanoPlanner.AccountsTest do
       assert "has already been taken" in errors_on(changeset).email
 
       # Now try with the upper cased email too, to check that email case is ignored.
-      {:error, changeset} = Accounts.register_user(%{email: String.upcase(email)})
+      {:error, changeset} =
+        Accounts.register_user(%{email: String.upcase(email)})
+
       assert "has already been taken" in errors_on(changeset).email
     end
 
@@ -96,7 +109,9 @@ defmodule NanoPlanner.AccountsTest do
 
   describe "change_user_registration/2" do
     test "returns a changeset" do
-      assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
+      assert %Ecto.Changeset{} =
+               changeset = Accounts.change_user_registration(%User{})
+
       assert changeset.required == [:password, :email]
     end
 
@@ -130,22 +145,29 @@ defmodule NanoPlanner.AccountsTest do
     end
 
     test "requires email to change", %{user: user} do
-      {:error, changeset} = Accounts.apply_user_email(user, valid_user_password(), %{})
+      {:error, changeset} =
+        Accounts.apply_user_email(user, valid_user_password(), %{})
+
       assert %{email: ["did not change"]} = errors_on(changeset)
     end
 
     test "validates email", %{user: user} do
       {:error, changeset} =
-        Accounts.apply_user_email(user, valid_user_password(), %{email: "not valid"})
+        Accounts.apply_user_email(user, valid_user_password(), %{
+          email: "not valid"
+        })
 
-      assert %{email: ["must have the @ sign and no spaces"]} = errors_on(changeset)
+      assert %{email: ["must have the @ sign and no spaces"]} =
+               errors_on(changeset)
     end
 
     test "validates maximum value for email for security", %{user: user} do
       too_long = String.duplicate("db", 100)
 
       {:error, changeset} =
-        Accounts.apply_user_email(user, valid_user_password(), %{email: too_long})
+        Accounts.apply_user_email(user, valid_user_password(), %{
+          email: too_long
+        })
 
       assert "should be at most 160 character(s)" in errors_on(changeset).email
     end
@@ -168,7 +190,10 @@ defmodule NanoPlanner.AccountsTest do
 
     test "applies the email without persisting it", %{user: user} do
       email = unique_user_email()
-      {:ok, user} = Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+
+      {:ok, user} =
+        Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+
       assert user.email == email
       assert Accounts.get_user!(user.id).email != email
     end
@@ -176,7 +201,9 @@ defmodule NanoPlanner.AccountsTest do
 
   describe "change_user_password/2" do
     test "returns a user changeset" do
-      assert %Ecto.Changeset{} = changeset = Accounts.change_user_password(%User{})
+      assert %Ecto.Changeset{} =
+               changeset = Accounts.change_user_password(%User{})
+
       assert changeset.required == [:password]
     end
 
@@ -214,14 +241,18 @@ defmodule NanoPlanner.AccountsTest do
       too_long = String.duplicate("db", 100)
 
       {:error, changeset} =
-        Accounts.update_user_password(user, valid_user_password(), %{password: too_long})
+        Accounts.update_user_password(user, valid_user_password(), %{
+          password: too_long
+        })
 
       assert "should be at most 80 character(s)" in errors_on(changeset).password
     end
 
     test "validates current password", %{user: user} do
       {:error, changeset} =
-        Accounts.update_user_password(user, "invalid", %{password: valid_user_password()})
+        Accounts.update_user_password(user, "invalid", %{
+          password: valid_user_password()
+        })
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
@@ -233,7 +264,11 @@ defmodule NanoPlanner.AccountsTest do
         })
 
       assert is_nil(user.password)
-      assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
+
+      assert Accounts.get_user_by_email_and_password(
+               user.email,
+               "new valid password"
+             )
     end
 
     test "deletes all tokens for the given user", %{user: user} do
@@ -286,7 +321,9 @@ defmodule NanoPlanner.AccountsTest do
     end
 
     test "does not return user for expired token", %{token: token} do
-      {1, nil} = Repo.update_all(UserToken, set: [inserted_at: ~N[2020-01-01 00:00:00]])
+      {1, nil} =
+        Repo.update_all(UserToken, set: [inserted_at: ~N[2020-01-01 00:00:00]])
+
       refute Accounts.get_user_by_session_token(token)
     end
   end

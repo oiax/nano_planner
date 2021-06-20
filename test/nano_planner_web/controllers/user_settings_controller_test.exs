@@ -21,7 +21,10 @@ defmodule NanoPlannerWeb.UserSettingsControllerTest do
   end
 
   describe "PUT /users/settings (change password form)" do
-    test "updates the user password and resets tokens", %{conn: conn, user: user} do
+    test "updates the user password and resets tokens", %{
+      conn: conn,
+      user: user
+    } do
       new_password_conn =
         put(conn, Routes.user_settings_path(conn, :update), %{
           "action" => "update_password",
@@ -32,10 +35,19 @@ defmodule NanoPlannerWeb.UserSettingsControllerTest do
           }
         })
 
-      assert redirected_to(new_password_conn) == Routes.user_settings_path(conn, :edit)
-      assert get_session(new_password_conn, :user_token) != get_session(conn, :user_token)
-      assert get_flash(new_password_conn, :info) =~ "Password updated successfully"
-      assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
+      assert redirected_to(new_password_conn) ==
+               Routes.user_settings_path(conn, :edit)
+
+      assert get_session(new_password_conn, :user_token) !=
+               get_session(conn, :user_token)
+
+      assert get_flash(new_password_conn, :info) =~
+               "Password updated successfully"
+
+      assert Accounts.get_user_by_email_and_password(
+               user.email,
+               "new valid password"
+             )
     end
 
     test "does not update password on invalid data", %{conn: conn} do
@@ -55,7 +67,8 @@ defmodule NanoPlannerWeb.UserSettingsControllerTest do
       assert response =~ "does not match password"
       assert response =~ "is not valid"
 
-      assert get_session(old_password_conn, :user_token) == get_session(conn, :user_token)
+      assert get_session(old_password_conn, :user_token) ==
+               get_session(conn, :user_token)
     end
   end
 end
