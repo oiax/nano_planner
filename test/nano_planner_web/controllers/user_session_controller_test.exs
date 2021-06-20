@@ -28,7 +28,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
           "user" => %{
-            "email" => user.email,
+            "login_name" => user.login_name,
             "password" => valid_user_password()
           }
         })
@@ -39,7 +39,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      assert response =~ user.email
+      assert response =~ user.login_name
       assert response =~ "Settings</a>"
       assert response =~ "Log out</a>"
     end
@@ -48,7 +48,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
           "user" => %{
-            "email" => user.email,
+            "login_name" => user.login_name,
             "password" => valid_user_password(),
             "remember_me" => "true"
           }
@@ -64,7 +64,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
         |> init_test_session(user_return_to: "/foo/bar")
         |> post(Routes.user_session_path(conn, :create), %{
           "user" => %{
-            "email" => user.email,
+            "login_name" => user.login_name,
             "password" => valid_user_password()
           }
         })
@@ -78,12 +78,12 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
     } do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
-          "user" => %{"email" => user.email, "password" => "invalid_password"}
+          "user" => %{"login_name" => user.login_name, "password" => "invalid_password"}
         })
 
       response = html_response(conn, 200)
       assert response =~ "<h1>Log in</h1>"
-      assert response =~ "Invalid email or password"
+      assert response =~ "Invalid login_name or password"
     end
   end
 

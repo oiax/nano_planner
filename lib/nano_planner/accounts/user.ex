@@ -3,7 +3,7 @@ defmodule NanoPlanner.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :email, :string
+    field :login_name, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime_usec
@@ -14,8 +14,8 @@ defmodule NanoPlanner.Accounts.User do
   @doc """
   A user changeset for registration.
 
-  It is important to validate the length of both email and password.
-  Otherwise databases may truncate the email without warnings, which
+  It is important to validate the length of both login_name and password.
+  Otherwise databases may truncate the login_name without warnings, which
   could lead to unpredictable or insecure behaviour. Long passwords may
   also be very expensive to hash for certain algorithms.
 
@@ -30,20 +30,20 @@ defmodule NanoPlanner.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
-    |> validate_email()
+    |> cast(attrs, [:login_name, :password])
+    |> validate_login_name()
     |> validate_password(opts)
   end
 
-  defp validate_email(changeset) do
+  defp validate_login_name(changeset) do
     changeset
-    |> validate_required([:email])
-    |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/,
+    |> validate_required([:login_name])
+    |> validate_format(:login_name, ~r/^[^\s]+@[^\s]+$/,
       message: "must have the @ sign and no spaces"
     )
-    |> validate_length(:email, max: 160)
-    |> unsafe_validate_unique(:email, NanoPlanner.Repo)
-    |> unique_constraint(:email)
+    |> validate_length(:login_name, max: 160)
+    |> unsafe_validate_unique(:login_name, NanoPlanner.Repo)
+    |> unique_constraint(:login_name)
   end
 
   defp validate_password(changeset, opts) do
@@ -70,17 +70,17 @@ defmodule NanoPlanner.Accounts.User do
   end
 
   @doc """
-  A user changeset for changing the email.
+  A user changeset for changing the login_name.
 
-  It requires the email to change otherwise an error is added.
+  It requires the login_name to change otherwise an error is added.
   """
-  def email_changeset(user, attrs) do
+  def login_name_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email])
-    |> validate_email()
+    |> cast(attrs, [:login_name])
+    |> validate_login_name()
     |> case do
-      %{changes: %{email: _}} = changeset -> changeset
-      %{} = changeset -> add_error(changeset, :email, "did not change")
+      %{changes: %{login_name: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :login_name, "did not change")
     end
   end
 

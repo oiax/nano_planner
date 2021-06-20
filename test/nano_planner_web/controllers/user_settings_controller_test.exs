@@ -44,8 +44,8 @@ defmodule NanoPlannerWeb.UserSettingsControllerTest do
       assert get_flash(new_password_conn, :info) =~
                "Password updated successfully"
 
-      assert Accounts.get_user_by_email_and_password(
-               user.email,
+      assert Accounts.get_user_by_login_name_and_password(
+               user.login_name,
                "new valid password"
              )
     end

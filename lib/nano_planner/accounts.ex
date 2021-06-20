@@ -11,36 +11,36 @@ defmodule NanoPlanner.Accounts do
   ## Database getters
 
   @doc """
-  Gets a user by email.
+  Gets a user by login_name.
 
   ## Examples
 
-      iex> get_user_by_email("foo@example.com")
+      iex> get_user_by_login_name("foo@example.com")
       %User{}
 
-      iex> get_user_by_email("unknown@example.com")
+      iex> get_user_by_login_name("unknown@example.com")
       nil
 
   """
-  def get_user_by_email(email) when is_binary(email) do
-    Repo.get_by(User, email: email)
+  def get_user_by_login_name(login_name) when is_binary(login_name) do
+    Repo.get_by(User, login_name: login_name)
   end
 
   @doc """
-  Gets a user by email and password.
+  Gets a user by login_name and password.
 
   ## Examples
 
-      iex> get_user_by_email_and_password("foo@example.com", "correct_password")
+      iex> get_user_by_login_name_and_password("foo@example.com", "correct_password")
       %User{}
 
-      iex> get_user_by_email_and_password("foo@example.com", "invalid_password")
+      iex> get_user_by_login_name_and_password("foo@example.com", "invalid_password")
       nil
 
   """
-  def get_user_by_email_and_password(email, password)
-      when is_binary(email) and is_binary(password) do
-    user = Repo.get_by(User, email: email)
+  def get_user_by_login_name_and_password(login_name, password)
+      when is_binary(login_name) and is_binary(password) do
+    user = Repo.get_by(User, login_name: login_name)
     if User.valid_password?(user, password), do: user
   end
 
@@ -96,60 +96,60 @@ defmodule NanoPlanner.Accounts do
   ## Settings
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for changing the user email.
+  Returns an `%Ecto.Changeset{}` for changing the user login_name.
 
   ## Examples
 
-      iex> change_user_email(user)
+      iex> change_user_login_name(user)
       %Ecto.Changeset{data: %User{}}
 
   """
-  def change_user_email(user, attrs \\ %{}) do
-    User.email_changeset(user, attrs)
+  def change_user_login_name(user, attrs \\ %{}) do
+    User.login_name_changeset(user, attrs)
   end
 
   @doc """
-  Emulates that the email will change without actually changing
+  Emulates that the login_name will change without actually changing
   it in the database.
 
   ## Examples
 
-      iex> apply_user_email(user, "valid password", %{email: ...})
+      iex> apply_user_login_name(user, "valid password", %{login_name: ...})
       {:ok, %User{}}
 
-      iex> apply_user_email(user, "invalid password", %{email: ...})
+      iex> apply_user_login_name(user, "invalid password", %{login_name: ...})
       {:error, %Ecto.Changeset{}}
 
   """
-  def apply_user_email(user, password, attrs) do
+  def apply_user_login_name(user, password, attrs) do
     user
-    |> User.email_changeset(attrs)
+    |> User.login_name_changeset(attrs)
     |> User.validate_current_password(password)
     |> Ecto.Changeset.apply_action(:update)
   end
 
   @doc """
-  Updates the user email using the given token.
+  Updates the user login_name using the given token.
 
-  If the token matches, the user email is updated and the token is deleted.
+  If the token matches, the user login_name is updated and the token is deleted.
   The confirmed_at date is also updated to the current time.
   """
-  def update_user_email(user, token) do
-    context = "change:#{user.email}"
+  def update_user_login_name(user, token) do
+    context = "change:#{user.login_name}"
 
     with {:ok, query} <-
-           UserToken.verify_change_email_token_query(token, context),
-         %UserToken{sent_to: email} <- Repo.one(query),
-         {:ok, _} <- Repo.transaction(user_email_multi(user, email, context)) do
+           UserToken.verify_change_login_name_token_query(token, context),
+         %UserToken{sent_to: login_name} <- Repo.one(query),
+         {:ok, _} <- Repo.transaction(user_login_name_multi(user, login_name, context)) do
       :ok
     else
       _ -> :error
     end
   end
 
-  defp user_email_multi(user, email, context) do
+  defp user_login_name_multi(user, login_name, context) do
     changeset =
-      user |> User.email_changeset(%{email: email}) |> User.confirm_changeset()
+      user |> User.login_name_changeset(%{login_name: login_name}) |> User.confirm_changeset()
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(:user, changeset)
