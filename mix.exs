@@ -33,6 +33,7 @@ defmodule NanoPlanner.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 2.0"},
       {:phoenix,
        git: "https://github.com/phoenixframework/phoenix.git",
        rev: "37ccc1f4ded9d0f8c1acb4e24d41d9c7ac254f27",
