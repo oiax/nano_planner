@@ -18,7 +18,7 @@ defmodule NanoPlanner.Accounts.UserToken do
     field :sent_to, :string
     belongs_to :user, NanoPlanner.Accounts.User
 
-    timestamps(updated_at: false)
+    timestamps(updated_at: false, type: :utc_datetime_usec)
   end
 
   @doc """
