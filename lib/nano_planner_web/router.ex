@@ -16,9 +16,6 @@ defmodule NanoPlannerWeb.Router do
     pipe_through :browser
 
     get "/", TopController, :index
-    get "/lessons/form", LessonController, :form
-    get "/lessons/register", LessonController, :register
-    get "/lessons/hello", LessonController, :hello
 
     scope "/plan_items" do
       get "/of_today", PlanItemController, :of_today
