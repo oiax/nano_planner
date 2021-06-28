@@ -3,6 +3,8 @@ defmodule NanoPlanner.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
+      add :login_name, :string, null: false
+      add :hashed_password, :string, null: false
 
       timestamps()
     end

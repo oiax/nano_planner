@@ -3,6 +3,9 @@ defmodule NanoPlanner.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    field :login_name, :string
+    field :password, :string, virtual: true, redact: true
+    field :hashed_password, :string, redact: true
 
     timestamps()
   end
