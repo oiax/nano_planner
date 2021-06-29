@@ -9,6 +9,12 @@ defmodule NanoPlanner.Accounts do
 
   def get_user_by_login_name_and_password(login_name, password) do
     user = Repo.get_by(User, login_name: login_name)
-    if user && Bcrypt.verify_pass(password, user.hashed_password), do: user
+
+    if user do
+      if Bcrypt.verify_pass(password, user.hashed_password), do: user
+    else
+      Bcrypt.no_user_verify()
+      nil
+    end
   end
 end
