@@ -1,7 +1,7 @@
 defmodule NanoPlanner.Accounts do
   import Ecto.Query, warn: false
   alias NanoPlanner.Repo
-  alias NanoPlanner.Accounts.User
+  alias NanoPlanner.Accounts.{User, UserToken}
 
   def count_users do
     Repo.aggregate(User, :count, :id)
@@ -18,6 +18,19 @@ defmodule NanoPlanner.Accounts do
     end
   end
 
-  def get_user_by_session_token(_token) do
+  def generate_user_session_token(user) do
+    {token, user_token} = UserToken.build_session_token(user)
+    Repo.insert!(user_token)
+    token
+  end
+
+  def get_user_by_session_token(token) do
+    query =
+      from ut in UserToken,
+        where: [token: ^token, context: "session"],
+        join: user in assoc(ut, :user),
+        select: user
+
+    Repo.one(query)
   end
 end
