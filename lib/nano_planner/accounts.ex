@@ -17,4 +17,7 @@ defmodule NanoPlanner.Accounts do
       nil
     end
   end
+
+  def get_user_by_session_token(_token) do
+  end
 end

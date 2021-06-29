@@ -9,8 +9,8 @@ defmodule NanoPlanner.AccountsTest do
     end
 
     test "登録されているユーザーの数を返す" do
-      for login_name <- ~w(alice bob carol david eve) do
-        %Accounts.User{} = user_fixture(login_name: login_name)
+      for _i <- 1..5 do
+        %Accounts.User{} = user_fixture()
       end
 
       assert Accounts.count_users() == 5
