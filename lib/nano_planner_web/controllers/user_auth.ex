@@ -8,7 +8,18 @@ defmodule NanoPlannerWeb.UserAuth do
 
     conn
     |> configure_session(renew: true)
+    |> clear_session()
     |> put_session(:user_token, token)
+    |> redirect(to: "/")
+  end
+
+  def log_out_user(conn) do
+    user_token = get_session(conn, :user_token)
+    user_token && Accounts.delete_session_token(user_token)
+
+    conn
+    |> configure_session(renew: true)
+    |> clear_session()
     |> redirect(to: "/")
   end
 end

@@ -33,4 +33,13 @@ defmodule NanoPlanner.Accounts do
 
     Repo.one(query)
   end
+
+  def delete_session_token(token) do
+    query =
+      from ut in UserToken,
+        where: [token: ^token, context: "session"]
+
+    Repo.delete_all(query)
+    :ok
+  end
 end
