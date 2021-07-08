@@ -16,6 +16,12 @@ defmodule NanoPlannerWeb.Router do
     get "/lessons/form", LessonController, :form
     get "/lessons/register", LessonController, :register
     get "/lessons/hello", LessonController, :hello
+    get "/cookie", CookieController, :show
+    get "/cookie/set", CookieController, :set
+    get "/cookie/unset", CookieController, :unset
+    get "/session", SessionController, :show
+    get "/session/set", SessionController, :set
+    get "/session/unset", SessionController, :unset
 
     scope "/plan_items" do
       get "/of_today", PlanItemController, :of_today
