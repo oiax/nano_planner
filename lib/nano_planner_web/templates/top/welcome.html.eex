@@ -1,0 +1,8 @@
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to NanoPlanner!</h1>
+  <hr class="my-4">
+  <%= link to: Routes.user_session_path(@conn, :new),
+    class: "btn btn-lg btn-primary" do %>
+    <i class="fa fa-sign-in-alt"></i> ログイン
+  <% end %>
+</div>
