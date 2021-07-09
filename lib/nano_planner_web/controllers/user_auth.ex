@@ -22,4 +22,20 @@ defmodule NanoPlannerWeb.UserAuth do
     |> clear_session()
     |> redirect(to: "/")
   end
+
+  def fetch_current_user(conn, _opts) do
+    user_token = get_session(conn, :user_token)
+    user = user_token && Accounts.get_user_by_session_token(user_token)
+    assign(conn, :current_user, user)
+  end
+
+  def require_authenticated_user(conn, _opts) do
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
 end
