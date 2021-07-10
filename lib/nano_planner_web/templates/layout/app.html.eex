@@ -13,10 +13,18 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header>
+    <header class="d-flex justify-content-between">
       <h1>
         <%= link "NanoPlanner", to: Routes.top_path(@conn, :index, []) %>
       </h1>
+      <%= if @current_user do %>
+        <div class="m-2">
+          <%= link to: Routes.user_session_path(@conn, :delete),
+            method: :delete do %>
+            <i class="fa fa-sign-out-alt"></i> ログアウト
+          <% end %>
+        </div>
+      <% end %>
     </header>
     <main>
       <%= render "_flash_messages.html", conn: @conn %>

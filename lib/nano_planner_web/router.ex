@@ -38,6 +38,8 @@ defmodule NanoPlannerWeb.Router do
     get "/session", SessionController, :show
     get "/session/set", SessionController, :set
     get "/session/unset", SessionController, :unset
+
+    delete "/users/log_out", UserSessionController, :delete
   end
 
   scope "/", NanoPlannerWeb do
