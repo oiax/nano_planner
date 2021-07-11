@@ -4,9 +4,9 @@ defmodule NanoPlannerWeb.PlanItemView do
   alias NanoPlanner.Schedule.PlanItem
   import NanoPlannerWeb.BootstrapHelpers
 
-  def document_title(conn) do
+  def document_title(assigns) do
     page_title =
-      case view_template(conn) do
+      case assigns.view_template do
         "index.html" -> "予定表"
         "of_today.html" -> "今日の予定表"
         "show.html" -> "予定の詳細"
