@@ -3,11 +3,11 @@ defmodule NanoPlanner.Schedule do
   alias NanoPlanner.Repo
   alias NanoPlanner.Schedule.PlanItem
 
-  def list_plan_items do
-    fetch_plan_items(PlanItem)
+  def list_plan_items(owner) do
+    fetch_plan_items(PlanItem, owner)
   end
 
-  def list_plan_items_of_today do
+  def list_plan_items_of_today(owner) do
     t0 = Timex.beginning_of_day(current_time())
     t1 = Timex.shift(t0, hours: 24)
 
@@ -17,28 +17,30 @@ defmodule NanoPlanner.Schedule do
       (i.starts_at >= ^t0 and i.starts_at < ^t1) or
         (i.ends_at > ^t0 and i.ends_at <= ^t1)
     )
-    |> fetch_plan_items()
+    |> fetch_plan_items(owner)
   end
 
-  def list_continued_plan_items do
+  def list_continued_plan_items(owner) do
     t0 = current_time() |> Timex.beginning_of_day()
     t1 = t0 |> Timex.shift(hours: 24)
 
     PlanItem
     |> where([i], i.starts_at < ^t0 and i.ends_at > ^t1)
-    |> fetch_plan_items()
+    |> fetch_plan_items(owner)
   end
 
-  defp fetch_plan_items(query) do
+  defp fetch_plan_items(query, owner) do
     query
+    |> where([i], i.owner_id == ^owner.id)
     |> order_by(asc: :starts_at, asc: :all_day, asc: :ends_at, asc: :id)
     |> Repo.all()
     |> convert_datetime()
   end
 
-  def get_plan_item!(id) do
+  def get_plan_item!(id, owner) do
     PlanItem
-    |> Repo.get!(id)
+    |> where([i], i.owner_id == ^owner.id and i.id == ^id)
+    |> Repo.one!()
     |> convert_datetime()
   end
 

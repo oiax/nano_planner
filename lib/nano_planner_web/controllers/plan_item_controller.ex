@@ -3,13 +3,15 @@ defmodule NanoPlannerWeb.PlanItemController do
   alias NanoPlanner.Schedule
 
   def index(conn, _params) do
-    plan_items = Schedule.list_plan_items()
+    owner = conn.assigns[:current_user]
+    plan_items = Schedule.list_plan_items(owner)
     render(conn, "index.html", plan_items: plan_items)
   end
 
   def of_today(conn, _params) do
-    plan_items = Schedule.list_plan_items_of_today()
-    continued_plan_items = Schedule.list_continued_plan_items()
+    owner = conn.assigns[:current_user]
+    plan_items = Schedule.list_plan_items_of_today(owner)
+    continued_plan_items = Schedule.list_continued_plan_items(owner)
 
     render(
       conn,
@@ -40,18 +42,18 @@ defmodule NanoPlannerWeb.PlanItemController do
   end
 
   def show(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id)
+    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
     render(conn, "show.html", plan_item: plan_item)
   end
 
   def edit(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id)
+    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
     changeset = Schedule.change_plan_item(plan_item)
     render(conn, "edit.html", plan_item: plan_item, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
-    plan_item = Schedule.get_plan_item!(id)
+    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
 
     case Schedule.update_plan_item(plan_item, plan_item_params) do
       {:ok, _plan_item} ->
@@ -67,7 +69,7 @@ defmodule NanoPlannerWeb.PlanItemController do
   end
 
   def delete(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id)
+    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
     Schedule.delete_plan_item(plan_item)
 
     conn
