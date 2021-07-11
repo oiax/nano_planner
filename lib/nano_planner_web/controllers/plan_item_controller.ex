@@ -28,7 +28,9 @@ defmodule NanoPlannerWeb.PlanItemController do
   end
 
   def create(conn, %{"plan_item" => plan_item_params}) do
-    case Schedule.create_plan_item(plan_item_params) do
+    owner = conn.assigns[:current_user]
+
+    case Schedule.create_plan_item(plan_item_params, owner) do
       {:ok, _plan_item} ->
         conn
         |> put_flash(:info, "予定を追加しました。")
