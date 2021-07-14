@@ -9,6 +9,6 @@ defmodule NanoPlanner.Repo.Migrations.CreateUsers do
       timestamps()
     end
 
-    create unique_index(:users, [:login_name])
+    create unique_index(:users, :login_name)
   end
 end
