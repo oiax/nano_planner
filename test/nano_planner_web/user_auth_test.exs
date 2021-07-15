@@ -2,7 +2,7 @@ defmodule NanoPlannerWeb.UserAuthTest do
   use NanoPlannerWeb.ConnCase, async: true
 
   alias NanoPlanner.Accounts
-  alias NanoPlannerWeb.{User, UserAuth}
+  alias NanoPlannerWeb.UserAuth
   import NanoPlanner.AccountsFixtures
 
   setup %{conn: conn} do
@@ -22,7 +22,7 @@ defmodule NanoPlannerWeb.UserAuthTest do
       conn = UserAuth.log_in_user(conn, user)
       assert user_token = get_session(conn, :user_token)
       assert redirected_to(conn) == "/"
-      assert %User{} = Accounts.get_user_by_session_token(user_token)
+      assert %Accounts.User{} = Accounts.get_user_by_session_token(user_token)
     end
   end
 
