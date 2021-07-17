@@ -3,6 +3,7 @@ defmodule NanoPlannerWeb.Router do
 
   import NanoPlannerWeb.UserAuth,
     only: [
+      no_user_auth: 2,
       fetch_current_user: 2,
       redirect_if_user_is_authenticated: 2,
       require_authenticated_user: 2
@@ -27,7 +28,7 @@ defmodule NanoPlannerWeb.Router do
   end
 
   scope "/", NanoPlannerWeb do
-    pipe_through :browser
+    pipe_through [:browser, :no_user_auth]
 
     get "/lessons/form", LessonController, :form
     get "/lessons/register", LessonController, :register

@@ -8,13 +8,13 @@ defmodule NanoPlannerWeb.SessionController do
 
   def set(conn, %{"message" => message} = _params) do
     conn
-    |> put_session("message", message)
+    |> put_session(:message, message)
     |> redirect(to: "/session")
   end
 
   def unset(conn, _params) do
     conn
-    |> delete_session("message")
+    |> delete_session(:message)
     |> redirect(to: "/session")
   end
 end
