@@ -5,18 +5,18 @@ defmodule NanoPlannerWeb.UserAuth do
   alias NanoPlannerWeb.Router.Helpers, as: Routes
 
   def log_in_user(conn, user, _params \\ %{}) do
-    token = Accounts.generate_user_session_token(user)
+    token = Accounts.generate_session_token(user)
 
     conn
     |> configure_session(renew: true)
     |> clear_session()
-    |> put_session(:user_token, token)
+    |> put_session(:session_token, token)
     |> redirect(to: "/")
   end
 
   def log_out_user(conn) do
-    user_token = get_session(conn, :user_token)
-    user_token && Accounts.delete_session_token(user_token)
+    session_token = get_session(conn, :session_token)
+    session_token && Accounts.delete_session_token(session_token)
 
     conn
     |> configure_session(renew: true)
@@ -29,8 +29,8 @@ defmodule NanoPlannerWeb.UserAuth do
   end
 
   def fetch_current_user(conn, _opts) do
-    user_token = get_session(conn, :user_token)
-    user = user_token && Accounts.get_user_by_session_token(user_token)
+    session_token = get_session(conn, :session_token)
+    user = session_token && Accounts.get_user_by_session_token(session_token)
     assign(conn, :current_user, user)
   end
 

@@ -51,21 +51,19 @@ defmodule NanoPlanner.AccountsTest do
     end
   end
 
-  describe "generate_user_session_token/1" do
+  describe "generate_session_token/1" do
     setup do
       %{user: user_fixture()}
     end
 
-    test "トークンを生成する", %{user: user} do
-      token = Accounts.generate_user_session_token(user)
-      assert user_token = Repo.get_by(Accounts.UserToken, token: token)
-      assert user_token.context == "session"
+    test "セッショントークンを生成する", %{user: user} do
+      token = Accounts.generate_session_token(user)
+      assert session_token = Repo.get_by(Accounts.SessionToken, token: token)
 
       assert_raise Ecto.ConstraintError, fn ->
-        Repo.insert!(%Accounts.UserToken{
-          token: user_token.token,
-          user_id: user_fixture().id,
-          context: "session"
+        Repo.insert!(%Accounts.SessionToken{
+          token: session_token.token,
+          user_id: user_fixture().id
         })
       end
     end
@@ -74,24 +72,24 @@ defmodule NanoPlanner.AccountsTest do
   describe "get_user_by_session_token/1" do
     setup do
       user = user_fixture()
-      token = Accounts.generate_user_session_token(user)
+      token = Accounts.generate_session_token(user)
       %{user: user, token: token}
     end
 
-    test "トークンを所有するユーザーを返す", %{user: user, token: token} do
+    test "セッショントークンを所有するユーザーを返す", %{user: user, token: token} do
       assert session_user = Accounts.get_user_by_session_token(token)
       assert session_user.id == user.id
     end
 
-    test "存在しないトークンを渡すとnilを返す" do
+    test "存在しないセッショントークンを渡すとnilを返す" do
       assert Accounts.get_user_by_session_token("oops") == nil
     end
   end
 
   describe "delete_session_token/1" do
-    test "トークンを削除する" do
+    test "セッショントークンを削除する" do
       user = user_fixture()
-      token = Accounts.generate_user_session_token(user)
+      token = Accounts.generate_session_token(user)
       assert Accounts.delete_session_token(token) == :ok
       assert Accounts.get_user_by_session_token(token) == nil
     end

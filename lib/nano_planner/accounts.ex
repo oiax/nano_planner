@@ -1,7 +1,7 @@
 defmodule NanoPlanner.Accounts do
   import Ecto.Query, warn: false
   alias NanoPlanner.Repo
-  alias NanoPlanner.Accounts.{User, UserToken}
+  alias NanoPlanner.Accounts.{User, SessionToken}
 
   def count_users do
     Repo.aggregate(User, :count, :id)
@@ -18,27 +18,24 @@ defmodule NanoPlanner.Accounts do
     end
   end
 
-  def generate_user_session_token(user) do
-    {token, user_token} = UserToken.build_session_token(user)
-    Repo.insert!(user_token)
+  def generate_session_token(user) do
+    {token, session_token} = SessionToken.build_session_token(user)
+    Repo.insert!(session_token)
     token
   end
 
   def get_user_by_session_token(token) do
     query =
-      from ut in UserToken,
-        where: [token: ^token, context: "session"],
-        join: user in assoc(ut, :user),
+      from st in SessionToken,
+        where: [token: ^token],
+        join: user in assoc(st, :user),
         select: user
 
     Repo.one(query)
   end
 
   def delete_session_token(token) do
-    query =
-      from ut in UserToken,
-        where: [token: ^token, context: "session"]
-
+    query = from st in SessionToken, where: [token: ^token]
     Repo.delete_all(query)
     :ok
   end
