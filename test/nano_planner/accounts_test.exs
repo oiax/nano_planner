@@ -56,9 +56,9 @@ defmodule NanoPlanner.AccountsTest do
       %{user: user_fixture()}
     end
 
-    test "セッショントークンを生成する", %{user: user} do
+    test "一意のセッショントークンを生成する", %{user: user} do
       token = Accounts.generate_session_token(user)
-      assert session_token = Repo.get_by(Accounts.SessionToken, token: token)
+      session_token = Repo.get_by(Accounts.SessionToken, token: token)
 
       assert_raise Ecto.ConstraintError, fn ->
         Repo.insert!(%Accounts.SessionToken{
@@ -76,7 +76,7 @@ defmodule NanoPlanner.AccountsTest do
       %{user: user, token: token}
     end
 
-    test "セッショントークンを所有するユーザーを返す", %{user: user, token: token} do
+    test "該当するユーザーを返す", %{user: user, token: token} do
       assert session_user = Accounts.get_user_by_session_token(token)
       assert session_user.id == user.id
     end

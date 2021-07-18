@@ -22,7 +22,9 @@ defmodule NanoPlannerWeb.UserAuthTest do
       conn = UserAuth.log_in_user(conn, user)
       assert session_token = get_session(conn, :session_token)
       assert redirected_to(conn) == "/"
-      assert %Accounts.User{} = Accounts.get_user_by_session_token(session_token)
+
+      assert %Accounts.User{} =
+               Accounts.get_user_by_session_token(session_token)
     end
   end
 
