@@ -18,9 +18,11 @@ defmodule NanoPlanner.Accounts do
     end
   end
 
-  def generate_session_token(user) do
-    {token, session_token} = SessionToken.build_session_token(user)
-    Repo.insert!(session_token)
+  @rand_size 32
+
+  def generate_session_token(%User{} = user) do
+    token = :crypto.strong_rand_bytes(@rand_size)
+    Repo.insert!(%SessionToken{token: token, user_id: user.id})
     token
   end
 

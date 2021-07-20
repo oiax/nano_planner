@@ -52,20 +52,22 @@ defmodule NanoPlanner.AccountsTest do
   end
 
   describe "generate_session_token/1" do
-    setup do
-      %{user: user_fixture()}
+    test "セッショントークンを生成する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert is_binary(token)
+      assert byte_size(token) == 32
     end
 
-    test "一意のセッショントークンを生成する", %{user: user} do
+    test "session_tokensテーブルに正しくレコードが挿入される" do
+      user = user_fixture()
       token = Accounts.generate_session_token(user)
+
       session_token = Repo.get_by(Accounts.SessionToken, token: token)
 
-      assert_raise Ecto.ConstraintError, fn ->
-        Repo.insert!(%Accounts.SessionToken{
-          token: session_token.token,
-          user_id: user_fixture().id
-        })
-      end
+      assert session_token != nil
+      assert session_token.user_id == user.id
     end
   end
 
