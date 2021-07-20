@@ -72,15 +72,14 @@ defmodule NanoPlanner.AccountsTest do
   end
 
   describe "get_user_by_session_token/1" do
-    setup do
+    test "セッショントークンの所有者であるユーザーを返す" do
       user = user_fixture()
       token = Accounts.generate_session_token(user)
-      %{user: user, token: token}
-    end
 
-    test "該当するユーザーを返す", %{user: user, token: token} do
-      assert session_user = Accounts.get_user_by_session_token(token)
-      assert session_user.id == user.id
+      session_owner = Accounts.get_user_by_session_token(token)
+
+      assert %Accounts.User{} = session_owner
+      assert session_owner.id == user.id
     end
 
     test "存在しないセッショントークンを渡すとnilを返す" do
@@ -92,6 +91,7 @@ defmodule NanoPlanner.AccountsTest do
     test "セッショントークンを削除する" do
       user = user_fixture()
       token = Accounts.generate_session_token(user)
+
       assert Accounts.delete_session_token(token) == :ok
       assert Accounts.get_user_by_session_token(token) == nil
     end
