@@ -1,6 +1,5 @@
 defmodule NanoPlanner.Accounts.SessionToken do
   use Ecto.Schema
-  import Ecto.Changeset, warn: false
   alias NanoPlanner.Accounts.User
 
   @rand_size 32

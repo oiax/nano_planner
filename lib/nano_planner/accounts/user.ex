@@ -1,6 +1,5 @@
 defmodule NanoPlanner.Accounts.User do
   use Ecto.Schema
-  import Ecto.Changeset, warn: false
 
   schema "users" do
     field :login_name, :string
