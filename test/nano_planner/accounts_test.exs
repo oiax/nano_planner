@@ -71,6 +71,16 @@ defmodule NanoPlanner.AccountsTest do
     end
   end
 
+  describe "delete_session_token/1" do
+    test "セッショントークンを削除する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert Accounts.delete_session_token(token) == :ok
+      assert Accounts.get_user_by_session_token(token) == nil
+    end
+  end
+
   describe "get_user_by_session_token/1" do
     test "セッショントークンの所有者であるユーザーを返す" do
       user = user_fixture()
@@ -84,16 +94,6 @@ defmodule NanoPlanner.AccountsTest do
 
     test "存在しないセッショントークンを渡すとnilを返す" do
       assert Accounts.get_user_by_session_token("oops") == nil
-    end
-  end
-
-  describe "delete_session_token/1" do
-    test "セッショントークンを削除する" do
-      user = user_fixture()
-      token = Accounts.generate_session_token(user)
-
-      assert Accounts.delete_session_token(token) == :ok
-      assert Accounts.get_user_by_session_token(token) == nil
     end
   end
 end
