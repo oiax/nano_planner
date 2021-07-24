@@ -36,8 +36,8 @@ defmodule NanoPlanner.Accounts do
     query =
       from st in SessionToken,
         where: [token: ^token],
-        join: user in assoc(st, :user),
-        select: {%{st | user: u}, u}
+        join: u in assoc(st, :user),
+        select: u
 
     Repo.one(query)
   end
