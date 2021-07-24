@@ -18,6 +18,11 @@ defmodule NanoPlanner.AccountsTest do
   end
 
   describe "get_user_by_login_name_and_password/2" do
+    setup do
+      user = user_fixture(login_name: "alice")
+      {:ok, user: user}
+    end
+
     test "ログイン名が存在しない場合はユーザーを返さない" do
       fetched =
         Accounts.get_user_by_login_name_and_password(
@@ -28,9 +33,7 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched == nil
     end
 
-    test "パスワードが正しくなければユーザーを返さない" do
-      user = user_fixture(login_name: "alice")
-
+    test "パスワードが正しくなければユーザーを返さない", %{user: user} do
       fetched =
         Accounts.get_user_by_login_name_and_password(
           user.login_name,
@@ -40,9 +43,7 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched == nil
     end
 
-    test "ログイン名とパスワードが正しければユーザーを返す" do
-      user = user_fixture(login_name: "alice")
-
+    test "ログイン名とパスワードが正しければユーザーを返す", %{user: user} do
       fetched =
         Accounts.get_user_by_login_name_and_password("alice", "alice123!")
 
