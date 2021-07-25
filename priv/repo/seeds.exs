@@ -3,6 +3,7 @@ Logger.configure(level: :warning)
 filenames = ~w(
   users
   plan_items
+  many_users
 )
 
 for filename <- filenames do
