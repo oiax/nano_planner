@@ -52,4 +52,24 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched.id == user.id
     end
   end
+
+  describe "generate_session_token/1" do
+    test "セッショントークンを生成する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert is_binary(token)
+      assert byte_size(token) == 32
+    end
+
+    test "session_tokensテーブルに正しくレコードが挿入される" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      session_token = Repo.get_by(Accounts.SessionToken, token: token)
+
+      assert session_token != nil
+      assert session_token.user_id == user.id
+    end
+  end
 end
