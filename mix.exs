@@ -4,13 +4,19 @@ defmodule NanoPlanner.MixProject do
   def project do
     [
       app: :nano_planner,
-      version: "0.1.0",
+      version: "0.2.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: [
+        nano_planner: [
+          steps: [:assemble, :tar]
+        ]
+      ],
+      default_release: :nano_planner
     ]
   end
 
@@ -36,7 +42,7 @@ defmodule NanoPlanner.MixProject do
       {:phoenix, "~> 1.5.8"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
-      {:postgrex, ">= 0.0.0"},
+      {:myxql, ">= 0.0.0"},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.4"},
@@ -46,7 +52,8 @@ defmodule NanoPlanner.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:tzdata, "~> 1.1"},
-      {:timex, "~> 3.7.5"}
+      {:timex, "~> 3.7.5"},
+      {:logger_file_backend, "~> 0.0.11"}
     ]
   end
 
