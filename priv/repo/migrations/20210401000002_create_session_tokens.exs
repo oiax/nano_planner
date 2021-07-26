@@ -4,7 +4,7 @@ defmodule NanoPlanner.Repo.Migrations.CreateSessionTokens do
   def change do
     create table(:session_tokens) do
       add :user_id, references(:users, on_delete: :delete_all), null: false
-      add :token, :binary, null: false
+      add :token, :binary, null: false, size: 32
 
       timestamps(updated_at: false)
     end

@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :nano_planner, NanoPlanner.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "root",
+  password: "root",
   database: "nano_planner_dev",
-  hostname: "postgres",
+  hostname: "mariadb",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
