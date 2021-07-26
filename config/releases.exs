@@ -36,3 +36,12 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :logger,
+  backends: [
+    {LoggerFileBackend, :info},
+    {LoggerFileBackend, :error}
+  ]
+
+config :logger, :info, path: "/home/np/log/info.log", level: :info
+config :logger, :error, path: "/home/np/log/error.log", level: :error

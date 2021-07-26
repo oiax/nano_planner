@@ -53,7 +53,8 @@ defmodule NanoPlanner.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:tzdata, "~> 1.1"},
       {:timex, "~> 3.7.5"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:logger_file_backend, "~> 0.0.11"}
     ]
   end
 
