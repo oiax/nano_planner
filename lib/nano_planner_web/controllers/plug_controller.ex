@@ -1,5 +1,6 @@
 defmodule NanoPlannerWeb.PlugController do
   use NanoPlannerWeb, :controller
+  import NanoPlannerWeb.RandomNumber, only: [set_number: 2]
 
   plug :set_number, min: 101, max: 200
 
