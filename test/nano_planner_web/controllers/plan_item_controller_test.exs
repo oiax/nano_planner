@@ -4,7 +4,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
   alias NanoPlanner.Repo
   alias NanoPlanner.Schedule.PlanItem
 
-  describe "index/2" do
+  describe "GET /plan_items" do
     setup do
       plan_item_fixture([])
       plan_item_fixture([])
@@ -20,7 +20,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
     end
   end
 
-  describe "create/2" do
+  describe "POST /plan_items" do
     test "予定項目を追加する", %{conn: conn} do
       params = %{
         "plan_item" => %{
