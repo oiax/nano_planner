@@ -71,4 +71,20 @@ defmodule NanoPlanner.AccountsTest do
       assert session_token.user_id == user.id
     end
   end
+
+  describe "get_user_by_session_token/1" do
+    test "セッショントークンの所有者であるユーザーを返す" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      session_owner = Accounts.get_user_by_session_token(token)
+
+      assert %Accounts.User{} = session_owner
+      assert session_owner.id == user.id
+    end
+
+    test "存在しないセッショントークンを渡すとnilを返す" do
+      assert Accounts.get_user_by_session_token("oops") == nil
+    end
+  end
 end

@@ -40,4 +40,12 @@ defmodule NanoPlannerWeb.ConnCase do
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  def log_in_user(conn, user) do
+    session_token = Accounts.generate_session_token(user)
+
+    conn
+    |> Phoenix.ConnTest.init_test_session(%{})
+    |> Plug.Conn.put_session(:session_token, session_token)
+  end
 end

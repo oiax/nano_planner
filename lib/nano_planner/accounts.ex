@@ -24,4 +24,12 @@ defmodule NanoPlanner.Accounts do
     Repo.insert!(%SessionToken{token: token, user_id: user.id})
     token
   end
+
+  def get_user_by_session_token(token) do
+    session_token = Repo.get_by(SessionToken, token: token)
+
+    if session_token do
+      Repo.get!(User, session_token.user_id)
+    end
+  end
 end
