@@ -6,6 +6,10 @@ defmodule NanoPlannerWeb.BootstrapHelpers do
     text_input(form, field, html_opts(form, field, opts))
   end
 
+  def bootstrap_password_input(form, field, opts \\ []) do
+    password_input(form, field, html_opts(form, field, opts))
+  end
+
   def bootstrap_date_input(form, field, opts \\ []) do
     date_input(form, field, html_opts(form, field, opts))
   end

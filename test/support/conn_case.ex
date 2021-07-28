@@ -42,7 +42,7 @@ defmodule NanoPlannerWeb.ConnCase do
   end
 
   def log_in_user(conn, user) do
-    session_token = Accounts.generate_session_token(user)
+    session_token = NanoPlanner.Accounts.generate_session_token(user)
 
     conn
     |> Phoenix.ConnTest.init_test_session(%{})

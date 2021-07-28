@@ -1,6 +1,5 @@
 defmodule NanoPlannerWeb.TopControllerTest do
   use NanoPlannerWeb.ConnCase, async: true
-  alias NanoPlanner.Accounts
   import NanoPlanner.AccountsFixtures
 
   describe "GET /" do
