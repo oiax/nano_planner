@@ -33,7 +33,7 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched == nil
     end
 
-    test "パスワードが正しくなければユーザーを返さない", %{user: user}  do
+    test "パスワードが正しくなければユーザーを返さない", %{user: user} do
       fetched =
         Accounts.get_user_by_login_name_and_password(
           user.login_name,
@@ -43,7 +43,7 @@ defmodule NanoPlanner.AccountsTest do
       assert fetched == nil
     end
 
-    test "ログイン名とパスワードが正しければユーザーを返す", %{user: user}  do
+    test "ログイン名とパスワードが正しければユーザーを返す", %{user: user} do
       fetched =
         Accounts.get_user_by_login_name_and_password("alice", "alice123!")
 

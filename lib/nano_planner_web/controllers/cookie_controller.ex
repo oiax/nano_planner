@@ -1,4 +1,4 @@
-defmodule NanoPlannerWeb.CookieController do 
+defmodule NanoPlannerWeb.CookieController do
   use NanoPlannerWeb, :controller
 
   def show(conn, _params) do

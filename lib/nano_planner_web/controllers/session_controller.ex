@@ -1,4 +1,4 @@
-defmodule NanoPlannerWeb.SessionController do 
+defmodule NanoPlannerWeb.SessionController do
   use NanoPlannerWeb, :controller
 
   def show(conn, _params) do
