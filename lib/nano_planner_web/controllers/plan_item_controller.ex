@@ -1,6 +1,9 @@
 defmodule NanoPlannerWeb.PlanItemController do
   use NanoPlannerWeb, :controller
   alias NanoPlanner.Schedule
+  import NanoPlannerWeb.UserAuth, only: [require_authenticated_user: 2]
+
+  plug :require_authenticated_user
 
   def index(conn, _params) do
     plan_items = Schedule.list_plan_items()
