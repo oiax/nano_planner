@@ -27,6 +27,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
 
     test "ログインフォームにリダイレクトする", %{conn: conn} do
       conn = get(conn, Routes.plan_item_path(conn, :index))
+
       assert redirected_to(conn) == "/users/log_in"
     end
   end

@@ -54,6 +54,8 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       conn = post(conn, Routes.user_session_path(conn, :create), params)
 
       assert Phoenix.Controller.view_template(conn) == "new.html"
+      assert Map.has_key?(conn.assigns, :error_message)
+      assert conn.assigns.error_message != nil
     end
 
     test "トップページにリダイレクトする", %{conn: conn, user: user} do
