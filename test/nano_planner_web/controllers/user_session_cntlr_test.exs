@@ -4,22 +4,15 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
   alias NanoPlanner.Accounts
 
   describe "GET /users/log_in" do
-    setup do
-      user = user_fixture(login_name: "alice")
-      {:ok, user: user}
-    end
-
     test "ログインフォームを表示する", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
 
       assert Phoenix.Controller.view_template(conn) == "new.html"
     end
 
-    test "トップページにリダイレクトする", %{conn: conn, user: user} do
-      conn =
-        conn
-        |> log_in_user(user)
-        |> get(Routes.user_session_path(conn, :new))
+    @tag login: true
+    test "トップページにリダイレクトする", %{conn: conn} do
+      conn = get(conn, Routes.user_session_path(conn, :new))
 
       assert redirected_to(conn) == "/"
     end
@@ -58,25 +51,11 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       assert Map.has_key?(conn.assigns, :error_message)
       assert conn.assigns.error_message != nil
     end
-
-    test "トップページにリダイレクトする", %{conn: conn, user: user} do
-      conn =
-        conn
-        |> log_in_user(user)
-        |> get(Routes.user_session_path(conn, :new))
-
-      assert redirected_to(conn) == "/"
-    end
   end
 
   describe "DELETE /users/log_out" do
-    setup do
-      user = user_fixture(login_name: "alice")
-      {:ok, user: user}
-    end
-
-    test "セッショントークンを削除する", %{conn: conn, user: user} do
-      conn = log_in_user(conn, user)
+    @tag login: true
+    test "セッショントークンを削除する", %{conn: conn} do
       session_token = get_session(conn, :session_token)
       conn = delete(conn, Routes.user_session_path(conn, :delete))
 

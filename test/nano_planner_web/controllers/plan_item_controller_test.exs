@@ -1,7 +1,6 @@
 defmodule NanoPlannerWeb.PlanItemControllerTest do
   use NanoPlannerWeb.ConnCase, async: true
   import NanoPlanner.ScheduleFixtures
-  import NanoPlanner.AccountsFixtures
   alias NanoPlanner.Repo
   alias NanoPlanner.Schedule.PlanItem
 
@@ -9,15 +8,12 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
     setup do
       plan_item_fixture([])
       plan_item_fixture([])
-      user = user_fixture(login_name: "alice")
-      {:ok, user: user}
+      :ok
     end
 
-    test "予定項目の一覧を表示する", %{conn: conn, user: user} do
-      conn =
-        conn
-        |> log_in_user(user)
-        |> get(Routes.plan_item_path(conn, :index))
+    @tag login: true
+    test "予定項目の一覧を表示する", %{conn: conn} do
+      conn = get(conn, Routes.plan_item_path(conn, :index))
 
       plan_items = conn.assigns.plan_items
 
@@ -33,12 +29,8 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
   end
 
   describe "POST /plan_items" do
-    setup do
-      user = user_fixture(login_name: "alice")
-      {:ok, user: user}
-    end
-
-    test "予定項目を追加する", %{conn: conn, user: user} do
+    @tag login: true
+    test "予定項目を追加する", %{conn: conn} do
       params = %{
         "plan_item" => %{
           "name" => "Test",
@@ -53,10 +45,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
         }
       }
 
-      conn =
-        conn
-        |> log_in_user(user)
-        |> post(Routes.plan_item_path(conn, :create), params)
+      conn = post(conn, Routes.plan_item_path(conn, :create), params)
 
       [item] = Repo.all(PlanItem)
 

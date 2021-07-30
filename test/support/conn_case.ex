@@ -16,6 +16,7 @@ defmodule NanoPlannerWeb.ConnCase do
   """
 
   use ExUnit.CaseTemplate
+  import NanoPlanner.AccountsFixtures
 
   using do
     quote do
@@ -38,7 +39,18 @@ defmodule NanoPlannerWeb.ConnCase do
       Ecto.Adapters.SQL.Sandbox.mode(NanoPlanner.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+    conn = Phoenix.ConnTest.build_conn()
+
+    {conn, user} =
+      if tags[:login] do
+        user = user_fixture(login_name: "alice")
+        conn = log_in_user(conn, user)
+        {conn, user}
+      else
+        {conn, nil}
+      end
+
+    {:ok, conn: conn, user: user}
   end
 
   def log_in_user(conn, user) do
