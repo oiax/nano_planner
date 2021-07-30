@@ -11,7 +11,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
       :ok
     end
 
-    @tag login: true
+    @tag :login
     test "予定項目の一覧を表示する", %{conn: conn} do
       conn = get(conn, Routes.plan_item_path(conn, :index))
 
@@ -29,7 +29,7 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
   end
 
   describe "POST /plan_items" do
-    @tag login: true
+    @tag :login
     test "予定項目を追加する", %{conn: conn} do
       params = %{
         "plan_item" => %{

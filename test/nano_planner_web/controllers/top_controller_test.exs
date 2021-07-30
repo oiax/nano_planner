@@ -8,7 +8,7 @@ defmodule NanoPlannerWeb.TopControllerTest do
       assert Phoenix.Controller.view_template(conn) == "welcome.html"
     end
 
-    @tag login: true
+    @tag :login
     test "ログイン後のトップページを表示する", %{conn: conn} do
       conn = get(conn, Routes.top_path(conn, :index))
 

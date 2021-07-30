@@ -10,7 +10,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       assert Phoenix.Controller.view_template(conn) == "new.html"
     end
 
-    @tag login: true
+    @tag :login
     test "トップページにリダイレクトする", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
 
@@ -54,7 +54,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
   end
 
   describe "DELETE /users/log_out" do
-    @tag login: true
+    @tag :login
     test "セッショントークンを削除する", %{conn: conn} do
       session_token = get_session(conn, :session_token)
       conn = delete(conn, Routes.user_session_path(conn, :delete))
