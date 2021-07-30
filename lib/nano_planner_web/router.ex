@@ -63,5 +63,6 @@ defmodule NanoPlannerWeb.Router do
     end
 
     resources "/plan_items", PlanItemController
+    delete "/users/log_out", UserSessionController, :delete
   end
 end

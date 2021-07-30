@@ -1,4 +1,5 @@
 defmodule NanoPlanner.Accounts do
+  import Ecto.Query
   alias NanoPlanner.Repo
   alias NanoPlanner.Accounts.{User, SessionToken}
 
@@ -31,5 +32,13 @@ defmodule NanoPlanner.Accounts do
     if session_token do
       Repo.get!(User, session_token.user_id)
     end
+  end
+
+  def delete_session_token(token) do
+    SessionToken
+    |> where(token: ^token)
+    |> Repo.delete_all()
+
+    :ok
   end
 end
