@@ -28,6 +28,8 @@ defmodule NanoPlannerWeb.UserSessionController do
     end
   end
 
+  @flash_message "ログアウトしました。"
+
   def delete(conn, _params) do
     session_token = get_session(conn, :session_token)
     session_token && Accounts.delete_session_token(session_token)
@@ -35,6 +37,7 @@ defmodule NanoPlannerWeb.UserSessionController do
     conn
     |> configure_session(renew: true)
     |> clear_session()
+    |> put_flash(:info, @flash_message)
     |> redirect(to: Routes.top_path(conn, :index))
   end
 end

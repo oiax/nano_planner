@@ -81,6 +81,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
       conn = delete(conn, Routes.user_session_path(conn, :delete))
 
       assert get_session(conn, :session_token) == nil
+      assert get_flash(conn, :info) != nil
       assert redirected_to(conn) == "/"
       assert Accounts.get_user_by_session_token(session_token) == nil
     end
