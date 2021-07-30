@@ -1,9 +1,15 @@
 defmodule NanoPlanner.TagTest do
   use NanoPlanner.DataCase
 
+  @moduletag login_name: "carol"
+
   @tag login_name: "bob"
   test "ログイン名はbobである", %{user: user} do
     assert user.login_name == "bob"
+  end
+
+  test "ログイン名はcarolである", %{user: user} do
+    assert user.login_name == "carol"
   end
 
   setup context do
