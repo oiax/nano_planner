@@ -15,6 +15,7 @@ defmodule NanoPlanner.DataCase do
   """
 
   use ExUnit.CaseTemplate
+  import NanoPlanner.AccountsFixtures
 
   using do
     quote do
@@ -34,7 +35,9 @@ defmodule NanoPlanner.DataCase do
       Ecto.Adapters.SQL.Sandbox.mode(NanoPlanner.Repo, {:shared, self()})
     end
 
-    :ok
+    login_name = tags[:login_name] || "alice"
+    user = user_fixture(login_name: login_name)
+    {:ok, user: user}
   end
 
   @doc """
