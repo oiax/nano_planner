@@ -45,7 +45,10 @@ defmodule NanoPlanner.AccountsTest do
 
     test "ログイン名とパスワードが正しければユーザーを返す", %{user: user} do
       fetched =
-        Accounts.get_user_by_login_name_and_password("alice", "alice123!")
+        Accounts.get_user_by_login_name_and_password(
+          user.login_name,
+          user.login_name <> "123!"
+        )
 
       assert %Accounts.User{} = fetched
       assert fetched.id == user.id
@@ -69,6 +72,16 @@ defmodule NanoPlanner.AccountsTest do
 
       assert session_token != nil
       assert session_token.user_id == user.id
+    end
+  end
+
+  describe "delete_session_token/1" do
+    test "セッショントークンを削除する" do
+      user = user_fixture()
+      token = Accounts.generate_session_token(user)
+
+      assert Accounts.delete_session_token(token) == :ok
+      assert Accounts.get_user_by_session_token(token) == nil
     end
   end
 
