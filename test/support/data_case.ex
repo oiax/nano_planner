@@ -35,8 +35,12 @@ defmodule NanoPlanner.DataCase do
       Ecto.Adapters.SQL.Sandbox.mode(NanoPlanner.Repo, {:shared, self()})
     end
 
-    login_name = tags[:login_name] || "alice"
-    user = user_fixture(login_name: login_name)
+    user =
+      if tags[:login] do
+        login_name = tags[:login_name] || "alice"
+        user_fixture(login_name: login_name)
+      end
+
     {:ok, user: user}
   end
 
