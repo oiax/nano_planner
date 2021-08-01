@@ -1,5 +1,5 @@
 defmodule NanoPlanner.ContextTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   setup do
     {:ok, number: 100}
