@@ -1,5 +1,5 @@
 defmodule NanoPlanner.AccountsTest do
-  use NanoPlanner.DataCase, async: true
+  use NanoPlanner.DataCase
   alias NanoPlanner.Accounts
   import NanoPlanner.AccountsFixtures
 

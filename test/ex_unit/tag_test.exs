@@ -1,5 +1,5 @@
 defmodule NanoPlanner.TagTest do
-  use NanoPlanner.DataCase, async: true
+  use NanoPlanner.DataCase
 
   @tag :login
   @tag login_name: "bob"

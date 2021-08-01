@@ -1,5 +1,5 @@
 defmodule NanoPlannerWeb.UserSessionControllerTest do
-  use NanoPlannerWeb.ConnCase, async: true
+  use NanoPlannerWeb.ConnCase
   import NanoPlanner.AccountsFixtures
   alias NanoPlanner.Accounts
 

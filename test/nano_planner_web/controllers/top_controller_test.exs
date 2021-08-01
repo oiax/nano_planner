@@ -1,5 +1,5 @@
 defmodule NanoPlannerWeb.TopControllerTest do
-  use NanoPlannerWeb.ConnCase, async: true
+  use NanoPlannerWeb.ConnCase
 
   describe "GET /" do
     test "ウェルカムページを表示する", %{conn: conn} do

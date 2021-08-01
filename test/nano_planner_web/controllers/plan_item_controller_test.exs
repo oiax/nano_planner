@@ -1,5 +1,5 @@
 defmodule NanoPlannerWeb.PlanItemControllerTest do
-  use NanoPlannerWeb.ConnCase, async: true
+  use NanoPlannerWeb.ConnCase
   import NanoPlanner.ScheduleFixtures
   alias NanoPlanner.Repo
   alias NanoPlanner.Schedule.PlanItem
