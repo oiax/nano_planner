@@ -18,7 +18,6 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
       assert conn.status == 200
 
       plan_items = conn.assigns[:plan_items]
-
       assert is_list(plan_items)
       assert length(plan_items) == 2
     end
@@ -49,9 +48,13 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
 
       conn = post(conn, "/plan_items", params)
 
-      [item] = Repo.all(PlanItem)
-
+      assert conn.status == 302
       assert redirected_to(conn) == "/plan_items"
+
+      fetched = Repo.all(PlanItem)
+      assert length(fetched) == 1
+
+      [item] = fetched
       assert item.name == "Test"
     end
   end
