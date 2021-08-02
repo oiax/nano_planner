@@ -3,7 +3,6 @@ defmodule NanoPlannerWeb.Router do
 
   import NanoPlannerWeb.UserAuth,
     only: [
-      fetch_current_user: 2,
       redirect_if_user_is_authenticated: 2,
       require_authenticated_user: 2
     ]
@@ -14,16 +13,16 @@ defmodule NanoPlannerWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug :fetch_current_user
+    plug NanoPlannerWeb.CurrentUser
   end
 
   pipeline :pre_auth do
-    plug :fetch_current_user
+    plug NanoPlannerWeb.CurrentUser
     plug :redirect_if_user_is_authenticated
   end
 
   pipeline :restricted do
-    plug :fetch_current_user
+    plug NanoPlannerWeb.CurrentUser
     plug :require_authenticated_user
   end
 
@@ -43,7 +42,7 @@ defmodule NanoPlannerWeb.Router do
   end
 
   scope "/", NanoPlannerWeb do
-    pipe_through [:browser, :fetch_current_user]
+    pipe_through [:browser, NanoPlannerWeb.CurrentUser]
 
     get "/", TopController, :index
   end
