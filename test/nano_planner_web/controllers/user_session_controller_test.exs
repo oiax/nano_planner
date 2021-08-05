@@ -32,7 +32,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
         }
       }
 
-      conn = post(conn, Routes.user_session_path(conn, :create), params)
+      conn = post(conn, "/users/log_in", params)
 
       assert redirected_to(conn) == "/"
     end
@@ -45,11 +45,13 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
         }
       }
 
-      conn = post(conn, Routes.user_session_path(conn, :create), params)
+      conn = post(conn, "/users/log_in", params)
 
       assert Phoenix.Controller.view_template(conn) == "new.html"
-      assert Map.has_key?(conn.assigns, :error_message)
-      assert conn.assigns.error_message != nil
+      assert conn.assigns[:error_message] != nil
+
+      response = html_response(conn, 200)
+      assert String.contains?(response, "ログイン名またはパスワードが正しくありません。")
     end
   end
 
@@ -57,7 +59,7 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
     @tag :login
     test "セッショントークンを削除する", %{conn: conn} do
       session_token = get_session(conn, :session_token)
-      conn = delete(conn, Routes.user_session_path(conn, :delete))
+      conn = delete(conn, "/users/log_out")
 
       assert get_session(conn, :session_token) == nil
       assert get_flash(conn, :info) != nil
