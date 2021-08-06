@@ -18,7 +18,7 @@
         <%= link "NanoPlanner", to: Routes.top_path(@conn, :index, []) %>
       </h1>
       <%#= if @conn.assigns[:current_user] do %>
-      <%= if @current_user do %>
+      <%= if @conn.assigns[:current_user] do %>
         <div class="m-2">
           <%= link to: Routes.user_session_path(@conn, :delete),
             method: :delete do %>

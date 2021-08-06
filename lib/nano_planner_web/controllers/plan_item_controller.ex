@@ -6,13 +6,15 @@ defmodule NanoPlannerWeb.PlanItemController do
   plug :require_authenticated_user
 
   def index(conn, _params) do
-    plan_items = Schedule.list_plan_items()
+    owner = conn.assigns[:current_user]
+    plan_items = Schedule.list_plan_items(owner)
     render(conn, "index.html", plan_items: plan_items)
   end
 
   def of_today(conn, _params) do
-    plan_items = Schedule.list_plan_items_of_today()
-    continued_plan_items = Schedule.list_continued_plan_items()
+    owner = conn.assigns[:current_user]
+    plan_items = Schedule.list_plan_items_of_today(owner)
+    continued_plan_items = Schedule.list_continued_plan_items(owner)
 
     render(
       conn,
