@@ -1,9 +1,30 @@
 defmodule NanoPlannerWeb.PlanItemController do
   use NanoPlannerWeb, :controller
   alias NanoPlanner.Schedule
-  require Logger
 
-  plug :fetch_plan_item when action in [:show]
+  plug :fetch_plan_item when action in [:show, :edit, :update, :delete]
+
+  defp fetch_plan_item(conn, _opts) do
+    id = conn.params["id"]
+    current_user = conn.assigns[:current_user]
+
+    case Schedule.get_plan_item(id, current_user) do
+      {:ok, plan_item} ->
+        assign(conn, :plan_item, plan_item)
+
+      {:error, :not_found} ->
+        conn
+        |> put_view(NanoPlannerWeb.CustomErrorView)
+        |> render("not_found.html")
+        |> halt()
+
+      {:error, :forbidden} ->
+        conn
+        |> put_view(NanoPlannerWeb.CustomErrorView)
+        |> render("forbidden.html")
+        |> halt()
+    end
+  end
 
   def index(conn, _params) do
     plan_items = Schedule.list_plan_items(conn.assigns[:current_user])
@@ -47,14 +68,13 @@ defmodule NanoPlannerWeb.PlanItemController do
     render(conn, "show.html")
   end
 
-  def edit(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
-    changeset = Schedule.change_plan_item(plan_item)
-    render(conn, "edit.html", plan_item: plan_item, changeset: changeset)
+  def edit(conn, _params) do
+    changeset = Schedule.change_plan_item(conn.assigns[:plan_item])
+    render(conn, "edit.html", changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "plan_item" => plan_item_params}) do
-    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
+  def update(conn, %{"plan_item" => plan_item_params}) do
+    plan_item = conn.assigns[:plan_item]
 
     case Schedule.update_plan_item(plan_item, plan_item_params) do
       {:ok, _plan_item} ->
@@ -69,28 +89,11 @@ defmodule NanoPlannerWeb.PlanItemController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
-    Schedule.delete_plan_item(plan_item)
+  def delete(conn, _params) do
+    Schedule.delete_plan_item(conn.assigns[:plan_item])
 
     conn
     |> put_flash(:info, "予定を削除しました。")
     |> redirect(to: Routes.plan_item_path(conn, :index))
-  end
-
-  defp fetch_plan_item(conn, _opts) do
-    id = conn.params["id"]
-    current_user = conn.assigns[:current_user]
-
-    case Schedule.get_plan_item(id, current_user) do
-      {:ok, plan_item} ->
-        assign(conn, :plan_item, plan_item)
-
-      {:error, :not_found} ->
-        conn
-        |> put_view(NanoPlannerWeb.CustomErrorView)
-        |> render("not_found.html")
-        |> halt()
-    end
   end
 end
