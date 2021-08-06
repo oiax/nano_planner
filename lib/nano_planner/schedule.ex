@@ -44,6 +44,19 @@ defmodule NanoPlanner.Schedule do
     |> convert_datetime()
   end
 
+  def get_plan_item(id, owner) do
+    item =
+      PlanItem
+      |> where([i], i.owner_id == ^owner.id and i.id == ^id)
+      |> Repo.one()
+
+    if item do
+      {:ok, convert_datetime(item)}
+    else
+      {:error, :not_found}
+    end
+  end
+
   def build_plan_item do
     time0 = beginning_of_hour()
     today = DateTime.to_date(current_time())

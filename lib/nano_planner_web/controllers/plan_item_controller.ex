@@ -1,6 +1,9 @@
 defmodule NanoPlannerWeb.PlanItemController do
   use NanoPlannerWeb, :controller
   alias NanoPlanner.Schedule
+  require Logger
+
+  plug :fetch_plan_item when action in [:show]
 
   def index(conn, _params) do
     plan_items = Schedule.list_plan_items(conn.assigns[:current_user])
@@ -40,9 +43,8 @@ defmodule NanoPlannerWeb.PlanItemController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    plan_item = Schedule.get_plan_item!(id, conn.assigns[:current_user])
-    render(conn, "show.html", plan_item: plan_item)
+  def show(conn, _params) do
+    render(conn, "show.html")
   end
 
   def edit(conn, %{"id" => id}) do
@@ -74,5 +76,21 @@ defmodule NanoPlannerWeb.PlanItemController do
     conn
     |> put_flash(:info, "予定を削除しました。")
     |> redirect(to: Routes.plan_item_path(conn, :index))
+  end
+
+  defp fetch_plan_item(conn, _opts) do
+    id = conn.params["id"]
+    current_user = conn.assigns[:current_user]
+
+    case Schedule.get_plan_item(id, current_user) do
+      {:ok, plan_item} ->
+        assign(conn, :plan_item, plan_item)
+
+      {:error, :not_found} ->
+        conn
+        |> put_view(NanoPlannerWeb.CustomErrorView)
+        |> render("not_found.html")
+        |> halt()
+    end
   end
 end
