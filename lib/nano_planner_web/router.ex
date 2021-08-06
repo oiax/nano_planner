@@ -1,5 +1,8 @@
 defmodule NanoPlannerWeb.Router do
   use NanoPlannerWeb, :router
+  use Plug.ErrorHandler
+
+  @behaviour Plug.ErrorHandler
 
   import NanoPlannerWeb.UserAuth,
     only: [
@@ -62,5 +65,14 @@ defmodule NanoPlannerWeb.Router do
 
     resources "/plan_items", PlanItemController
     delete "/users/log_out", UserSessionController, :delete
+  end
+
+  @impl Plug.ErrorHandler
+  def handle_errors(conn, %{kind: :error, reason: %Ecto.NoResultsError{}}) do
+    send_resp(conn, conn.status, "Something went wrong")
+  end
+
+  def handle_errors(conn, %{}) do
+    conn
   end
 end
