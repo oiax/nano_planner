@@ -5,9 +5,9 @@ defmodule NanoPlannerWeb.PlanItemControllerTest do
   alias NanoPlanner.Schedule.PlanItem
 
   describe "GET /plan_items" do
-    setup do
-      plan_item_fixture([])
-      plan_item_fixture([])
+    setup context do
+      plan_item_fixture(owner: context[:user])
+      plan_item_fixture(owner: context[:user])
       :ok
     end
 
