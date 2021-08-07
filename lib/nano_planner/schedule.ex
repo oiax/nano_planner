@@ -75,8 +75,8 @@ defmodule NanoPlanner.Schedule do
     Application.get_env(:nano_planner, :default_time_zone)
   end
 
-  def create_plan_item(attrs) do
-    %PlanItem{}
+  def create_plan_item(attrs, owner) do
+    %PlanItem{owner_id: owner.id}
     |> PlanItem.changeset(attrs)
     |> Repo.insert()
   end
