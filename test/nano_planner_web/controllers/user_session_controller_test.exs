@@ -5,14 +5,14 @@ defmodule NanoPlannerWeb.UserSessionControllerTest do
 
   describe "GET /users/log_in" do
     test "ログインフォームを表示する", %{conn: conn} do
-      conn = get(conn, Routes.user_session_path(conn, :new))
+      conn = get(conn, "/users/log_in")
 
       assert Phoenix.Controller.view_template(conn) == "new.html"
     end
 
     @tag :login
     test "トップページにリダイレクトする", %{conn: conn} do
-      conn = get(conn, Routes.user_session_path(conn, :new))
+      conn = get(conn, "/users/log_in")
 
       assert redirected_to(conn) == "/"
     end
