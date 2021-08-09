@@ -1,8 +1,10 @@
 defmodule NanoPlanner.Schedule.PlanItem do
   use Ecto.Schema
   import Ecto.Changeset
+  alias NanoPlanner.Accounts.User
 
   schema "plan_items" do
+    belongs_to :owner, User
     field :name, :string
     field :description, :string, default: ""
     field :all_day, :boolean, default: false
@@ -16,7 +18,6 @@ defmodule NanoPlanner.Schedule.PlanItem do
     field :e_date, :date, virtual: true
     field :e_hour, :integer, virtual: true
     field :e_minute, :integer, virtual: true
-    field :owner_id, :integer
 
     timestamps(type: :utc_datetime_usec)
   end

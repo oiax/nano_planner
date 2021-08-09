@@ -1,36 +1,56 @@
 defmodule Ecto.SchemaTest do
   use NanoPlanner.DataCase
-  alias NanoPlanner.Accounts
   import NanoPlanner.AccountsFixtures
+  import NanoPlanner.ScheduleFixtures
+  alias NanoPlanner.Accounts.User
+  alias NanoPlanner.Schedule.PlanItem
 
   setup do
     {:ok, user: user_fixture()}
   end
 
   describe "belongs/to" do
-    test "初期化", %{user: user} do
-      st1 = %Accounts.SessionToken{}
-      st2 = %Accounts.SessionToken{user: user}
+    test "初期化1" do
+      item = %PlanItem{}
 
-      assert %Ecto.Association.NotLoaded{} = st1.user
-      assert %Accounts.User{} = st2.user
-      assert is_nil(st2.user_id)
+      assert %Ecto.Association.NotLoaded{} = item.owner
+      assert item.owner_id == nil
+    end
+
+    test "初期化2", %{user: user} do
+      item = %PlanItem{owner: user}
+
+      assert %User{} = item.owner
+      assert item.owner_id == nil
     end
 
     test "データベースへの挿入", %{user: user} do
-      token = :crypto.strong_rand_bytes(32)
-      st = Repo.insert!(%Accounts.SessionToken{token: token, user: user})
+      time0 =
+        "Asia/Tokyo"
+        |> DateTime.now!()
+        |> DateTime.truncate(:second)
+        |> Timex.beginning_of_day()
+        |> DateTime.shift_zone!("Etc/UTC")
 
-      assert %Accounts.User{} = st.user
-      assert st.user_id == user.id
+      item =
+        Repo.insert!(%PlanItem{
+          name: "Test",
+          description: "",
+          starts_at: time0,
+          ends_at: Timex.shift(time0, hours: 1),
+          owner: user
+        })
+
+      assert %User{} = item.owner
+      assert item.owner_id == user.id
     end
 
     test "データベースから取得", %{user: user} do
-      token = Accounts.generate_session_token(user)
-      st = Repo.get_by(Accounts.SessionToken, token: token)
+      item = plan_item_fixture(owner: user)
+      fetched = Repo.get!(PlanItem, item.id)
 
-      assert %Ecto.Association.NotLoaded{} = st.user
-      assert st.user_id == user.id
+      assert %Ecto.Association.NotLoaded{} = fetched.owner
+      assert fetched.owner_id == user.id
     end
   end
 end
