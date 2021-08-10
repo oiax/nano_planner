@@ -26,11 +26,10 @@ defmodule Ecto.QueryTest do
       _token2 = Accounts.generate_session_token(user2)
 
       query =
-        from t in Accounts.SessionToken,
-          where: t.token == ^token1,
-          join: u in Accounts.User,
-          on: t.user_id == u.id,
-          select: %{token: t, user_id: u.id}
+        from s in Accounts.SessionToken,
+          where: s.token == ^token1,
+          join: u in assoc(s, :user),
+          select: %{token: s, user_id: u.id}
 
       fetched = Repo.one(query)
 

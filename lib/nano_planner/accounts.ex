@@ -22,7 +22,7 @@ defmodule NanoPlanner.Accounts do
 
   def generate_session_token(%User{} = user) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    Repo.insert!(%SessionToken{token: token, user_id: user.id})
+    Repo.insert!(%SessionToken{token: token, user: user})
     token
   end
 
@@ -30,9 +30,8 @@ defmodule NanoPlanner.Accounts do
     query =
       from s in SessionToken,
         where: s.token == ^token,
-        join: user in User,
-        on: s.user_id == user.id,
-        select: user
+        join: u in assoc(s, :user),
+        select: u
 
     Repo.one(query)
   end

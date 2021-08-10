@@ -42,7 +42,7 @@ defmodule Ecto.RepoTest do
       query =
         from i in PlanItem,
           where: i.id == ^item.id,
-          join: u in User,
+          join: u in assoc(i, :owner),
           on: i.owner_id == u.id,
           select: %{i | owner: u}
 
