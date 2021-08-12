@@ -26,6 +26,12 @@ defmodule NanoPlanner.Accounts do
     token
   end
 
+  def delete_session_token(token) do
+    query = from s in SessionToken, where: s.token == ^token
+    Repo.delete_all(query)
+    :ok
+  end
+
   def get_user_by_session_token(token) do
     query =
       from s in SessionToken,
@@ -34,13 +40,5 @@ defmodule NanoPlanner.Accounts do
         select: u
 
     Repo.one(query)
-  end
-
-  def delete_session_token(token) do
-    SessionToken
-    |> where(token: ^token)
-    |> Repo.delete_all()
-
-    :ok
   end
 end
