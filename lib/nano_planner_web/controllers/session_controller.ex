@@ -2,7 +2,7 @@ defmodule NanoPlannerWeb.SessionController do
   use NanoPlannerWeb, :controller
 
   def show(conn, _params) do
-    message = get_session(conn, :message)
+    message = get_session(conn, "message")
     render(conn, "show.html", message: message)
   end
 
