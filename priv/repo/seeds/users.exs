@@ -1,4 +1,4 @@
-import NanoPlanner.Repo, only: [insert!: 1] 
+import NanoPlanner.Repo
 alias NanoPlanner.Accounts.User
 
 for login_name <- ~w(alice bob carol david eve) do

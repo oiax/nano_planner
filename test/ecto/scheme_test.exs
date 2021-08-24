@@ -9,7 +9,7 @@ defmodule Ecto.SchemaTest do
     {:ok, user: user_fixture()}
   end
 
-  describe "belongs/to" do
+  describe "belongs_to/3" do
     test "初期化1" do
       item = %PlanItem{}
 

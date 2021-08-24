@@ -1,5 +1,4 @@
-import NanoPlanner.Repo, only: [insert!: 1]
-import NanoPlanner.Repo, only: [get_by!: 2, insert!: 1]
+import NanoPlanner.Repo
 alias NanoPlanner.Accounts.User
 alias NanoPlanner.Schedule.PlanItem
 
